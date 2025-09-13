@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+option csharp_namespace = "AuthService.Grpc";
+
+package auth;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+service OAuthService {
+    rpc AuthenticateGoogle(GoogleAuthRequest) returns (AuthResponse);
+    rpc AuthenticateFacebook(FacebookAuthRequest) returns (AuthResponse);
+    rpc LinkOAuthAccount(LinkOAuthRequest) returns (LinkOAuthResponse);
+    rpc UnlinkOAuthAccount(UnlinkOAuthRequest) returns (UnlinkOAuthResponse);
+    rpc GetLinkedAccounts(GetLinkedAccountsRequest) returns (GetLinkedAccountsResponse);
+    rpc ValidateOAuthToken(ValidateOAuthTokenRequest) returns (ValidateOAuthTokenResponse);
+}
+
+message GoogleAuthRequest {
+    string id_token = 1;
+    string access_token = 2;
+    DeviceInfo device_info = 3;
+}
+
+message FacebookAuthRequest {
+    string access_token = 1;
+    DeviceInfo device_info = 2;
+}
+
+message DeviceInfo {
+    string device_id = 1;
+    string device_name = 2;
+    string device_type = 3;
+    string ip_address = 4;
+    string user_agent = 5;
+}
+
+message AuthResponse {
+    bool success = 1;
+    string user_id = 2;
+    string access_token = 3;
+    string refresh_token = 4;
+    int32 expires_in = 5;
+    string token_type = 6;
+    bool is_new_user = 7;
+    string error = 8;
+    string message = 9;
+}
+
+message LinkOAuthRequest {
+    string user_id = 1;
+    string provider = 2;
+    string access_token = 3;
+}
+
+message LinkOAuthResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message UnlinkOAuthRequest {
+    string user_id = 1;
+    string provider = 2;
+}
+
+message UnlinkOAuthResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message GetLinkedAccountsRequest {
+    string user_id = 1;
+}
+
+message GetLinkedAccountsResponse {
+    repeated LinkedAccount accounts = 1;
+}
+
+message LinkedAccount {
+    string provider = 1;
+    string provider_email = 2;
+    bool is_primary = 3;
+    google.protobuf.Timestamp connected_at = 4;
+    google.protobuf.Timestamp last_used_at = 5;
+}
+
+message ValidateOAuthTokenRequest {
+    string provider = 1;
+    string access_token = 2;
+}
+
+message ValidateOAuthTokenResponse {
+    bool is_valid = 1;
+    string user_id = 2;
+    string provider_user_id = 3;
+    string email = 4;
+}

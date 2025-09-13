@@ -1,0 +1,1 @@
+D:\SingleProject1\AuthService\AuthService\AuthService.Shared\obj\Debug\net8.0\staticwebassets.build.json

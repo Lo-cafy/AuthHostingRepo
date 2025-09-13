@@ -1,0 +1,3 @@
+obj\Debug\net8.0\Protos/DeviceFingerprint.cs \
+obj\Debug\net8.0\Protos/DeviceFingerprintGrpc.cs: C:/Users/muham/.nuget/packages/grpc.tools/2.59.0/build/native/include/google/protobuf/timestamp.proto\
+ Protos/device_fingerprint.proto
