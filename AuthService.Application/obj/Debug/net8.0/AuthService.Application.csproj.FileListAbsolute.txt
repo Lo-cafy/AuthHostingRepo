@@ -23,3 +23,4 @@ D:\SingleProject1\AuthService\AuthService\AuthService.Application\obj\Debug\net8
 D:\SingleProject1\AuthService\AuthService\AuthService.Application\obj\Debug\net8.0\refint\AuthService.Application.dll
 D:\SingleProject1\AuthService\AuthService\AuthService.Application\obj\Debug\net8.0\AuthService.Application.pdb
 D:\SingleProject1\AuthService\AuthService\AuthService.Application\obj\Debug\net8.0\ref\AuthService.Application.dll
+D:\SingleProject1\AuthService\AuthService\AuthService.Application\obj\Debug\net8.0\AuthService.Application.sourcelink.json

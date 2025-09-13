@@ -70,3 +70,4 @@ D:\SingleProject1\AuthService\AuthService\AuthService\obj\Debug\net8.0\AuthServi
 D:\SingleProject1\AuthService\AuthService\AuthService\obj\Debug\net8.0\AuthService.Api.genruntimeconfig.cache
 D:\SingleProject1\AuthService\AuthService\AuthService\obj\Debug\net8.0\ref\AuthService.Api.dll
 D:\SingleProject1\AuthService\AuthService\AuthService\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\SingleProject1\AuthService\AuthService\AuthService\obj\Debug\net8.0\AuthService.Api.sourcelink.json

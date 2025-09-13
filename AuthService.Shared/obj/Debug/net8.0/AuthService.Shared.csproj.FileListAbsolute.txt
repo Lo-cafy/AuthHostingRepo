@@ -33,3 +33,5 @@ D:\SingleProject1\AuthService\AuthService\AuthService.Shared\obj\Debug\net8.0\re
 D:\SingleProject1\AuthService\AuthService\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.pdb
 D:\SingleProject1\AuthService\AuthService\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.genruntimeconfig.cache
 D:\SingleProject1\AuthService\AuthService\AuthService.Shared\obj\Debug\net8.0\ref\AuthService.Shared.dll
+D:\SingleProject1\AuthService\AuthService\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.sourcelink.json
+D:\SingleProject1\AuthService\AuthService\AuthService.Shared\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
