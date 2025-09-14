@@ -6,13 +6,10 @@ using Newtonsoft.Json;
 using AuthService.Application.Interfaces;
 using AuthService.Application.DTOs.Auth;
 using AuthService.Application.DTOs.Auth.OAuth;
-
 using AuthService.Infrastructure.Interfaces;
 using AuthService.Domain.Entities;
 using System.Collections.Generic;
 using System.Text;
-using AuthService.Infrastructure.Repositories;
-
 
 namespace AuthService.Application.Services
 {
@@ -25,7 +22,7 @@ namespace AuthService.Application.Services
         private readonly ILogger<OAuthService> _logger;
 
         public OAuthService(
-        IOAuthRepository oauthRepository,
+            IOAuthRepository oauthRepository,
             IUserCredentialRepository credentialRepository,
             IJwtService jwtService,
             IHttpClientFactory httpClientFactory,
@@ -42,10 +39,7 @@ namespace AuthService.Application.Services
         {
             try
             {
-                // Verify Google token and get user info
                 var userInfo = await VerifyGoogleTokenAsync(request.IdToken, request.AccessToken);
-
-                // Process OAuth authentication
                 return await ProcessOAuthAuthenticationAsync("google", userInfo);
             }
             catch (Exception ex)
@@ -64,10 +58,7 @@ namespace AuthService.Application.Services
         {
             try
             {
-                // Verify Facebook token and get user info
                 var userInfo = await VerifyFacebookTokenAsync(request.AccessToken);
-
-                // Process OAuth authentication
                 return await ProcessOAuthAuthenticationAsync("facebook", userInfo);
             }
             catch (Exception ex)
@@ -92,7 +83,6 @@ namespace AuthService.Application.Services
                     throw new Exception($"OAuth provider {provider} not found or inactive");
                 }
 
-                // Get user info based on provider
                 var userInfo = provider.ToLower() switch
                 {
                     "google" => await VerifyGoogleTokenAsync(null, accessToken),
@@ -100,27 +90,35 @@ namespace AuthService.Application.Services
                     _ => throw new Exception($"Unsupported provider: {provider}")
                 };
 
-                // Check if this provider account is already linked
-                var existingConnection = await _oauthRepository.GetConnectionAsync(oauthProvider.ProviderId, userInfo.Id);
+                var existingConnection = await _oauthRepository.GetConnectionAsync(
+                    oauthProvider.ProviderId, userInfo.Id);
+
                 if (existingConnection != null)
                 {
                     throw new Exception("This provider account is already linked to a user");
                 }
 
-                // Create new connection
+                var providerData = new Dictionary<string, object>
+                {
+                    { "name", userInfo.Name },
+                    { "email", userInfo.Email },
+                    { "picture", userInfo.Picture },
+                    { "id", userInfo.Id }
+                };
+
                 var connection = new OAuthConnection
                 {
-                    ConnectionId = Guid.NewGuid(),
                     UserId = userId,
                     ProviderId = oauthProvider.ProviderId,
                     ProviderUserId = userInfo.Id,
                     ProviderEmail = userInfo.Email,
-                    ProviderData = JsonConvert.SerializeObject(userInfo),
+                    ProviderData = providerData,
                     AccessTokenEncrypted = EncryptToken(accessToken),
                     TokenExpiresAt = DateTime.UtcNow.AddHours(1),
                     IsPrimary = false,
                     ConnectedAt = DateTime.UtcNow,
-                    LastUsedAt = DateTime.UtcNow
+                    LastUsedAt = DateTime.UtcNow,
+                    IsActive = true
                 };
 
                 await _oauthRepository.CreateConnectionAsync(connection);
@@ -158,27 +156,31 @@ namespace AuthService.Application.Services
         {
             var client = _httpClientFactory.CreateClient();
 
-            // If idToken is provided, verify it with Google's tokeninfo endpoint
             if (!string.IsNullOrEmpty(idToken))
             {
-                var response = await client.GetAsync($"https://oauth2.googleapis.com/tokeninfo?id_token={idToken}");
+                var response = await client.GetAsync(
+                    $"https://oauth2.googleapis.com/tokeninfo?id_token={idToken}");
+
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new Exception("Invalid Google ID token");
                 }
+
                 var tokenInfo = await response.Content.ReadAsStringAsync();
-                var userInfo = JsonConvert.DeserializeObject<OAuthUserInfo>(tokenInfo);
-                return userInfo;
+                return JsonConvert.DeserializeObject<OAuthUserInfo>(tokenInfo);
             }
 
-            // Otherwise, use the access token to get user info
             client.DefaultRequestHeaders.Authorization =
                 new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
-            var userInfoResponse = await client.GetAsync("https://www.googleapis.com/oauth2/v2/userinfo");
+
+            var userInfoResponse = await client.GetAsync(
+                "https://www.googleapis.com/oauth2/v2/userinfo");
+
             if (!userInfoResponse.IsSuccessStatusCode)
             {
                 throw new Exception("Failed to get Google user info");
             }
+
             return JsonConvert.DeserializeObject<OAuthUserInfo>(
                 await userInfoResponse.Content.ReadAsStringAsync());
         }
@@ -198,7 +200,8 @@ namespace AuthService.Application.Services
             return JsonConvert.DeserializeObject<OAuthUserInfo>(content);
         }
 
-        private async Task<AuthResultDto> ProcessOAuthAuthenticationAsync(string provider, OAuthUserInfo userInfo)
+        private async Task<AuthResultDto> ProcessOAuthAuthenticationAsync(
+            string provider, OAuthUserInfo userInfo)
         {
             var oauthProvider = await _oauthRepository.GetProviderAsync(provider);
             if (oauthProvider == null)
@@ -206,15 +209,14 @@ namespace AuthService.Application.Services
                 throw new Exception($"OAuth provider {provider} not found");
             }
 
-            // Check if user exists
-            var connection = await _oauthRepository.GetConnectionAsync(oauthProvider.ProviderId, userInfo.Id);
+            var connection = await _oauthRepository.GetConnectionAsync(
+                oauthProvider.ProviderId, userInfo.Id);
 
             Guid userId;
             bool isNewUser = false;
 
             if (connection == null)
             {
-                // Check if user exists with this email
                 var existingUser = await _credentialRepository.GetByEmailAsync(userInfo.Email);
 
                 if (existingUser != null)
@@ -223,7 +225,6 @@ namespace AuthService.Application.Services
                 }
                 else
                 {
-                    // Create new user
                     userId = Guid.NewGuid();
                     isNewUser = true;
 
@@ -241,18 +242,25 @@ namespace AuthService.Application.Services
                     await _credentialRepository.CreateAsync(credential);
                 }
 
-                // Create OAuth connection
+                var providerData = new Dictionary<string, object>
+                {
+                    { "name", userInfo.Name },
+                    { "email", userInfo.Email },
+                    { "picture", userInfo.Picture },
+                    { "id", userInfo.Id }
+                };
+
                 connection = new OAuthConnection
                 {
-                    ConnectionId = Guid.NewGuid(),
                     UserId = userId,
                     ProviderId = oauthProvider.ProviderId,
                     ProviderUserId = userInfo.Id,
                     ProviderEmail = userInfo.Email,
-                    ProviderData = JsonConvert.SerializeObject(userInfo),
+                    ProviderData = providerData,
                     IsPrimary = isNewUser,
                     ConnectedAt = DateTime.UtcNow,
-                    LastUsedAt = DateTime.UtcNow
+                    LastUsedAt = DateTime.UtcNow,
+                    IsActive = true
                 };
 
                 await _oauthRepository.CreateConnectionAsync(connection);
@@ -264,11 +272,11 @@ namespace AuthService.Application.Services
                 await _oauthRepository.UpdateConnectionAsync(connection);
             }
 
-            // Generate JWT tokens
             var jti = Guid.NewGuid().ToString();
             var refreshJti = Guid.NewGuid().ToString();
 
-            var accessToken = _jwtService.GenerateAccessToken(userId, userInfo.Email, new[] { "customer" }, jti);
+            var accessToken = _jwtService.GenerateAccessToken(
+                userId, userInfo.Email, new[] { "customer" }, jti);
             var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
             return new AuthResultDto
@@ -304,7 +312,8 @@ namespace AuthService.Application.Services
             return authUrl;
         }
 
-        public async Task<OAuthCallbackDto> HandleCallbackAsync(string provider, string code, string state)
+        public async Task<OAuthCallbackDto> HandleCallbackAsync(
+            string provider, string code, string state)
         {
             try
             {
@@ -314,14 +323,11 @@ namespace AuthService.Application.Services
                     throw new Exception($"OAuth provider {provider} not found");
                 }
 
-                // Exchange code for tokens
                 var tokens = await ExchangeCodeForTokensAsync(oauthProvider, code);
-
-                // Get user info
                 var userInfo = await GetUserInfoAsync(oauthProvider, tokens.AccessToken);
 
-                // Check if user exists
-                var connection = await _oauthRepository.GetConnectionAsync(oauthProvider.ProviderId, userInfo.Id);
+                var connection = await _oauthRepository.GetConnectionAsync(
+                    oauthProvider.ProviderId, userInfo.Id);
 
                 Guid userId;
                 string email = userInfo.Email;
@@ -329,7 +335,6 @@ namespace AuthService.Application.Services
 
                 if (connection == null)
                 {
-                    // New user or new connection
                     var existingUser = await _credentialRepository.GetByEmailAsync(email);
 
                     if (existingUser != null)
@@ -338,16 +343,14 @@ namespace AuthService.Application.Services
                     }
                     else
                     {
-                        // Create new user
                         userId = Guid.NewGuid();
                         isNewUser = true;
 
-                        // Create minimal credential entry for OAuth user
                         var credential = new UserCredential
                         {
                             UserId = userId,
                             Email = email,
-                            PasswordHash = "OAUTH_USER", // Special marker for OAuth-only users
+                            PasswordHash = "OAUTH_USER",
                             Role = "customer",
                             IsActive = true,
                             CreatedAt = DateTime.UtcNow,
@@ -357,41 +360,51 @@ namespace AuthService.Application.Services
                         await _credentialRepository.CreateAsync(credential);
                     }
 
-                    // Create OAuth connection
+                    var providerData = new Dictionary<string, object>
+                    {
+                        { "name", userInfo.Name },
+                        { "email", userInfo.Email },
+                        { "picture", userInfo.Picture },
+                        { "id", userInfo.Id }
+                    };
+
                     connection = new OAuthConnection
                     {
-                        ConnectionId = Guid.NewGuid(),
                         UserId = userId,
                         ProviderId = oauthProvider.ProviderId,
                         ProviderUserId = userInfo.Id,
                         ProviderEmail = email,
-                        ProviderData = JsonConvert.SerializeObject(userInfo),
+                        ProviderData = providerData,
                         AccessTokenEncrypted = EncryptToken(tokens.AccessToken),
-                        RefreshTokenEncrypted = !string.IsNullOrEmpty(tokens.RefreshToken) ? EncryptToken(tokens.RefreshToken) : null,
+                        RefreshTokenEncrypted = !string.IsNullOrEmpty(tokens.RefreshToken)
+                            ? EncryptToken(tokens.RefreshToken)
+                            : null,
                         TokenExpiresAt = DateTime.UtcNow.AddSeconds(tokens.ExpiresIn),
                         IsPrimary = isNewUser,
                         ConnectedAt = DateTime.UtcNow,
-                        LastUsedAt = DateTime.UtcNow
+                        LastUsedAt = DateTime.UtcNow,
+                        IsActive = true
                     };
 
                     await _oauthRepository.CreateConnectionAsync(connection);
                 }
                 else
                 {
-                    // Update existing connection
                     userId = connection.UserId;
                     connection.AccessTokenEncrypted = EncryptToken(tokens.AccessToken);
-                    connection.RefreshTokenEncrypted = !string.IsNullOrEmpty(tokens.RefreshToken) ? EncryptToken(tokens.RefreshToken) : null;
+                    connection.RefreshTokenEncrypted = !string.IsNullOrEmpty(tokens.RefreshToken)
+                        ? EncryptToken(tokens.RefreshToken)
+                        : null;
                     connection.TokenExpiresAt = DateTime.UtcNow.AddSeconds(tokens.ExpiresIn);
                     connection.LastUsedAt = DateTime.UtcNow;
                     await _oauthRepository.UpdateConnectionAsync(connection);
                 }
 
-                // Generate JWT tokens
                 var jti = Guid.NewGuid().ToString();
                 var refreshJti = Guid.NewGuid().ToString();
 
-                var accessToken = _jwtService.GenerateAccessToken(userId, email, new[] { "customer" }, jti);
+                var accessToken = _jwtService.GenerateAccessToken(
+                    userId, email, new[] { "customer" }, jti);
                 var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
                 return new OAuthCallbackDto
@@ -412,7 +425,8 @@ namespace AuthService.Application.Services
             }
         }
 
-        private async Task<TokenResponse> ExchangeCodeForTokensAsync(OAuthProvider provider, string code)
+        private async Task<TokenResponse> ExchangeCodeForTokensAsync(
+            OAuthProvider provider, string code)
         {
             var client = _httpClientFactory.CreateClient();
             var redirectUri = GetRedirectUri(provider.ProviderName);
@@ -462,31 +476,31 @@ namespace AuthService.Application.Services
 
         private string EncryptToken(string token)
         {
-            // Implement proper encryption here
-            // For now, just base64 encode (NOT SECURE - replace with proper encryption)
+            // TODO: Implement proper encryption
+            // This is just a placeholder - DO NOT use in production
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(token));
         }
 
         private string DecryptSecret(string encryptedSecret)
         {
-            // Implement proper decryption here
-            // For now, just base64 decode (NOT SECURE - replace with proper decryption)
+            // TODO: Implement proper decryption
+            // This is just a placeholder - DO NOT use in production
             return Encoding.UTF8.GetString(Convert.FromBase64String(encryptedSecret));
         }
 
         private class TokenResponse
         {
             [JsonProperty("access_token")]
-            public string AccessToken { get; set; }
+            public required string AccessToken { get; set; }
 
             [JsonProperty("refresh_token")]
-            public string RefreshToken { get; set; }
+            public string? RefreshToken { get; set; }
 
             [JsonProperty("expires_in")]
             public int ExpiresIn { get; set; }
 
             [JsonProperty("token_type")]
-            public string TokenType { get; set; }
+            public required string TokenType { get; set; }
         }
 
         private class OAuthUserInfo

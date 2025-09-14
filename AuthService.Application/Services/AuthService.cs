@@ -23,6 +23,7 @@ namespace AuthService.Application.Services
         private readonly ILoginAttemptRepository _loginAttemptRepository;
         private readonly IDigitalFingerprintService _fingerprintService;
         private readonly ILogger<AuthService> _logger;
+
         public AuthService(
             IUserCredentialRepository credentialRepository,
             IJwtService jwtService,
@@ -99,7 +100,7 @@ namespace AuthService.Application.Services
 
                 // Generate tokens
                 var accessToken = _jwtService.GenerateAccessToken(credential.UserId, credential.Email, new[] { credential.Role }, session.Jti);
-                                var refreshToken = _jwtService.GenerateRefreshToken(credential.UserId, session.RefreshJti);
+                var refreshToken = _jwtService.GenerateRefreshToken(credential.UserId, session.RefreshJti);
 
                 // Log successful login
                 await LogLoginAttempt(request.Email, true, null, request.DeviceInfo, fingerprint);
@@ -155,7 +156,7 @@ namespace AuthService.Application.Services
 
                 // Generate verification token
                 var verificationToken = GenerateSecureToken();
-                
+
                 return new RegisterResponseDto
                 {
                     UserId = userId,
@@ -217,9 +218,9 @@ namespace AuthService.Application.Services
 
                 // Generate new access token
                 var accessToken = _jwtService.GenerateAccessToken(
-                    credential.UserId, 
-                    credential.Email, 
-                    new[] { credential.Role }, 
+                    credential.UserId,
+                    credential.Email,
+                    new[] { credential.Role },
                     session.Jti
                 );
 
@@ -233,6 +234,76 @@ namespace AuthService.Application.Services
             {
                 _logger.LogError(ex, "Token refresh failed");
                 throw;
+            }
+        }
+
+        public async Task<bool> ValidateTokenAsync(string token)
+        {
+            try
+            {
+                var principal = _jwtService.ValidateToken(token);
+                if (principal == null)
+                {
+                    return false;
+                }
+
+                var userId = Guid.Parse(principal.FindFirst("sub")?.Value);
+                var jti = principal.FindFirst("jti")?.Value;
+
+                var session = await _sessionRepository.GetByJtiAsync(jti);
+                if (session == null || !session.IsActive || session.ExpiresAt < DateTime.UtcNow)
+                {
+                    return false;
+                }
+
+                var credential = await _credentialRepository.GetByUserIdAsync(userId);
+                return credential != null && credential.IsActive;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Token validation failed");
+                return false;
+            }
+        }
+
+        public async Task<AuthResultDto> AuthenticateAsync(string email, string password)
+        {
+            try
+            {
+                var loginRequest = new LoginRequestDto
+                {
+                    Email = email,
+                    Password = password,
+                    DeviceInfo = new DeviceInfoDto
+                    {
+                        DeviceType = "API",
+                        IpAddress = "0.0.0.0",
+                        UserAgent = "API Client"
+                    }
+                };
+
+                var loginResult = await LoginAsync(loginRequest);
+
+                return new AuthResultDto
+                {
+                    Success = true,
+                    UserId = loginResult.UserId,
+                    AccessToken = loginResult.AccessToken,
+                    RefreshToken = loginResult.RefreshToken,
+                    ExpiresIn = loginResult.ExpiresIn,
+                    TokenType = "Bearer",
+                    Message = "Authentication successful"
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Authentication failed for email: {Email}", email);
+                return new AuthResultDto
+                {
+                    Success = false,
+                    Error = "Authentication failed",
+                    Message = ex.Message
+                };
             }
         }
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using AuthService.Domain.Entities;
+﻿using AuthService.Domain.Entities;
 
 namespace AuthService.Infrastructure.Interfaces
 {

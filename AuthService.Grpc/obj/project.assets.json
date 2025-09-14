@@ -2,36 +2,36 @@
   "version": 3,
   "targets": {
     "net8.0": {
-      "AspNetCore.HealthChecks.NpgSql/7.1.0": {
+      "AspNetCore.HealthChecks.NpgSql/8.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Diagnostics.HealthChecks": "7.0.9",
-          "Npgsql": "7.0.6"
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.0",
+          "Npgsql": "8.0.0"
         },
         "compile": {
-          "lib/net7.0/HealthChecks.NpgSql.dll": {
+          "lib/net8.0/HealthChecks.NpgSql.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net7.0/HealthChecks.NpgSql.dll": {
+          "lib/net8.0/HealthChecks.NpgSql.dll": {
             "related": ".xml"
           }
         }
       },
-      "AspNetCore.HealthChecks.UI.Client/7.1.0": {
+      "AspNetCore.HealthChecks.UI.Client/8.0.0": {
         "type": "package",
         "dependencies": {
-          "AspNetCore.HealthChecks.UI.Core": "7.0.0",
-          "Microsoft.Extensions.Diagnostics.HealthChecks": "7.0.9"
+          "AspNetCore.HealthChecks.UI.Core": "8.0.0",
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.0"
         },
         "compile": {
-          "lib/net7.0/HealthChecks.UI.Client.dll": {
+          "lib/net8.0/HealthChecks.UI.Client.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net7.0/HealthChecks.UI.Client.dll": {
+          "lib/net8.0/HealthChecks.UI.Client.dll": {
             "related": ".xml"
           }
         },
@@ -39,11 +39,11 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "AspNetCore.HealthChecks.UI.Core/7.0.0": {
+      "AspNetCore.HealthChecks.UI.Core/8.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "7.0.0",
-          "Microsoft.Extensions.Diagnostics.HealthChecks": "7.0.9"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0",
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.0"
         },
         "compile": {
           "lib/net6.0/HealthChecks.UI.Core.dll": {
@@ -52,6 +52,19 @@
         },
         "runtime": {
           "lib/net6.0/HealthChecks.UI.Core.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Dapper/2.1.66": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Dapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Dapper.dll": {
             "related": ".xml"
           }
         }
@@ -747,18 +760,18 @@
           }
         }
       },
-      "Npgsql/7.0.6": {
+      "Npgsql/9.0.1": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.Logging.Abstractions": "6.0.0"
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
         },
         "compile": {
-          "lib/net7.0/Npgsql.dll": {
+          "lib/net8.0/Npgsql.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net7.0/Npgsql.dll": {
+          "lib/net8.0/Npgsql.dll": {
             "related": ".xml"
           }
         }
@@ -814,22 +827,6 @@
         },
         "runtime": {
           "lib/netstandard2.0/Serilog.Enrichers.Environment.dll": {}
-        }
-      },
-      "Serilog.Enrichers.Thread/3.1.0": {
-        "type": "package",
-        "dependencies": {
-          "Serilog": "2.3.0"
-        },
-        "compile": {
-          "lib/netstandard2.0/Serilog.Enrichers.Thread.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Serilog.Enrichers.Thread.dll": {
-            "related": ".xml"
-          }
         }
       },
       "Serilog.Extensions.Hosting/8.0.0": {
@@ -1140,8 +1137,11 @@
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "AuthService.Domain": "1.0.0",
+          "Dapper": "2.1.66",
           "Microsoft.EntityFrameworkCore": "9.0.0",
-          "Microsoft.EntityFrameworkCore.Relational": "9.0.0"
+          "Microsoft.EntityFrameworkCore.Relational": "9.0.0",
+          "Newtonsoft.Json": "13.0.1",
+          "Npgsql": "9.0.1"
         },
         "compile": {
           "bin/placeholder/AuthService.Infrastructure.dll": {}
@@ -1169,50 +1169,74 @@
     }
   },
   "libraries": {
-    "AspNetCore.HealthChecks.NpgSql/7.1.0": {
-      "sha512": "MBJrV/4jlnm/gNa+WWM82m01/mb58PXjS/lQs53h+M7+y50EGQOrCHljrI+cgPMWy7g7K2iohaNdlOe+gyX9tg==",
+    "AspNetCore.HealthChecks.NpgSql/8.0.0": {
+      "sha512": "X7Ewbi6pVdsZ3ENV3EnA4DPPckHuTmWZBtu3vhFQEnmxKTQakD1dkPCoX65xkqVRy/akBPc2A/yvFyrsZpUqsg==",
       "type": "package",
-      "path": "aspnetcore.healthchecks.npgsql/7.1.0",
+      "path": "aspnetcore.healthchecks.npgsql/8.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "aspnetcore.healthchecks.npgsql.7.1.0.nupkg.sha512",
+        "README.md",
+        "aspnetcore.healthchecks.npgsql.8.0.0.nupkg.sha512",
         "aspnetcore.healthchecks.npgsql.nuspec",
         "icon.png",
         "lib/net7.0/HealthChecks.NpgSql.dll",
         "lib/net7.0/HealthChecks.NpgSql.xml",
+        "lib/net8.0/HealthChecks.NpgSql.dll",
+        "lib/net8.0/HealthChecks.NpgSql.xml",
         "lib/netstandard2.0/HealthChecks.NpgSql.dll",
         "lib/netstandard2.0/HealthChecks.NpgSql.xml"
       ]
     },
-    "AspNetCore.HealthChecks.UI.Client/7.1.0": {
-      "sha512": "f7Z0Xw2C7mvL49/vtTpgn1ZLJPycBqpCPr7DVINaoeNdJ01aQ37JFfodxqA0KLxp+fGiIdLs9+ktbiSBfiMdRQ==",
+    "AspNetCore.HealthChecks.UI.Client/8.0.0": {
+      "sha512": "QT3hgIYPpoI4LDKVGBI2zpi6COnJOjTiYXhgEQK67vZU+g0mg+Z7JuT4PRHj3hJ5M98yPnnPlkz2VVaGZYEvaQ==",
       "type": "package",
-      "path": "aspnetcore.healthchecks.ui.client/7.1.0",
+      "path": "aspnetcore.healthchecks.ui.client/8.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "aspnetcore.healthchecks.ui.client.7.1.0.nupkg.sha512",
+        "aspnetcore.healthchecks.ui.client.8.0.0.nupkg.sha512",
         "aspnetcore.healthchecks.ui.client.nuspec",
         "icon.png",
         "lib/net6.0/HealthChecks.UI.Client.dll",
         "lib/net6.0/HealthChecks.UI.Client.xml",
         "lib/net7.0/HealthChecks.UI.Client.dll",
-        "lib/net7.0/HealthChecks.UI.Client.xml"
+        "lib/net7.0/HealthChecks.UI.Client.xml",
+        "lib/net8.0/HealthChecks.UI.Client.dll",
+        "lib/net8.0/HealthChecks.UI.Client.xml"
       ]
     },
-    "AspNetCore.HealthChecks.UI.Core/7.0.0": {
-      "sha512": "nOBktEQ/PjCqJIqLlFlLXKdDyJ42OsgDpd4WaD9iZH1GQD+LlBW36xObn9LUFj3lNOAULfobAt/l2n/9X0oiIA==",
+    "AspNetCore.HealthChecks.UI.Core/8.0.0": {
+      "sha512": "g+w6mVjdXLdklLH55VsctlX2gsI3uIcJ5kwpzLftUSTbrizq+KCYJ7hw2JZKyOBdg4TqOKfuim9fCE+XjuN/hQ==",
       "type": "package",
-      "path": "aspnetcore.healthchecks.ui.core/7.0.0",
+      "path": "aspnetcore.healthchecks.ui.core/8.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "aspnetcore.healthchecks.ui.core.7.0.0.nupkg.sha512",
+        "aspnetcore.healthchecks.ui.core.8.0.0.nupkg.sha512",
         "aspnetcore.healthchecks.ui.core.nuspec",
         "icon.png",
         "lib/net6.0/HealthChecks.UI.Core.dll",
         "lib/net6.0/HealthChecks.UI.Core.xml"
+      ]
+    },
+    "Dapper/2.1.66": {
+      "sha512": "/q77jUgDOS+bzkmk3Vy9SiWMaetTw+NOoPAV0xPBsGVAyljd5S6P+4RUW7R3ZUGGr9lDRyPKgAMj2UAOwvqZYw==",
+      "type": "package",
+      "path": "dapper/2.1.66",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Dapper.png",
+        "dapper.2.1.66.nupkg.sha512",
+        "dapper.nuspec",
+        "lib/net461/Dapper.dll",
+        "lib/net461/Dapper.xml",
+        "lib/net8.0/Dapper.dll",
+        "lib/net8.0/Dapper.xml",
+        "lib/netstandard2.0/Dapper.dll",
+        "lib/netstandard2.0/Dapper.xml",
+        "readme.md"
       ]
     },
     "Google.Protobuf/3.25.1": {
@@ -2497,27 +2521,19 @@
         "packageIcon.png"
       ]
     },
-    "Npgsql/7.0.6": {
-      "sha512": "TAqvwRnm3NJ0QvN7cvu6geJkbI0XPzGVRElVY5hF4gsgA+BnE12x6GM1TLhdeq+7ZKvvo3BD8jXKnXmr3tvdEw==",
+    "Npgsql/9.0.1": {
+      "sha512": "aZrXuBUUjRnvjoS4Lq0ZPYe3pnzAfK7TroGNGVpo4FCMBW1ypD/XfTTYjXpeRI8xcX5Otiv535Dy2jQWi98oeA==",
       "type": "package",
-      "path": "npgsql/7.0.6",
+      "path": "npgsql/9.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "lib/net5.0/Npgsql.dll",
-        "lib/net5.0/Npgsql.xml",
         "lib/net6.0/Npgsql.dll",
         "lib/net6.0/Npgsql.xml",
-        "lib/net7.0/Npgsql.dll",
-        "lib/net7.0/Npgsql.xml",
-        "lib/netcoreapp3.1/Npgsql.dll",
-        "lib/netcoreapp3.1/Npgsql.xml",
-        "lib/netstandard2.0/Npgsql.dll",
-        "lib/netstandard2.0/Npgsql.xml",
-        "lib/netstandard2.1/Npgsql.dll",
-        "lib/netstandard2.1/Npgsql.xml",
-        "npgsql.7.0.6.nupkg.sha512",
+        "lib/net8.0/Npgsql.dll",
+        "lib/net8.0/Npgsql.xml",
+        "npgsql.9.0.1.nupkg.sha512",
         "npgsql.nuspec",
         "postgresql.png"
       ]
@@ -2585,23 +2601,6 @@
         "lib/netstandard2.0/Serilog.Enrichers.Environment.dll",
         "serilog.enrichers.environment.2.3.0.nupkg.sha512",
         "serilog.enrichers.environment.nuspec"
-      ]
-    },
-    "Serilog.Enrichers.Thread/3.1.0": {
-      "sha512": "85lWsGRJpRxvKT6j/H67no55SUBsBIvp556TKuBTGhjtoPeq+L7j/sDWbgAtvT0p7u7/phJyX6j35PQ4Vtqw0g==",
-      "type": "package",
-      "path": "serilog.enrichers.thread/3.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net45/Serilog.Enrichers.Thread.dll",
-        "lib/net45/Serilog.Enrichers.Thread.xml",
-        "lib/netstandard1.0/Serilog.Enrichers.Thread.dll",
-        "lib/netstandard1.0/Serilog.Enrichers.Thread.xml",
-        "lib/netstandard2.0/Serilog.Enrichers.Thread.dll",
-        "lib/netstandard2.0/Serilog.Enrichers.Thread.xml",
-        "serilog.enrichers.thread.3.1.0.nupkg.sha512",
-        "serilog.enrichers.thread.nuspec"
       ]
     },
     "Serilog.Extensions.Hosting/8.0.0": {
@@ -3085,8 +3084,8 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "AspNetCore.HealthChecks.NpgSql >= 7.1.0",
-      "AspNetCore.HealthChecks.UI.Client >= 7.1.0",
+      "AspNetCore.HealthChecks.NpgSql >= 8.0.0",
+      "AspNetCore.HealthChecks.UI.Client >= 8.0.0",
       "AuthService.Application >= 1.0.0",
       "AuthService.Infrastructure >= 1.0.0",
       "Google.Protobuf >= 3.25.1",
@@ -3095,12 +3094,11 @@
       "Grpc.AspNetCore.Server.Reflection >= 2.59.0",
       "Grpc.Tools >= 2.59.0",
       "Microsoft.Extensions.Diagnostics.HealthChecks >= 8.0.0",
+      "Npgsql >= 9.0.1",
       "Serilog >= 3.1.1",
       "Serilog.AspNetCore >= 8.0.0",
       "Serilog.Enrichers.Environment >= 2.3.0",
-      "Serilog.Enrichers.Thread >= 3.1.0",
       "Serilog.Extensions.Hosting >= 8.0.0",
-      "Serilog.Extensions.Logging >= 8.0.0",
       "Serilog.Settings.Configuration >= 8.0.0",
       "Serilog.Sinks.Console >= 5.0.1",
       "Serilog.Sinks.File >= 5.0.0"
@@ -3113,11 +3111,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SingleProject1\\AuthService\\AuthService\\AuthService.Grpc\\AuthService.Grpc.csproj",
+      "projectUniqueName": "D:\\SingleProject1\\AuthService\\AuthService.Api\\AuthService.Grpc\\AuthService.Grpc.csproj",
       "projectName": "AuthService.Grpc",
-      "projectPath": "D:\\SingleProject1\\AuthService\\AuthService\\AuthService.Grpc\\AuthService.Grpc.csproj",
+      "projectPath": "D:\\SingleProject1\\AuthService\\AuthService.Api\\AuthService.Grpc\\AuthService.Grpc.csproj",
       "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-      "outputPath": "D:\\SingleProject1\\AuthService\\AuthService\\AuthService.Grpc\\obj\\",
+      "outputPath": "D:\\SingleProject1\\AuthService\\AuthService.Api\\AuthService.Grpc\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3138,11 +3136,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\SingleProject1\\AuthService\\AuthService\\AuthService.Application\\AuthService.Application.csproj": {
-              "projectPath": "D:\\SingleProject1\\AuthService\\AuthService\\AuthService.Application\\AuthService.Application.csproj"
+            "D:\\SingleProject1\\AuthService\\AuthService.Api\\AuthService.Application\\AuthService.Application.csproj": {
+              "projectPath": "D:\\SingleProject1\\AuthService\\AuthService.Api\\AuthService.Application\\AuthService.Application.csproj"
             },
-            "D:\\SingleProject1\\AuthService\\AuthService\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
-              "projectPath": "D:\\SingleProject1\\AuthService\\AuthService\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
+            "D:\\SingleProject1\\AuthService\\AuthService.Api\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
+              "projectPath": "D:\\SingleProject1\\AuthService\\AuthService.Api\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
             }
           }
         }
@@ -3165,11 +3163,11 @@
         "dependencies": {
           "AspNetCore.HealthChecks.NpgSql": {
             "target": "Package",
-            "version": "[7.1.0, )"
+            "version": "[8.0.0, )"
           },
           "AspNetCore.HealthChecks.UI.Client": {
             "target": "Package",
-            "version": "[7.1.0, )"
+            "version": "[8.0.0, )"
           },
           "Google.Protobuf": {
             "target": "Package",
@@ -3197,6 +3195,10 @@
             "target": "Package",
             "version": "[8.0.0, )"
           },
+          "Npgsql": {
+            "target": "Package",
+            "version": "[9.0.1, )"
+          },
           "Serilog": {
             "target": "Package",
             "version": "[3.1.1, )"
@@ -3209,15 +3211,7 @@
             "target": "Package",
             "version": "[2.3.0, )"
           },
-          "Serilog.Enrichers.Thread": {
-            "target": "Package",
-            "version": "[3.1.0, )"
-          },
           "Serilog.Extensions.Hosting": {
-            "target": "Package",
-            "version": "[8.0.0, )"
-          },
-          "Serilog.Extensions.Logging": {
             "target": "Package",
             "version": "[8.0.0, )"
           },

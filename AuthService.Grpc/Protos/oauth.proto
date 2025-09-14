@@ -5,7 +5,6 @@ option csharp_namespace = "AuthService.Grpc";
 package auth;
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/empty.proto";
 
 service OAuthService {
     rpc AuthenticateGoogle(GoogleAuthRequest) returns (AuthResponse);

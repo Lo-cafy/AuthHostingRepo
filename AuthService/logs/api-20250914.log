@@ -1,0 +1,122 @@
+2025-09-14 13:31:49.785 +05:30 [INF] Starting Auth API
+2025-09-14 13:31:49.984 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-14 13:31:50.825 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-14 13:31:50.828 +05:30 [INF] Now listening on: http://localhost:5007
+2025-09-14 13:31:50.926 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-14 13:31:50.937 +05:30 [INF] Hosting environment: Development
+2025-09-14 13:31:50.942 +05:30 [INF] Content root path: D:\SingleProject1\AuthService\AuthService.Api\AuthService
+2025-09-14 13:31:53.263 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:31:56.046 +05:30 [INF] HTTP GET /swagger responded 404 in 2358.9832 ms
+2025-09-14 13:31:56.077 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 2824.8174ms
+2025-09-14 13:31:56.086 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:31:58.545 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:31:58.562 +05:30 [INF] HTTP GET /swagger responded 404 in 1.7563 ms
+2025-09-14 13:31:58.563 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 18.747ms
+2025-09-14 13:31:58.566 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:31:59.591 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:31:59.594 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:31:59.693 +05:30 [INF] HTTP GET /swagger responded 404 in 2.5774 ms
+2025-09-14 13:31:59.693 +05:30 [INF] HTTP GET /swagger responded 404 in 2.5753 ms
+2025-09-14 13:31:59.697 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 499 null null 106.451ms
+2025-09-14 13:31:59.698 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 103.4475ms
+2025-09-14 13:31:59.698 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 499
+2025-09-14 13:31:59.698 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:31:59.908 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:31:59.926 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:31:59.930 +05:30 [INF] HTTP GET /swagger responded 404 in 0.1031 ms
+2025-09-14 13:31:59.941 +05:30 [INF] HTTP GET /swagger responded 404 in 0.1069 ms
+2025-09-14 13:31:59.941 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 499 null null 33.3576ms
+2025-09-14 13:31:59.943 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 499
+2025-09-14 13:31:59.944 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 16.7992ms
+2025-09-14 13:31:59.951 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:32:00.278 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:00.281 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:00.311 +05:30 [INF] HTTP GET /swagger responded 404 in 0.1602 ms
+2025-09-14 13:32:00.332 +05:30 [INF] HTTP GET /swagger responded 404 in 0.0956 ms
+2025-09-14 13:32:00.332 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 51.3316ms
+2025-09-14 13:32:00.345 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 499 null null 66.9247ms
+2025-09-14 13:32:00.346 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:32:00.346 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 499
+2025-09-14 13:32:00.670 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:00.687 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:00.705 +05:30 [INF] HTTP GET /swagger responded 404 in 0.3238 ms
+2025-09-14 13:32:00.705 +05:30 [INF] HTTP GET /swagger responded 404 in 0.0802 ms
+2025-09-14 13:32:00.706 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 18.6277ms
+2025-09-14 13:32:00.706 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:32:00.705 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 499 null null 35.5978ms
+2025-09-14 13:32:00.721 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 499
+2025-09-14 13:32:01.304 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:01.314 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:01.339 +05:30 [INF] HTTP GET /swagger responded 404 in 0.1142 ms
+2025-09-14 13:32:01.341 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 499 null null 37.8915ms
+2025-09-14 13:32:01.341 +05:30 [INF] HTTP GET /swagger responded 404 in 0.1069 ms
+2025-09-14 13:32:01.342 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 499
+2025-09-14 13:32:01.342 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 28.0087ms
+2025-09-14 13:32:01.342 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:32:01.705 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:01.712 +05:30 [INF] HTTP GET /swagger responded 404 in 0.1320 ms
+2025-09-14 13:32:01.712 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 7.1465ms
+2025-09-14 13:32:01.715 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:32:02.052 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:02.079 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:02.092 +05:30 [INF] HTTP GET /swagger responded 404 in 0.1037 ms
+2025-09-14 13:32:02.093 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 14.1056ms
+2025-09-14 13:32:02.093 +05:30 [INF] HTTP GET /swagger responded 404 in 0.0801 ms
+2025-09-14 13:32:02.094 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:32:02.097 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 499 null null 45.005ms
+2025-09-14 13:32:02.098 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 499
+2025-09-14 13:32:02.420 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:02.437 +05:30 [INF] HTTP GET /swagger responded 404 in 0.1259 ms
+2025-09-14 13:32:02.438 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 17.5099ms
+2025-09-14 13:32:02.442 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:32:17.079 +05:30 [INF] Starting Auth API
+2025-09-14 13:32:17.192 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-14 13:32:17.604 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-14 13:32:17.608 +05:30 [INF] Now listening on: http://localhost:5007
+2025-09-14 13:32:17.737 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-14 13:32:17.749 +05:30 [INF] Hosting environment: Development
+2025-09-14 13:32:17.750 +05:30 [INF] Content root path: D:\SingleProject1\AuthService\AuthService.Api\AuthService
+2025-09-14 13:32:18.503 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:32:18.812 +05:30 [INF] HTTP GET /swagger responded 404 in 115.2939 ms
+2025-09-14 13:32:18.823 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 332.995ms
+2025-09-14 13:32:18.832 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:34:01.650 +05:30 [INF] Starting Auth API
+2025-09-14 13:34:01.773 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-14 13:34:02.301 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-14 13:34:02.307 +05:30 [INF] Now listening on: http://localhost:5007
+2025-09-14 13:34:02.403 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-14 13:34:02.412 +05:30 [INF] Hosting environment: Development
+2025-09-14 13:34:02.419 +05:30 [INF] Content root path: D:\SingleProject1\AuthService\AuthService.Api\AuthService
+2025-09-14 13:34:03.384 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger - null null
+2025-09-14 13:34:03.921 +05:30 [INF] HTTP GET /swagger responded 404 in 287.7742 ms
+2025-09-14 13:34:03.933 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger - 404 0 null 561.3414ms
+2025-09-14 13:34:03.937 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:7179/swagger, Response status code: 404
+2025-09-14 13:35:58.621 +05:30 [INF] Starting Auth API
+2025-09-14 13:35:58.757 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-14 13:35:59.250 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-14 13:35:59.256 +05:30 [INF] Now listening on: http://localhost:5179
+2025-09-14 13:35:59.323 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-14 13:35:59.324 +05:30 [INF] Hosting environment: Development
+2025-09-14 13:35:59.325 +05:30 [INF] Content root path: D:\SingleProject1\AuthService\AuthService.Api\AuthService
+2025-09-14 13:36:00.125 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/ - null null
+2025-09-14 13:36:00.331 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/ - 301 0 null 220.2363ms
+2025-09-14 13:36:00.364 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-09-14 13:36:00.515 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger-ui.css - null null
+2025-09-14 13:36:00.521 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger-ui-bundle.js - null null
+2025-09-14 13:36:00.521 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger-ui-standalone-preset.js - null null
+2025-09-14 13:36:00.529 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 164.743ms
+2025-09-14 13:36:00.617 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-14 13:36:00.753 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-09-14 13:36:00.868 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 251.4796ms
+2025-09-14 13:36:01.100 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-09-14 13:36:01.100 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger-ui.css - 200 152034 text/css 585.3662ms
+2025-09-14 13:36:01.260 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-09-14 13:36:01.261 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger-ui-standalone-preset.js - 200 230280 text/javascript 740.0929ms
+2025-09-14 13:36:01.993 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-09-14 13:36:01.995 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger-ui-bundle.js - 200 1456926 text/javascript 1474.4496ms
+2025-09-14 13:36:02.062 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 1308.6897ms
+2025-09-14 13:36:02.229 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-09-14 13:36:02.266 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/favicon-32x32.png - null null
+2025-09-14 13:36:02.283 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 53.9493ms
+2025-09-14 13:36:02.288 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-09-14 13:36:02.301 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/favicon-32x32.png - 200 628 image/png 34.2413ms

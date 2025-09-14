@@ -1,13 +1,16 @@
 using AuthService.Grpc.Interceptors;
 using AuthService.Grpc.Services;
-using AuthService.Application.Interfaces;
-using AuthService.Application.Services;
-using AuthService.Infrastructure.Interfaces;
-using AuthService.Infrastructure.Repositories;
+using AuthService.Infrastructure.Data;
+using AuthService.Infrastructure.Data.Interfaces;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Serilog;
-using Grpc.HealthCheck;
 using Serilog.Events;
+using Grpc.HealthCheck;
+using Serilog.Sinks.SystemConsole.Themes;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,17 +19,26 @@ Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
     .Enrich.FromLogContext()
-    .WriteTo.Console()
+    .WriteTo.Console(theme: AnsiConsoleTheme.Code)
+    .WriteTo.File("logs/grpc-.log",
+        rollingInterval: RollingInterval.Day,
+        fileSizeLimitBytes: 10 * 1024 * 1024,
+        retainedFileCountLimit: 30,
+        rollOnFileSizeLimit: true,
+        shared: true,
+        flushToDiskInterval: TimeSpan.FromSeconds(1))
     .CreateLogger();
 
 try
 {
+    // Configure Kestrel
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.ListenLocalhost(5001, o => o.Protocols = HttpProtocols.Http2);
+    });
+
     // Add Serilog to the logging pipeline
-    builder.Host.UseSerilog((hostingContext, loggerConfiguration) =>
-        loggerConfiguration
-            .ReadFrom.Configuration(hostingContext.Configuration)
-            .Enrich.FromLogContext()
-            .WriteTo.Console());
+    builder.Host.UseSerilog();
 
     // Add gRPC services
     builder.Services.AddGrpc(options =>
@@ -34,24 +46,20 @@ try
         options.Interceptors.Add<ExceptionInterceptor>();
         options.Interceptors.Add<AuthInterceptor>();
         options.Interceptors.Add<RateLimitInterceptor>();
+        options.EnableDetailedErrors = builder.Environment.IsDevelopment();
     });
 
-    // Register Application Services
-    builder.Services.AddScoped<IOAuthService, AuthService.Application.Services.OAuthService>();
-    builder.Services.AddScoped<IDeviceFingerprintService, DeviceFingerprintService>();
-    builder.Services.AddScoped<IJwtService, JwtService>();
-    builder.Services.AddScoped<ISecurityService, SecurityService>();
+    // Configure Database
+    builder.Services.Configure<DatabaseOptions>(
+        builder.Configuration.GetSection(DatabaseOptions.SectionName));
+    builder.Services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
 
-    // Register Repositories
-    builder.Services.AddScoped<IOAuthRepository, OAuthRepository>();
-    builder.Services.AddScoped<IDeviceFingerprintRepository, DeviceFingerprintRepository>();
-    builder.Services.AddScoped<IUserRepository, UserRepository>();
+ 
 
     // Add health checks
-    builder.Services.AddGrpc();
     builder.Services.AddHealthChecks()
         .AddNpgSql(
-            builder.Configuration.GetConnectionString("DefaultConnection"),
+            builder.Configuration.GetConnectionString("AuthDb"),
             name: "postgres",
             tags: new[] { "db", "postgres" });
 
@@ -71,18 +79,17 @@ try
     app.UseSerilogRequestLogging();
 
     // Map gRPC services
+    app.MapGrpcService<AuthGrpcService>();
     app.MapGrpcService<OAuthGrpcService>();
     app.MapGrpcService<DeviceFingerprintGrpcService>();
 
-    // Map health check endpoint
+    // Map health check endpoints
     app.MapHealthChecks("/health");
-
-    // Map gRPC health service
     app.MapGrpcHealthChecksService();
 
-    app.MapGet("/", () => "AuthService gRPC is running");
+    app.MapGet("/", () => "AuthService gRPC is running. gRPC endpoints are available.");
 
-    Log.Information("Starting AuthService gRPC");
+    Log.Information("Starting AuthService gRPC on port 5001");
     app.Run();
 }
 catch (Exception ex)

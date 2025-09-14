@@ -11,5 +11,6 @@ namespace AuthService.Infrastructure.Interfaces
         Task<OAuthConnection> CreateConnectionAsync(OAuthConnection connection);
         Task<IEnumerable<OAuthConnection>> GetUserConnectionsAsync(Guid userId);
         Task UpdateConnectionAsync(OAuthConnection connection);
+        Task<OAuthConnection> GetConnectionByProviderEmailAsync(string provider, string email);
     }
 }

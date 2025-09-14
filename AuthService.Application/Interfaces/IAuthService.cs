@@ -8,6 +8,8 @@ namespace AuthService.Application.Interfaces
         Task<LoginResponseDto> LoginAsync(LoginRequestDto request);
         Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request);
         Task<RefreshTokenResponseDto> RefreshTokenAsync(RefreshTokenRequestDto request);
+        Task<AuthResultDto> AuthenticateAsync(string email, string password);
+        Task<bool> ValidateTokenAsync(string token);
         Task LogoutAsync(string jti);
     }
 }
