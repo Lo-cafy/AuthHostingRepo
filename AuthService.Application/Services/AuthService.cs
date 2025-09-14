@@ -1,16 +1,17 @@
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using AuthService.Application.Interfaces;
 using AuthService.Application.DTOs.Auth;
+using AuthService.Application.DTOs.Common;
 using AuthService.Infrastructure.Interfaces;
 using AuthService.Domain.Entities;
+using AuthService.Domain.Enums;
 using AuthService.Shared.Exceptions;
 using System.Security.Cryptography;
-using AuthService.Application.DTOs.Common;
 using System.Text;
 using Newtonsoft.Json;
-using AuthService.Infrastructure.Repositories;
 
 namespace AuthService.Application.Services
 {
@@ -42,40 +43,42 @@ namespace AuthService.Application.Services
             _logger = logger;
         }
 
-        public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request)
+        public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request, DeviceInfoDto? deviceInfo = null)
         {
             try
             {
-                // Generate fingerprint
-                var fingerprint = _fingerprintService.GenerateFingerprint(request.DeviceInfo);
+                deviceInfo ??= new DeviceInfoDto
+                {
+                    DeviceId = Guid.NewGuid().ToString(),
+                    DeviceType = "Unknown",
+                    IpAddress = "0.0.0.0",
+                    UserAgent = "Unknown"
+                };
 
-                // Check rate limiting
+                var fingerprint = _fingerprintService.GenerateFingerprint(deviceInfo);
+
                 var recentFailures = await _loginAttemptRepository.GetRecentFailuresAsync(fingerprint, 15);
                 if (recentFailures >= 5)
                 {
-                    await LogLoginAttempt(request.Email, false, "rate_limited", request.DeviceInfo, fingerprint);
+                    await LogLoginAttempt(request.Email, false, "rate_limited", deviceInfo, fingerprint);
                     throw new RateLimitException("Too many failed attempts. Try again in 15 minutes.");
                 }
 
-                // Get user credentials
                 var credential = await _credentialRepository.GetByEmailAsync(request.Email);
                 if (credential == null)
                 {
-                    await LogLoginAttempt(request.Email, false, "user_not_found", request.DeviceInfo, fingerprint);
+                    await LogLoginAttempt(request.Email, false, "user_not_found", deviceInfo, fingerprint);
                     throw new AuthException("Invalid email or password");
                 }
 
-                // Check if account is locked
                 if (credential.LockedUntil.HasValue && credential.LockedUntil > DateTime.UtcNow)
                 {
-                    await LogLoginAttempt(request.Email, false, "account_locked", request.DeviceInfo, fingerprint);
+                    await LogLoginAttempt(request.Email, false, "account_locked", deviceInfo, fingerprint);
                     throw new AuthException($"Account is locked until {credential.LockedUntil}");
                 }
 
-                // Verify password
                 if (!_passwordService.VerifyPassword(request.Password, credential.PasswordHash))
                 {
-                    // Update failed attempts
                     credential.FailedAttempts++;
                     if (credential.FailedAttempts >= 5)
                     {
@@ -83,11 +86,10 @@ namespace AuthService.Application.Services
                     }
                     await _credentialRepository.UpdateAsync(credential);
 
-                    await LogLoginAttempt(request.Email, false, "invalid_password", request.DeviceInfo, fingerprint);
+                    await LogLoginAttempt(request.Email, false, "invalid_password", deviceInfo, fingerprint);
                     throw new AuthException("Invalid email or password");
                 }
 
-                // Reset failed attempts on successful login
                 if (credential.FailedAttempts > 0)
                 {
                     credential.FailedAttempts = 0;
@@ -95,29 +97,90 @@ namespace AuthService.Application.Services
                     await _credentialRepository.UpdateAsync(credential);
                 }
 
-                // Create JWT session
-                var session = await CreateSessionAsync(credential.UserId, request.DeviceInfo);
+                var session = await CreateSessionAsync(credential.UserId, deviceInfo);
 
-                // Generate tokens
-                var accessToken = _jwtService.GenerateAccessToken(credential.UserId, credential.Email, new[] { credential.Role }, session.Jti);
+                var accessToken = _jwtService.GenerateAccessToken(
+                    credential.UserId,
+                    credential.Email,
+                    Enum.Parse<RoleTypeEnum>(credential.Role),
+                    session.Jti
+                );
                 var refreshToken = _jwtService.GenerateRefreshToken(credential.UserId, session.RefreshJti);
 
-                // Log successful login
-                await LogLoginAttempt(request.Email, true, null, request.DeviceInfo, fingerprint);
+                await LogLoginAttempt(request.Email, true, null, deviceInfo, fingerprint);
 
                 return new LoginResponseDto
                 {
+                    Success = true,
                     AccessToken = accessToken,
                     RefreshToken = refreshToken,
                     ExpiresIn = 3600,
-                    UserId = credential.UserId,
-                    Email = credential.Email,
-                    Roles = new[] { credential.Role }
+                    ExpiresAt = DateTime.UtcNow.AddHours(1),
+                    User = new UserInfoDto
+                    {
+                        UserId = credential.UserId,
+                        Email = credential.Email,
+                        IsEmailVerified = true,
+                        Role = Enum.Parse<RoleTypeEnum>(credential.Role)
+
+                    },
+                    Role = Enum.Parse<RoleTypeEnum>(credential.Role)
+
                 };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Login failed for email: {Email}", request.Email);
+                throw;
+            }
+        }
+
+
+        public async Task<RefreshTokenResponseDto> RefreshTokenAsync(RefreshTokenRequestDto request)
+        {
+            try
+            {
+                var principal = _jwtService.ValidateRefreshToken(request.RefreshToken);
+                if (principal == null)
+                {
+                    throw new AuthException("Invalid refresh token");
+                }
+
+                var refreshJti = principal.FindFirst("jti")?.Value;
+                var userId = Guid.Parse(principal.FindFirst("sub")?.Value ?? "");
+
+                var session = await _sessionRepository.GetByRefreshJtiAsync(refreshJti);
+                if (session == null || !session.IsActive || session.ExpiresAt < DateTime.UtcNow)
+                {
+                    throw new AuthException("Invalid or expired session");
+                }
+
+                var credential = await _credentialRepository.GetByUserIdAsync(userId);
+                if (credential == null || !credential.IsActive)
+                {
+                    throw new AuthException("User not found or inactive");
+                }
+
+                session.LastAccessedAt = DateTime.UtcNow;
+                await _sessionRepository.UpdateAsync(session);
+
+                var accessToken = _jwtService.GenerateAccessToken(
+                    credential.UserId,
+                    credential.Email,
+                    Enum.Parse<RoleTypeEnum>(credential.Role),
+                    session.Jti
+                );
+
+                return new RefreshTokenResponseDto
+                {
+                    AccessToken = accessToken,
+                    RefreshToken = request.RefreshToken,
+                    ExpiresIn = 3600
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Token refresh failed");
                 throw;
             }
         }
@@ -145,7 +208,7 @@ namespace AuthService.Application.Services
                     UserId = userId,
                     Email = request.Email.ToLower(),
                     PasswordHash = passwordHash,
-                    Role = request.Role ?? "customer",
+                    Role = RoleTypeEnum.Customer.ToString(),
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
@@ -159,6 +222,7 @@ namespace AuthService.Application.Services
 
                 return new RegisterResponseDto
                 {
+                    Success = true,
                     UserId = userId,
                     Email = credential.Email,
                     VerificationToken = verificationToken,
@@ -172,7 +236,7 @@ namespace AuthService.Application.Services
             }
         }
 
-        public async Task LogoutAsync(string jti)
+        public async Task<bool> LogoutAsync(string jti)
         {
             var session = await _sessionRepository.GetByJtiAsync(jti);
             if (session != null && session.IsActive)
@@ -181,60 +245,22 @@ namespace AuthService.Application.Services
                 session.RevokedAt = DateTime.UtcNow;
                 session.RevokeReason = "User logout";
                 await _sessionRepository.UpdateAsync(session);
+                return true;
             }
+            return false;
         }
 
-        public async Task<RefreshTokenResponseDto> RefreshTokenAsync(RefreshTokenRequestDto request)
+        public async Task<bool> RevokeAllSessionsAsync(Guid userId)
         {
-            try
+            var sessions = await _sessionRepository.GetActiveSessionsByUserIdAsync(userId);
+            foreach (var session in sessions)
             {
-                // Validate refresh token
-                var principal = _jwtService.ValidateRefreshToken(request.RefreshToken);
-                if (principal == null)
-                {
-                    throw new AuthException("Invalid refresh token");
-                }
-
-                var refreshJti = principal.FindFirst("jti")?.Value;
-                var userId = Guid.Parse(principal.FindFirst("sub")?.Value);
-
-                // Get session
-                var session = await _sessionRepository.GetByRefreshJtiAsync(refreshJti);
-                if (session == null || !session.IsActive || session.ExpiresAt < DateTime.UtcNow)
-                {
-                    throw new AuthException("Invalid or expired session");
-                }
-
-                // Get user
-                var credential = await _credentialRepository.GetByUserIdAsync(userId);
-                if (credential == null || !credential.IsActive)
-                {
-                    throw new AuthException("User not found or inactive");
-                }
-
-                // Update session
-                session.LastAccessedAt = DateTime.UtcNow;
+                session.IsActive = false;
+                session.RevokedAt = DateTime.UtcNow;
+                session.RevokeReason = "All sessions revoked";
                 await _sessionRepository.UpdateAsync(session);
-
-                // Generate new access token
-                var accessToken = _jwtService.GenerateAccessToken(
-                    credential.UserId,
-                    credential.Email,
-                    new[] { credential.Role },
-                    session.Jti
-                );
-
-                return new RefreshTokenResponseDto
-                {
-                    AccessToken = accessToken,
-                    ExpiresIn = 3600
-                };
             }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Token refresh failed");
-                throw;
-            }
+            return true;
         }
 
         public async Task<bool> ValidateTokenAsync(string token)
@@ -247,7 +273,7 @@ namespace AuthService.Application.Services
                     return false;
                 }
 
-                var userId = Guid.Parse(principal.FindFirst("sub")?.Value);
+                var userId = Guid.Parse(principal.FindFirst("sub")?.Value ?? "");
                 var jti = principal.FindFirst("jti")?.Value;
 
                 var session = await _sessionRepository.GetByJtiAsync(jti);
@@ -273,13 +299,7 @@ namespace AuthService.Application.Services
                 var loginRequest = new LoginRequestDto
                 {
                     Email = email,
-                    Password = password,
-                    DeviceInfo = new DeviceInfoDto
-                    {
-                        DeviceType = "API",
-                        IpAddress = "0.0.0.0",
-                        UserAgent = "API Client"
-                    }
+                    Password = password
                 };
 
                 var loginResult = await LoginAsync(loginRequest);
@@ -287,7 +307,7 @@ namespace AuthService.Application.Services
                 return new AuthResultDto
                 {
                     Success = true,
-                    UserId = loginResult.UserId,
+                    UserId = loginResult.User.UserId,
                     AccessToken = loginResult.AccessToken,
                     RefreshToken = loginResult.RefreshToken,
                     ExpiresIn = loginResult.ExpiresIn,
@@ -330,13 +350,13 @@ namespace AuthService.Application.Services
             return await _sessionRepository.CreateAsync(session);
         }
 
-        private async Task LogLoginAttempt(string identifier, bool success, string failureReason, DeviceInfoDto deviceInfo, string fingerprint)
+        private async Task LogLoginAttempt(string identifier, bool success, string? failureReason, DeviceInfoDto deviceInfo, string fingerprint)
         {
             var attempt = new LoginAttempt
             {
                 AttemptId = Guid.NewGuid(),
                 Identifier = identifier,
-                AuthProvider = Domain.Enums.AuthProviderEnum.Password,
+                AuthProvider = AuthProviderEnum.Password,
                 Success = success,
                 FailureReason = failureReason,
                 IpAddress = deviceInfo?.IpAddress ?? "0.0.0.0",

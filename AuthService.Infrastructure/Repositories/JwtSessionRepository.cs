@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;  // Add this
 using System.Threading.Tasks;
+using System.Linq;  // Add this
 using Microsoft.EntityFrameworkCore;
 using AuthService.Domain.Entities;
 using AuthService.Infrastructure.Data;
@@ -26,6 +28,16 @@ namespace AuthService.Infrastructure.Repositories
         {
             return await _context.JwtSessions
                 .FirstOrDefaultAsync(x => x.RefreshJti == refreshJti && x.IsActive);
+        }
+
+        // Add this new method
+        public async Task<IEnumerable<JwtSession>> GetActiveSessionsByUserIdAsync(Guid userId)
+        {
+            return await _context.JwtSessions
+                .Where(x => x.UserId == userId &&
+                           x.IsActive &&
+                           x.ExpiresAt > DateTime.UtcNow)
+                .ToListAsync();
         }
 
         public async Task<JwtSession> CreateAsync(JwtSession session)

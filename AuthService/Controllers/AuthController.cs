@@ -106,7 +106,6 @@ namespace AuthService.Api.Controllers
         [Authorize]
         public async Task<IActionResult> GetUser(Guid id)
         {
-            // Placeholder for getting user details
             return Ok(new { userId = id });
         }
     }

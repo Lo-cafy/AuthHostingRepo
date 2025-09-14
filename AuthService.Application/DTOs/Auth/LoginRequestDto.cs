@@ -12,6 +12,6 @@ namespace AuthService.Application.DTOs.Auth
         [Required]
         public string Password { get; set; }
 
-        public DeviceInfoDto DeviceInfo { get; set; }
+        //public DeviceInfoDto DeviceInfo { get; set; }
     }
 }
