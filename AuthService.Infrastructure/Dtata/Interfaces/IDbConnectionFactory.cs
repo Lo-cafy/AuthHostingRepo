@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Threading.Tasks;
 
 namespace AuthService.Infrastructure.Data.Interfaces
 {

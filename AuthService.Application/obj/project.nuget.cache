@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZlwOs6KHpjE=",
+  "dgSpecHash": "PfFNeVkgpzQ=",
   "success": true,
   "projectFilePath": "D:\\SingleProject1\\AuthService\\AuthService.Api\\AuthService.Application\\AuthService.Application.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\muham\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\microsoft.entityframeworkcore\\9.0.0\\microsoft.entityframeworkcore.9.0.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\9.0.0\\microsoft.entityframeworkcore.abstractions.9.0.0.nupkg.sha512",

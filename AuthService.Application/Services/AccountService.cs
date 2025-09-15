@@ -6,23 +6,29 @@ using AuthService.Application.DTOs.Account;
 using AuthService.Infrastructure.Interfaces;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Enums;
-using System.ComponentModel.DataAnnotations;
+using AuthService.Shared.Exceptions;
+using System.Security.Cryptography;
+using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace AuthService.Application.Services
 {
     public class AccountService : IAccountService
     {
+        private readonly IDatabaseFunctionService _databaseFunctionService;
         private readonly IUserCredentialRepository _credentialRepository;
         private readonly ISecurityTokenRepository _tokenRepository;
         private readonly IPasswordService _passwordService;
         private readonly ILogger<AccountService> _logger;
 
         public AccountService(
+            IDatabaseFunctionService databaseFunctionService,
             IUserCredentialRepository credentialRepository,
             ISecurityTokenRepository tokenRepository,
             IPasswordService passwordService,
             ILogger<AccountService> logger)
         {
+            _databaseFunctionService = databaseFunctionService;
             _credentialRepository = credentialRepository;
             _tokenRepository = tokenRepository;
             _passwordService = passwordService;
@@ -33,36 +39,24 @@ namespace AuthService.Application.Services
         {
             try
             {
-                var token = await _tokenRepository.GetByTokenHashAsync(request.Token);
+                var requestId = Guid.NewGuid();
+                var result = await _databaseFunctionService.VerifyEmailAsync(request.Token, requestId);
 
-                if (token == null || token.TokenType != TokenTypeEnum.EmailVerification)
+                using (result)
                 {
-                    throw new ValidationException("Invalid verification token");
+                    var root = result.RootElement;
+
+                    if (!root.GetProperty("success").GetBoolean())
+                    {
+                        var message = root.GetProperty("message").GetString();
+                        throw new ValidationException(message);
+                    }
+
+                    _logger.LogInformation("Email verified for user: {UserId}",
+                        root.GetProperty("user_id").GetGuid());
+
+                    return true;
                 }
-
-                if (token.ExpiresAt < DateTime.UtcNow)
-                {
-                    throw new ValidationException("Verification token has expired");
-                }
-
-                if (token.UsedAt.HasValue)
-                {
-                    throw new ValidationException("Verification token has already been used");
-                }
-
-                // Mark token as used
-                token.UsedAt = DateTime.UtcNow;
-                await _tokenRepository.UpdateAsync(token);
-
-                // Update user email verification status
-                var credential = await _credentialRepository.GetByUserIdAsync(token.UserId);
-                if (credential != null)
-                {
-                    // You might need to add IsEmailVerified to UserCredential or maintain it separately
-                    await _credentialRepository.UpdateAsync(credential);
-                }
-
-                return true;
             }
             catch (Exception ex)
             {
@@ -79,12 +73,13 @@ namespace AuthService.Application.Services
                 if (credential == null)
                 {
                     // Don't reveal if email exists
+                    _logger.LogInformation("Password reset requested for non-existent email: {Email}", email);
                     return true;
                 }
 
                 // Generate reset token
-                var resetToken = Guid.NewGuid().ToString();
-                var tokenHash = _passwordService.HashPassword(resetToken); // Reuse password hashing
+                var resetToken = GenerateSecureToken();
+                var tokenHash = HashToken(resetToken);
 
                 var securityToken = new SecurityToken
                 {
@@ -94,12 +89,12 @@ namespace AuthService.Application.Services
                     TokenHash = tokenHash,
                     ExpiresAt = DateTime.UtcNow.AddHours(1),
                     CreatedAt = DateTime.UtcNow,
-                    Metadata = "{}"
+                    Metadata = new Dictionary<string, object>() // Initialize as empty dictionary
                 };
 
                 await _tokenRepository.CreateAsync(securityToken);
 
-                // In production, send email with reset link
+                // TODO: Send email with reset link containing resetToken
                 _logger.LogInformation("Password reset token generated for user: {UserId}", credential.UserId);
 
                 return true;
@@ -115,7 +110,9 @@ namespace AuthService.Application.Services
         {
             try
             {
-                var token = await _tokenRepository.GetByTokenHashAsync(request.Token);
+                // Find token by hash
+                var tokenHash = HashToken(request.Token);
+                var token = await _tokenRepository.GetByTokenHashAsync(tokenHash);
 
                 if (token == null || token.TokenType != TokenTypeEnum.ResetPassword)
                 {
@@ -135,14 +132,20 @@ namespace AuthService.Application.Services
                 // Validate new password
                 _passwordService.ValidatePasswordStrength(request.NewPassword);
 
-                // Update password
+                // Get user credential
                 var credential = await _credentialRepository.GetByUserIdAsync(token.UserId);
                 if (credential == null)
                 {
                     throw new ValidationException("User not found");
                 }
 
-                credential.PasswordHash = _passwordService.HashPassword(request.NewPassword);
+                // Generate password salt and hash (matching database stored procedure format)
+                var passwordSalt = GeneratePasswordSalt();
+                var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword + passwordSalt, 12);
+
+                // Update password
+                credential.PasswordHash = passwordHash;
+                credential.PasswordSalt = passwordSalt;
                 credential.PasswordChangedAt = DateTime.UtcNow;
                 credential.FailedAttempts = 0;
                 credential.LockedUntil = null;
@@ -151,6 +154,8 @@ namespace AuthService.Application.Services
                 // Mark token as used
                 token.UsedAt = DateTime.UtcNow;
                 await _tokenRepository.UpdateAsync(token);
+
+                _logger.LogInformation("Password reset completed for user: {UserId}", token.UserId);
 
                 return true;
             }
@@ -171,8 +176,9 @@ namespace AuthService.Application.Services
                     throw new ValidationException("User not found");
                 }
 
-                // Verify current password
-                if (!_passwordService.VerifyPassword(request.CurrentPassword, credential.PasswordHash))
+                // Verify current password with salt
+                var currentPasswordWithSalt = request.CurrentPassword + credential.PasswordSalt;
+                if (!BCrypt.Net.BCrypt.Verify(currentPasswordWithSalt, credential.PasswordHash))
                 {
                     throw new ValidationException("Current password is incorrect");
                 }
@@ -180,10 +186,17 @@ namespace AuthService.Application.Services
                 // Validate new password
                 _passwordService.ValidatePasswordStrength(request.NewPassword);
 
+                // Generate new salt and hash
+                var passwordSalt = GeneratePasswordSalt();
+                var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.NewPassword + passwordSalt, 12);
+
                 // Update password
-                credential.PasswordHash = _passwordService.HashPassword(request.NewPassword);
+                credential.PasswordHash = passwordHash;
+                credential.PasswordSalt = passwordSalt;
                 credential.PasswordChangedAt = DateTime.UtcNow;
                 await _credentialRepository.UpdateAsync(credential);
+
+                _logger.LogInformation("Password changed for user: {UserId}", request.UserId);
 
                 return true;
             }
@@ -191,6 +204,35 @@ namespace AuthService.Application.Services
             {
                 _logger.LogError(ex, "Password change failed");
                 throw;
+            }
+        }
+
+        private string GenerateSecureToken()
+        {
+            var randomBytes = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomBytes);
+            }
+            return Convert.ToBase64String(randomBytes);
+        }
+
+        private string GeneratePasswordSalt()
+        {
+            var saltBytes = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(saltBytes);
+            }
+            return Convert.ToBase64String(saltBytes);
+        }
+
+        private string HashToken(string token)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(token));
+                return Convert.ToHexString(hashedBytes).ToLower();
             }
         }
     }

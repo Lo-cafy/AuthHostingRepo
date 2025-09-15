@@ -71,3 +71,4 @@ D:\SingleProject1\AuthService\AuthService.Api\AuthService.Shared\obj\Debug\net8.
 D:\SingleProject1\AuthService\AuthService.Api\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.pdb
 D:\SingleProject1\AuthService\AuthService.Api\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.genruntimeconfig.cache
 D:\SingleProject1\AuthService\AuthService.Api\AuthService.Shared\obj\Debug\net8.0\ref\AuthService.Shared.dll
+D:\SingleProject1\AuthService\AuthService.Api\AuthService.Shared\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

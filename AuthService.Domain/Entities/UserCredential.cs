@@ -14,5 +14,6 @@
         public DateTime? PasswordChangedAt { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public bool MustChangePassword { get; set; }
     }
 }

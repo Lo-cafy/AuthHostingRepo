@@ -4,17 +4,16 @@ using AuthService.Infrastructure.Extensions;
 using AuthService.Api.Middleware;
 using AuthService.Application.Options;
 using AuthService.Infrastructure.Data;
-using AuthService.Infrastructure.Data.Interfaces;
 using AuthService.Infrastructure.Interfaces;
-using AuthService.Infrastructure.Repositories; 
+using AuthService.Infrastructure.Services;
+using AuthService.Infrastructure.Repositories;
+using AuthService.Application.Interfaces;
+using AuthService.Application.Services;
 using System.Text;
 using Serilog;
 using Serilog.Events;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using AuthService.Infrastructure.Data.Interfaces;
 using Serilog.Sinks.SystemConsole.Themes;
-using Serilog.Sinks.File;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,16 +39,27 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configure Database
-builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.SectionName));
-builder.Services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
+// Database Configuration
+builder.Services.Configure<DatabaseOptions>(
+    builder.Configuration.GetSection(DatabaseOptions.SectionName));
+builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
+builder.Services.AddScoped<IDatabaseFunctionService, DatabaseFunctionService>();
 
-// ? Register IUserCredentialRepository implementation
+// Register Core Services
+builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IDigitalFingerprintService, DigitalFingerprintService>();
+
+// Register Repositories
 builder.Services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
+builder.Services.AddScoped<IJwtSessionRepository, JwtSessionRepository>();
+builder.Services.AddScoped<ILoginAttemptRepository, LoginAttemptRepository>();
+builder.Services.AddScoped<ISecurityTokenRepository, SecurityTokenRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
-// Configure Infrastructure and Application services
-builder.Services.AddInfrastructureServices(builder.Configuration);
-builder.Services.AddApplicationServices();
+// Register Application Services
+builder.Services.AddScoped<IAuthService, AuthService.Application.Services.AuthService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 // Configure JWT
 var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
@@ -66,7 +76,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtOptions.Issuer,
             ValidAudience = jwtOptions.Audience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(jwtOptions.Secret)),
             ClockSkew = TimeSpan.Zero
         };
     });

@@ -46,7 +46,7 @@ namespace AuthService.Api.Controllers
             }
             catch (Exception)
             {
-                // Always return success to prevent email enumeration
+               
                 return Ok(new { message = "If the email exists, a password reset link has been sent" });
             }
         }

@@ -16,7 +16,9 @@ namespace AuthService.Infrastructure.Data
 
         public IDbConnection CreateConnection()
         {
-            return new NpgsqlConnection(_options.ConnectionString);
+            var connection = new NpgsqlConnection(_options.ConnectionString);
+            connection.Open();
+            return connection;
         }
 
         public async Task<IDbConnection> CreateConnectionAsync()
