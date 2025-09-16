@@ -14,7 +14,7 @@ namespace AuthService.Infrastructure.Data
             _options = options.Value;
         }
 
-        public IDbConnection CreateConnection()
+        public NpgsqlConnection CreateConnection()  
         {
             return new NpgsqlConnection(_options.ConnectionString);
         }

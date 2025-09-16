@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  dns-test:
+    image: busybox
+    command: ping -c 3 registry-1.docker.io
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4

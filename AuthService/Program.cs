@@ -1,20 +1,22 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using AuthService.Infrastructure.Extensions;
 using AuthService.Api.Middleware;
+using AuthService.Application.Extensions;
 using AuthService.Application.Options;
 using AuthService.Infrastructure.Data;
 using AuthService.Infrastructure.Data.Interfaces;
+using AuthService.Infrastructure.Extensions;
 using AuthService.Infrastructure.Interfaces;
 using AuthService.Infrastructure.Repositories; 
-using System.Text;
-using Serilog;
-using Serilog.Events;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Serilog.Sinks.SystemConsole.Themes;
+using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Events;
 using Serilog.Sinks.File;
+using Serilog.Sinks.SystemConsole.Themes;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +37,14 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+builder.Services.AddDbContext<AuthDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("AuthDb");
+    options.UseNpgsql(connectionString); 
+});
+
+builder.Services.AddApplicationServices(builder.Configuration);
+
 // Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -49,7 +59,7 @@ builder.Services.AddScoped<IUserCredentialRepository, UserCredentialRepository>(
 
 // Configure Infrastructure and Application services
 builder.Services.AddInfrastructureServices(builder.Configuration);
-builder.Services.AddApplicationServices();
+
 
 // Configure JWT
 var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
@@ -101,6 +111,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {

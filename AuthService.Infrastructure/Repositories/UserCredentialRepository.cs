@@ -7,7 +7,7 @@ namespace AuthService.Infrastructure.Repositories
 {
     public class UserCredentialRepository : BaseRepository, IUserCredentialRepository
     {
-        public UserCredentialRepository(IDbConnectionFactory connectionFactory)
+        public UserCredentialRepository(Data.Interfaces.IDbConnectionFactory connectionFactory)
             : base(connectionFactory)
         {
         }

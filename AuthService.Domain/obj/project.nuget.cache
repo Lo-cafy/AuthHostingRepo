@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "snA9/Ixn5W4=",
+  "dgSpecHash": "fCcSaYxvia0=",
   "success": true,
-  "projectFilePath": "D:\\SingleProject1\\AuthService\\AuthService.Api\\AuthService.Domain\\AuthService.Domain.csproj",
+  "projectFilePath": "C:\\Users\\mshah\\Locafy\\Locafy\\Backend\\LocafyMicroservice\\services\\auth-service\\AuthService.Domain\\AuthService.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

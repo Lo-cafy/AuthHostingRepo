@@ -1,10 +1,12 @@
-﻿using System.Data;
+﻿using Npgsql;
+using System.Data;
 
 namespace AuthService.Infrastructure.Data.Interfaces
 {
     public interface IDbConnectionFactory
     {
-        IDbConnection CreateConnection();
+       
+        NpgsqlConnection CreateConnection();
         Task<IDbConnection> CreateConnectionAsync();
     }
 }

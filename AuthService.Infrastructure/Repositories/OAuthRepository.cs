@@ -13,7 +13,7 @@ namespace AuthService.Infrastructure.Repositories
 {
     public class OAuthRepository : BaseRepository, IOAuthRepository
     {
-        public OAuthRepository(IDbConnectionFactory connectionFactory)
+        public OAuthRepository(Data.Interfaces.IDbConnectionFactory connectionFactory)
             : base(connectionFactory)
         {
         }

@@ -10,7 +10,7 @@ namespace AuthService.Infrastructure.Repositories
 {
     public class DeviceFingerprintRepository : BaseRepository, IDeviceFingerprintRepository
     {
-        public DeviceFingerprintRepository(IDbConnectionFactory connectionFactory)
+        public DeviceFingerprintRepository(Data.Interfaces.IDbConnectionFactory connectionFactory)
             : base(connectionFactory)
         {
         }

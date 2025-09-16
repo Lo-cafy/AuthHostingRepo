@@ -8,5 +8,7 @@ namespace AuthService.Application.DTOs.Auth
         public string Email { get; set; }
         public string VerificationToken { get; set; }
         public string Message { get; set; }
+        public bool Success { get; internal set; }
+        public string ErrorCode { get; internal set; }
     }
 }
