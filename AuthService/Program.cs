@@ -1,19 +1,22 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using AuthService.Infrastructure.Extensions;
 using AuthService.Api.Middleware;
+using AuthService.Application.Extensions;
 using AuthService.Application.Options;
 using AuthService.Infrastructure.Data;
+using AuthService.Infrastructure.Data.Interfaces;
+using AuthService.Infrastructure.Extensions;
 using AuthService.Infrastructure.Interfaces;
-using AuthService.Infrastructure.Services;
-using AuthService.Infrastructure.Repositories;
-using AuthService.Application.Interfaces;
-using AuthService.Application.Services;
-using System.Text;
+using AuthService.Infrastructure.Repositories; 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Events;
-using AuthService.Infrastructure.Data.Interfaces;
+using Serilog.Sinks.File;
 using Serilog.Sinks.SystemConsole.Themes;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,32 +37,29 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+builder.Services.AddDbContext<AuthDbContext>(options =>
+{
+    var connectionString = builder.Configuration.GetConnectionString("AuthDb");
+    options.UseNpgsql(connectionString); 
+});
+
+builder.Services.AddApplicationServices(builder.Configuration);
+
 // Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Database Configuration
-builder.Services.Configure<DatabaseOptions>(
-    builder.Configuration.GetSection(DatabaseOptions.SectionName));
-builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
-builder.Services.AddScoped<IDatabaseFunctionService, DatabaseFunctionService>();
+// Configure Database
+builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.SectionName));
+builder.Services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
 
-// Register Core Services
-builder.Services.AddScoped<IPasswordService, PasswordService>();
-builder.Services.AddScoped<IJwtService, JwtService>();
-builder.Services.AddScoped<IDigitalFingerprintService, DigitalFingerprintService>();
-
-// Register Repositories
+// ? Register IUserCredentialRepository implementation
 builder.Services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
-builder.Services.AddScoped<IJwtSessionRepository, JwtSessionRepository>();
-builder.Services.AddScoped<ILoginAttemptRepository, LoginAttemptRepository>();
-builder.Services.AddScoped<ISecurityTokenRepository, SecurityTokenRepository>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
-// Register Application Services
-builder.Services.AddScoped<IAuthService, AuthService.Application.Services.AuthService>();
-builder.Services.AddScoped<IAccountService, AccountService>();
+// Configure Infrastructure and Application services
+builder.Services.AddInfrastructureServices(builder.Configuration);
+
 
 // Configure JWT
 var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
@@ -76,8 +76,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtOptions.Issuer,
             ValidAudience = jwtOptions.Audience,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtOptions.Secret)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
             ClockSkew = TimeSpan.Zero
         };
     });
@@ -112,6 +111,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  dns-test:
+    image: busybox
+    command: ping -c 3 registry-1.docker.io
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+
+  auth-database:
+    image: postgres:15
+    container_name: authdatabase
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - auth_pg_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d 
+    ports:
+      - "5433:5432"
+    networks:
+      - user-network
+
+  user-service:
+    build:
+      context: .                        
+      dockerfile: Dockerfile
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    depends_on:
+      - auth-database
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__AuthDb: Host=auth-database;Port=${DB_PORT};Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+    networks:
+      - user-network
+
+volumes:
+  auth_pg_data:
+
+networks:
+  user-network:
+    driver: bridge

@@ -44,23 +44,12 @@ namespace AuthService.Api.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
         {
-            try
-            {
-                var result = await _authService.RegisterAsync(request);
-                return CreatedAtAction(nameof(GetUser), new { id = result.UserId }, result);
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(new { error = ex.Message });
-            }
-            catch (AuthException ex)
-            {
-                return Conflict(new { error = ex.Message });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { error = "An error occurred during registration" });
-            }
+            var result = await _authService.RegisterAsync(request);
+
+            if (!result.Success)
+                return BadRequest(result);  // Returns 400 with the error message
+
+            return Created($"/api/users/{result.UserId}", result);  // Returns 201 Created on success
         }
 
         [HttpPost("refresh")]
@@ -106,6 +95,7 @@ namespace AuthService.Api.Controllers
         [Authorize]
         public async Task<IActionResult> GetUser(Guid id)
         {
+            // Placeholder for getting user details
             return Ok(new { userId = id });
         }
     }

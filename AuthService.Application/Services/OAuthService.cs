@@ -10,7 +10,6 @@ using AuthService.Infrastructure.Interfaces;
 using AuthService.Domain.Entities;
 using System.Collections.Generic;
 using System.Text;
-using AuthService.Domain.Enums;
 
 namespace AuthService.Application.Services
 {
@@ -277,8 +276,7 @@ namespace AuthService.Application.Services
             var refreshJti = Guid.NewGuid().ToString();
 
             var accessToken = _jwtService.GenerateAccessToken(
-            userId, userInfo.Email, RoleTypeEnum.Customer, jti);
-
+                userId, userInfo.Email, new[] { "customer" }, jti);
             var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
             return new AuthResultDto
@@ -404,9 +402,9 @@ namespace AuthService.Application.Services
 
                 var jti = Guid.NewGuid().ToString();
                 var refreshJti = Guid.NewGuid().ToString();
-                var accessToken = _jwtService.GenerateAccessToken(
-                   userId, userInfo.Email, RoleTypeEnum.Customer, jti);
 
+                var accessToken = _jwtService.GenerateAccessToken(
+                    userId, email, new[] { "customer" }, jti);
                 var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
                 return new OAuthCallbackDto

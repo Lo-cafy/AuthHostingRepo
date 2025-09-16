@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AuthService.Domain.Entities;
 
 namespace AuthService.Infrastructure.Interfaces
@@ -8,7 +7,6 @@ namespace AuthService.Infrastructure.Interfaces
     {
         Task<SecurityToken> GetByTokenHashAsync(string tokenHash);
         Task<SecurityToken> CreateAsync(SecurityToken token);
-        Task<bool> UpdateAsync(SecurityToken token);
-        Task<bool> MarkAsUsedAsync(Guid tokenId);
+        Task UpdateAsync(SecurityToken token);
     }
 }

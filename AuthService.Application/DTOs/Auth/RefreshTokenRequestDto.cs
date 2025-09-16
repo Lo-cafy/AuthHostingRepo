@@ -6,5 +6,7 @@ namespace AuthService.Application.DTOs.Auth
     {
         [Required]
         public string RefreshToken { get; set; }
+        public string? IpAddress { get; internal set; }
+        public string? UserAgent { get; internal set; }
     }
 }

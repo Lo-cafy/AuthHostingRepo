@@ -30,7 +30,7 @@ namespace AuthService.Application.Services
                 TokenHash = tokenHash,
                 ExpiresAt = GetExpirationTime(tokenType),
                 CreatedAt = DateTime.UtcNow,
-                Metadata = new Dictionary<string, object>() 
+                Metadata = "{}"
             };
 
             await _tokenRepository.CreateAsync(securityToken);
