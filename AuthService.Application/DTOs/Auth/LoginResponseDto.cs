@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AuthService.Application.DTOs.Enum;
+using System;
 
 namespace AuthService.Application.DTOs.Auth
 {

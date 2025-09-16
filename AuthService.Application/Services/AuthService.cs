@@ -133,7 +133,7 @@ namespace AuthService.Application.Services
                         ExpiresIn = spResponse.tokens.expires_in ?? 3600,
                         UserId = spResponse.user_id,
                         Email = spResponse.email,
-                        Roles = spResponse.roles?.ToObject<string[]>() ?? new[] { "customer" }
+                        Role = spResponse.roles?.ToObject<string[]>() ?? new[] { "customer" }
                     };
                 }
 

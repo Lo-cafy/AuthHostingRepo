@@ -11,7 +11,7 @@ namespace AuthService.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
            
-            services.AddSingleton<IDbConnectionFactory, PostgresConnectionFactory>();
+            services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
 
            
             services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();

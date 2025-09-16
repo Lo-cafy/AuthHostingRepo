@@ -8,6 +8,7 @@ using AuthService.Infrastructure.Interfaces;
 using AuthService.Infrastructure.Repositories; 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Connections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,6 +18,7 @@ using Serilog.Events;
 using Serilog.Sinks.File;
 using Serilog.Sinks.SystemConsole.Themes;
 using System.Text;
+using DatabaseOptions = AuthService.Application.Options.DatabaseOptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,9 +53,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Configure Database
-builder.Services.Configure<DatabaseOptions>(builder.Configuration.GetSection(DatabaseOptions.SectionName));
+builder.Services.Configure<DatabaseOptions>(
+    builder.Configuration.GetSection(DatabaseOptions.SectionName));
 builder.Services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
-
 // ? Register IUserCredentialRepository implementation
 builder.Services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
 
