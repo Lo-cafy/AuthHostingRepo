@@ -10,6 +10,6 @@ namespace AuthService.Application.DTOs.Auth
         public string TokenType { get; set; } = "Bearer";
         public Guid UserId { get; set; }
         public string Email { get; set; }
-        public string[] Roles { get; set; }
+         public RoleTypeEnum Role { get; set; }
     }
 }
