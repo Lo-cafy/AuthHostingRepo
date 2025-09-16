@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuthService.Shared")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71cbfbf21349b89bdb21339c0d348c8a5d5a2fa9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+781cd5f49bbe6a2acd4536db79989154bf0e25e8")]
 [assembly: System.Reflection.AssemblyProductAttribute("AuthService.Shared")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuthService.Shared")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
