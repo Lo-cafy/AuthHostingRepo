@@ -35,18 +35,6 @@ namespace AuthService.Infrastructure.Data.Configurations
             builder.HasIndex(x => x.RefreshJti)
                 .IsUnique();
 
-            builder.Property(x => x.DeviceId)
-                .HasColumnName("device_id")
-                .HasMaxLength(255);
-
-            builder.Property(x => x.DeviceName)
-                .HasColumnName("device_name")
-                .HasMaxLength(100);
-
-            builder.Property(x => x.DeviceType)
-                .HasColumnName("device_type")
-                .HasMaxLength(50);
-
             builder.Property(x => x.IpAddress)
                 .HasColumnName("ip_address");
 

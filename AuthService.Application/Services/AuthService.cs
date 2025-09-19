@@ -1,143 +1,144 @@
+using System;
+using System.Linq;
+using System.Text.Json;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using AuthService.Application.Interfaces;
 using AuthService.Application.DTOs.Auth;
 using AuthService.Application.DTOs.Common;
-using AuthService.Application.Interfaces;
-using AuthService.Domain.Entities;
-using AuthService.Infrastructure.Data.Interfaces;
 using AuthService.Infrastructure.Interfaces;
-using AuthService.Infrastructure.Repositories;
+using AuthService.Domain.Entities;
+using AuthService.Domain.Enums;
 using AuthService.Shared.Exceptions;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json;
-using Npgsql;
-using NpgsqlTypes;
-using System;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace AuthService.Application.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IDbConnectionFactory _connectionFactory;
+        private readonly IDatabaseFunctionService _databaseFunctionService;
+        private readonly IUserCredentialRepository _credentialRepository;
+        private readonly IJwtService _jwtService;
+        private readonly IPasswordService _passwordService;
+        private readonly IJwtSessionRepository _sessionRepository;
+        private readonly ILoginAttemptRepository _loginAttemptRepository;
+        private readonly IDigitalFingerprintService _fingerprintService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger<AuthService> _logger;
 
-        public AuthService(IDbConnectionFactory connectionFactory, ILogger<AuthService> logger)
+        public AuthService(
+            IDatabaseFunctionService databaseFunctionService,
+            IUserCredentialRepository credentialRepository,
+            IJwtService jwtService,
+            IPasswordService passwordService,
+            IJwtSessionRepository sessionRepository,
+            ILoginAttemptRepository loginAttemptRepository,
+            IDigitalFingerprintService fingerprintService,
+              IHttpContextAccessor httpContextAccessor,
+            ILogger<AuthService> logger)
         {
-            _connectionFactory = connectionFactory;
+            _databaseFunctionService = databaseFunctionService;
+            _credentialRepository = credentialRepository;
+            _jwtService = jwtService;
+            _passwordService = passwordService;
+            _sessionRepository = sessionRepository;
+            _loginAttemptRepository = loginAttemptRepository;
+            _fingerprintService = fingerprintService;
+            _httpContextAccessor = httpContextAccessor;
             _logger = logger;
         }
 
-        public async Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request)
+        public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request, DeviceInfoDto? deviceInfo = null)
         {
-            // Input validation (as before)
-            if (string.IsNullOrEmpty(request.Email) || string.IsNullOrEmpty(request.Password))
-                return new RegisterResponseDto { Success = false, Message = "Email and password are required" };
-
-            if (request.Password != request.ConfirmPassword)
-                return new RegisterResponseDto { Success = false, Message = "Passwords do not match" };
-
             try
             {
-                using var connection = _connectionFactory.CreateConnection();
-                await connection.OpenAsync();
-
-                using var command = new NpgsqlCommand("SELECT auth.register_with_password(@p_user_id, @p_email, @p_password, @p_role_name, @p_ip_address, @p_user_agent, @p_request_id)", connection);
-
-                command.Parameters.Add(new NpgsqlParameter("@p_user_id", NpgsqlDbType.Uuid) { Value = Guid.NewGuid() });
-                command.Parameters.Add(new NpgsqlParameter("@p_email", NpgsqlDbType.Varchar, 100) { Value = request.Email.ToLower() });
-                command.Parameters.Add(new NpgsqlParameter("@p_password", NpgsqlDbType.Text) { Value = request.Password });
-                command.Parameters.Add(new NpgsqlParameter("@p_role_name", NpgsqlDbType.Varchar, 50) { Value = request.Role ?? "customer" });
-                command.Parameters.Add(new NpgsqlParameter("@p_ip_address", NpgsqlDbType.Inet) { Value = request.DeviceInfo?.IpAddress ?? "127.0.0.1" });
-                command.Parameters.Add(new NpgsqlParameter("@p_user_agent", NpgsqlDbType.Text) { Value = request.DeviceInfo?.UserAgent ?? "Unknown" });
-                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Uuid) { Value = Guid.NewGuid() });
-
-                var result = await command.ExecuteScalarAsync();
-                var jsonResult = result?.ToString();
-
-                if (string.IsNullOrEmpty(jsonResult))
-                    return new RegisterResponseDto { Success = false, Message = "No response from database" };
-
-                var spResponse = JsonConvert.DeserializeObject<dynamic>(jsonResult);
-
-                if (!(bool)spResponse.success)
-                    return new RegisterResponseDto { Success = false, Message = spResponse.message.ToString() ?? "Registration failed", ErrorCode = spResponse.error.ToString() };
-
-                return new RegisterResponseDto
+                deviceInfo ??= new DeviceInfoDto
                 {
-                    Success = true,
-                    UserId = spResponse.user_id,
-                    Email = request.Email,
-                    VerificationToken = spResponse.verification_token,
-                    Message = spResponse.message
+                    IpAddress = "127.0.0.1",
+                    UserAgent = "Unknown"
                 };
-            }
-            catch (NpgsqlException nex)
-            {
-                _logger.LogError(nex, "Database error during registration for email: {Email}", request.Email);
-                return new RegisterResponseDto { Success = false, Message = $"Database error: {nex.Message}" };
-            }
-            catch (JsonException jex)
-            {
-                _logger.LogError(jex, "JSON parsing error during registration");
-                return new RegisterResponseDto { Success = false, Message = "Invalid response from database" };
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Registration failed for email: {Email}", request.Email);
-                return new RegisterResponseDto { Success = false, Message = "An unexpected error occurred" };
-            }
-        }
 
+                var requestId = Guid.NewGuid();
 
-        public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request)
-        {
-            try
-            {
-                using var connection = _connectionFactory.CreateConnection();
-                await connection.OpenAsync();
-
-                var deviceInfo = JsonConvert.SerializeObject(new
+                var deviceInfoForSP = new
                 {
-                    ip_address = request.DeviceInfo?.IpAddress ?? "127.0.0.1",
-                    user_agent = request.DeviceInfo?.UserAgent ?? "Unknown",
-                    device_id = request.DeviceInfo?.DeviceId,
-                    device_name = request.DeviceInfo?.DeviceName,
-                    device_type = request.DeviceInfo?.DeviceType,
-                    location = request.DeviceInfo?.Location
-                });
+                    ip_address = deviceInfo.IpAddress,
+                    user_agent = deviceInfo.UserAgent,
+                    location = deviceInfo.Location
+                };
 
-                using var command = new NpgsqlCommand("SELECT auth.authenticate_password(@p_email, @p_password, @p_device_info, @p_request_id)", (NpgsqlConnection?)connection);
-                command.Parameters.AddWithValue("@p_email", request.Email.ToLower());
-                command.Parameters.AddWithValue("@p_password", request.Password);
-                command.Parameters.AddWithValue("@p_device_info", NpgsqlTypes.NpgsqlDbType.Jsonb, deviceInfo);
-                command.Parameters.AddWithValue("@p_request_id", Guid.NewGuid());
+                var result = await _databaseFunctionService.AuthenticatePasswordAsync(
+                    request.Email,
+                    request.Password,
+                    deviceInfoForSP,
+                    requestId
+                );
 
-                var result = await command.ExecuteScalarAsync();
-                var jsonResult = result?.ToString();
-
-                if (!string.IsNullOrEmpty(jsonResult))
+                using (result)
                 {
-                    var spResponse = JsonConvert.DeserializeObject<dynamic>(jsonResult);
+                    var root = result.RootElement;
 
-                    if (!(bool)spResponse.success)
+                    if (!root.GetProperty("success").GetBoolean())
                     {
-                        throw new AuthException(spResponse.message.ToString());
+                        var error = root.GetProperty("error").GetString();
+                        var message = root.GetProperty("message").GetString();
+                        var code = root.GetProperty("code").GetInt32();
+
+                        if (code == 429)
+                            throw new RateLimitException(message);
+                        else if (code == 423)
+                            throw new AuthException(message);
+                        else if (code == 403 && error == "EMAIL_NOT_VERIFIED")
+                        {
+                            throw new AuthException("Please verify your email address before logging in");
+                        }
+                        else
+                            throw new AuthException(message);
                     }
+
+                    var userId = root.GetProperty("user_id").GetGuid();
+                    var email = root.GetProperty("email").GetString();
+                    var emailVerified = root.GetProperty("email_verified").GetBoolean();
+                    var accountStatus = root.GetProperty("account_status").GetString();
+
+                    var roles = root.GetProperty("roles").EnumerateArray()
+                        .Select(r => r.GetString())
+                        .ToList();
+
+                    var tokens = root.GetProperty("tokens");
+                    var accessJti = tokens.GetProperty("access_token_jti").GetString();
+                    var refreshJti = tokens.GetProperty("refresh_token_jti").GetString();
+                    var expiresIn = tokens.GetProperty("expires_in").GetInt32();
+
+                    var session = root.GetProperty("session");
+                    var sessionId = session.GetProperty("session_id").GetGuid();
+
+                    // Generate actual JWT tokens
+                    var roleEnum = Enum.Parse<RoleTypeEnum>(roles.FirstOrDefault() ?? "Customer", true);
+                    var accessToken = _jwtService.GenerateAccessToken(userId, email, roleEnum, accessJti);
+                    var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
                     return new LoginResponseDto
                     {
-                        AccessToken = spResponse.tokens.access_token_jti,
-                        RefreshToken = spResponse.tokens.refresh_token_jti,
-                        ExpiresIn = spResponse.tokens.expires_in ?? 3600,
-                        UserId = spResponse.user_id,
-                        Email = spResponse.email,
-                        Role = spResponse.roles?.ToObject<string[]>() ?? new[] { "customer" }
+                        Success = true,
+                        AccessToken = accessToken,
+                        RefreshToken = refreshToken,
+                        ExpiresIn = expiresIn,
+                        ExpiresAt = DateTime.UtcNow.AddSeconds(expiresIn),
+                        User = new UserInfoDto
+                        {
+                            UserId = userId,
+                            Email = email,
+                            IsEmailVerified = emailVerified,
+                            Role = roleEnum
+                        },
+                        Role = roleEnum
                     };
                 }
-
-                throw new AuthException("Authentication failed");
             }
             catch (Exception ex)
             {
@@ -146,46 +147,69 @@ namespace AuthService.Application.Services
             }
         }
 
-        public async Task<AuthResultDto> AuthenticateAsync(string email, string password)
+        public async Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request)
         {
-           
             try
             {
-                using var connection = _connectionFactory.CreateConnection();
-                await connection.OpenAsync();
-
-                using var command = new NpgsqlCommand("SELECT auth.authenticate_password(@p_email, @p_password, '{}'::jsonb, @p_request_id)", connection);
-                command.Parameters.AddWithValue("@p_email", email.ToLower());
-                command.Parameters.AddWithValue("@p_password", password);
-                command.Parameters.AddWithValue("@p_request_id", Guid.NewGuid());
-
-                var result = await command.ExecuteScalarAsync();
-                var jsonResult = result?.ToString();
-
-                if (!string.IsNullOrEmpty(jsonResult))
+                // Validate passwords match
+                if (request.Password != request.ConfirmPassword)
                 {
-                    var spResponse = JsonConvert.DeserializeObject<dynamic>(jsonResult);
-
-                    if (!(bool)spResponse.success)
-                        throw new AuthException(spResponse.message.ToString());
-
-                    return new AuthResultDto
-                    {
-                        Success = true,
-                        AccessToken = spResponse.tokens.access_token_jti,
-                        RefreshToken = spResponse.tokens.refresh_token_jti,
-                        ExpiresIn = spResponse.tokens.expires_in ?? 3600,
-                        UserId = spResponse.user_id,
-                        Email = spResponse.email,
-                        Roles = spResponse.roles?.ToObject<string[]>() ?? new[] { "customer" }
-                    };
+                    throw new ValidationException("Passwords do not match");
                 }
 
-                throw new AuthException("Authentication failed.");
+                var userId = Guid.NewGuid();
+                var requestId = Guid.NewGuid();
+
+                // Get client IP and User Agent from HttpContext
+                var deviceInfo = new
+                {
+                    ip_address = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "127.0.0.1",
+                    user_agent = _httpContextAccessor.HttpContext?.Request.Headers["User-Agent"].ToString() ?? "Unknown"
+                };
+
+                var result = await _databaseFunctionService.RegisterWithPasswordAsync(
+                    userId,
+                    request.Email,
+                    request.Password,
+                    "customer", // Default role
+                    deviceInfo.ip_address,
+                    deviceInfo.user_agent,
+                    requestId
+                );
+
+                using (result)
+                {
+                    var root = result.RootElement;
+
+                    if (!root.GetProperty("success").GetBoolean())
+                    {
+                        var error = root.GetProperty("error").GetString();
+                        var message = root.GetProperty("message").GetString();
+                        var code = root.GetProperty("code").GetInt32();
+
+                        if (code == 429)
+                            throw new RateLimitException(message);
+                        else if (code == 409)
+                            throw new AuthException("Email already registered");
+                        else if (code == 400)
+                            throw new ValidationException(message);
+                        else
+                            throw new AuthException(message);
+                    }
+
+                    return new RegisterResponseDto
+                    {
+                        Success = true,
+                        UserId = root.GetProperty("user_id").GetGuid(),
+                        Email = request.Email,
+                        VerificationToken = root.GetProperty("verification_token").GetString(),
+                        Message = root.GetProperty("message").GetString()
+                    };
+                }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Authentication failed for email: {Email}", email);
+                _logger.LogError(ex, "Registration failed for email: {Email}", request.Email);
                 throw;
             }
         }
@@ -194,40 +218,55 @@ namespace AuthService.Application.Services
         {
             try
             {
-                using var connection = _connectionFactory.CreateConnection();
-                await connection.OpenAsync();
-
-                var deviceInfo = JsonConvert.SerializeObject(new
+                var principal = _jwtService.ValidateRefreshToken(request.RefreshToken);
+                if (principal == null)
                 {
-                    ip_address = request.IpAddress ?? "127.0.0.1",
-                    user_agent = request.UserAgent ?? "Unknown"
-                });
+                    throw new AuthException("Invalid refresh token");
+                }
 
-                using var command = new NpgsqlCommand("SELECT auth.refresh_jwt_token(@p_refresh_jti, @p_device_info, @p_request_id)", connection);
-                command.Parameters.AddWithValue("@p_refresh_jti", request.RefreshToken);
-                command.Parameters.AddWithValue("@p_device_info", NpgsqlTypes.NpgsqlDbType.Jsonb, deviceInfo);
-                command.Parameters.AddWithValue("@p_request_id", Guid.NewGuid());
+                var refreshJti = principal.FindFirst("jti")?.Value;
+                var requestId = Guid.NewGuid();
 
-                var result = await command.ExecuteScalarAsync();
-                var jsonResult = result?.ToString();
+                var result = await _databaseFunctionService.RefreshJwtTokenAsync(
+                    refreshJti,
+                    null,
+                    requestId
+                );
 
-                if (!string.IsNullOrEmpty(jsonResult))
+                using (result)
                 {
-                    var spResponse = JsonConvert.DeserializeObject<dynamic>(jsonResult);
+                    var root = result.RootElement;
 
-                    if (!(bool)spResponse.success)
+                    if (!root.GetProperty("success").GetBoolean())
                     {
-                        throw new AuthException(spResponse.message.ToString());
+                        var error = root.GetProperty("error").GetString();
+                        var message = root.GetProperty("message").GetString();
+                        throw new AuthException(message);
                     }
+
+                    var userId = root.GetProperty("user_id").GetGuid();
+                    var roles = root.GetProperty("roles").EnumerateArray()
+                        .Select(r => r.GetString())
+                        .ToList();
+
+                    var tokens = root.GetProperty("tokens");
+                    var newAccessJti = tokens.GetProperty("access_token_jti").GetString();
+                    var expiresIn = tokens.GetProperty("expires_in").GetInt32();
+
+                    // Get user email from principal
+                    var email = principal.FindFirst("email")?.Value ?? "";
+
+                    // Generate actual JWT token
+                    var roleEnum = Enum.Parse<RoleTypeEnum>(roles.FirstOrDefault() ?? "Customer", true);
+                    var accessToken = _jwtService.GenerateAccessToken(userId, email, roleEnum, newAccessJti);
 
                     return new RefreshTokenResponseDto
                     {
-                        AccessToken = spResponse.tokens.access_token_jti,
-                        ExpiresIn = spResponse.tokens.expires_in ?? 3600
+                        AccessToken = accessToken,
+                        RefreshToken = request.RefreshToken,
+                        ExpiresIn = expiresIn
                     };
                 }
-
-                throw new AuthException("Token refresh failed");
             }
             catch (Exception ex)
             {
@@ -236,18 +275,65 @@ namespace AuthService.Application.Services
             }
         }
 
+        public async Task<bool> LogoutAsync(string jti)
+        {
+            try
+            {
+                var requestId = Guid.NewGuid();
+                var result = await _databaseFunctionService.LogoutSessionAsync(jti, "user_logout", requestId);
+
+                using (result)
+                {
+                    var root = result.RootElement;
+                    return root.GetProperty("success").GetBoolean();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Logout failed for JTI: {Jti}", jti);
+                return false;
+            }
+        }
+
+        public async Task<bool> RevokeAllSessionsAsync(Guid userId)
+        {
+            try
+            {
+                var sessions = await _sessionRepository.GetActiveSessionsByUserIdAsync(userId);
+
+                foreach (var session in sessions)
+                {
+                    await LogoutAsync(session.Jti);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Failed to revoke all sessions for user: {UserId}", userId);
+                return false;
+            }
+        }
+
         public async Task<bool> ValidateTokenAsync(string token)
         {
             try
             {
-                using var connection = _connectionFactory.CreateConnection();
-                await connection.OpenAsync();
+                var principal = _jwtService.ValidateToken(token);
+                if (principal == null)
+                {
+                    return false;
+                }
 
-                using var command = new NpgsqlCommand("SELECT auth.validate_session(@p_jti)", connection);
-                command.Parameters.AddWithValue("@p_jti", token);
+                var jti = principal.FindFirst("jti")?.Value;
 
-                var result = await command.ExecuteScalarAsync();
-                return result != null && (bool)result;
+                var session = await _sessionRepository.GetByJtiAsync(jti);
+                if (session == null || !session.IsActive || session.ExpiresAt < DateTime.UtcNow)
+                {
+                    return false;
+                }
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -256,26 +342,88 @@ namespace AuthService.Application.Services
             }
         }
 
-        public async Task LogoutAsync(string jti)
+        public async Task<AuthResultDto> AuthenticateAsync(string email, string password)
         {
             try
             {
-                using var connection = _connectionFactory.CreateConnection();
-                await connection.OpenAsync();
+                var loginRequest = new LoginRequestDto
+                {
+                    Email = email,
+                    Password = password
+                };
 
-                using var command = new NpgsqlCommand("SELECT auth.logout_session(@p_jti, @p_reason, @p_request_id)", connection);
-                command.Parameters.AddWithValue("@p_jti", jti);
-                command.Parameters.AddWithValue("@p_reason", "user_logout");
-                command.Parameters.AddWithValue("@p_request_id", Guid.NewGuid());
+                var loginResult = await LoginAsync(loginRequest);
 
-                await command.ExecuteScalarAsync();
+                return new AuthResultDto
+                {
+                    Success = true,
+                    UserId = loginResult.User.UserId,
+                    AccessToken = loginResult.AccessToken,
+                    RefreshToken = loginResult.RefreshToken,
+                    ExpiresIn = loginResult.ExpiresIn,
+                    TokenType = "Bearer",
+                    Message = "Authentication successful"
+                };
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Logout failed for JTI: {Jti}", jti);
-                throw;
+                _logger.LogError(ex, "Authentication failed for email: {Email}", email);
+                return new AuthResultDto
+                {
+                    Success = false,
+                    Error = "Authentication failed",
+                    Message = ex.Message
+                };
             }
         }
-    }
 
+        private async Task<JwtSession> CreateSessionAsync(Guid userId, DeviceInfoDto deviceInfo)
+        {
+            var session = new JwtSession
+            {
+                SessionId = Guid.NewGuid(),
+                UserId = userId,
+                Jti = Guid.NewGuid().ToString(),
+                RefreshJti = Guid.NewGuid().ToString(),
+
+                IpAddress = deviceInfo?.IpAddress,
+                UserAgent = deviceInfo?.UserAgent,
+                Location = deviceInfo?.Location != null ? JsonConvert.SerializeObject(deviceInfo.Location) : null,
+                CreatedAt = DateTime.UtcNow,
+                LastAccessedAt = DateTime.UtcNow,
+                ExpiresAt = DateTime.UtcNow.AddDays(30),
+                IsActive = true
+            };
+
+            return await _sessionRepository.CreateAsync(session);
+        }
+
+        private async Task LogLoginAttempt(string identifier, bool success, string? failureReason, DeviceInfoDto deviceInfo, string fingerprint)
+        {
+            var attempt = new LoginAttempt
+            {
+                AttemptId = Guid.NewGuid(),
+                Identifier = identifier,
+                AuthProvider = AuthProviderEnum.Password,
+                Success = success,
+                FailureReason = failureReason,
+                IpAddress = deviceInfo?.IpAddress ?? "0.0.0.0",
+                UserAgent = deviceInfo?.UserAgent,
+                AttemptedAt = DateTime.UtcNow,
+                Fingerprint = fingerprint
+            };
+
+            await _loginAttemptRepository.CreateAsync(attempt);
+        }
+
+        private string GenerateSecureToken()
+        {
+            var randomBytes = new byte[32];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomBytes);
+            }
+            return Convert.ToBase64String(randomBytes);
+        }
+    }
 }

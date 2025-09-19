@@ -32,9 +32,6 @@ namespace AuthService.Grpc.Services
                 var userId = Guid.Parse(request.UserId);
                 var deviceInfo = new DeviceFingerprintDto
                 {
-                    DeviceId = request.DeviceInfo.DeviceId,
-                    DeviceName = request.DeviceInfo.DeviceName,
-                    DeviceType = request.DeviceInfo.DeviceType,
                     OperatingSystem = request.DeviceInfo.OperatingSystem,
                     Browser = request.DeviceInfo.Browser,
                     UserAgent = request.DeviceInfo.UserAgent,
@@ -51,7 +48,7 @@ namespace AuthService.Grpc.Services
                 return new RegisterDeviceResponse
                 {
                     Success = true,
-                    FingerprintId = Guid.NewGuid().ToString(), // You might want to return this from the service
+                    FingerprintId = Guid.NewGuid().ToString(),
                     FingerprintHash = fingerprintHash,
                     Message = "Device registered successfully"
                 };
@@ -148,9 +145,7 @@ namespace AuthService.Grpc.Services
                 {
                     response.Devices.Add(new UserDevice
                     {
-                        FingerprintId = Guid.NewGuid().ToString(), // You might want to add this to DTO
-                        DeviceName = device.DeviceName,
-                        DeviceType = device.DeviceType,
+                        FingerprintId = Guid.NewGuid().ToString(),
                         OperatingSystem = device.OperatingSystem,
                         Browser = device.Browser,
                         IsTrusted = false, // You might want to add this to DTO

@@ -17,8 +17,5 @@ namespace AuthService.Application.DTOs.Auth
         [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
-        public string Role { get; set; } = "customer";
-
-        public DeviceInfoDto DeviceInfo { get; set; }
     }
 }

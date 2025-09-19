@@ -1,16 +1,16 @@
-﻿using AuthService.Application.DTOs.Enum;
+﻿using AuthService.Domain.Enums;
 using System;
 
 namespace AuthService.Application.DTOs.Auth
 {
     public class LoginResponseDto
     {
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
+        public bool Success { get; set; }
+        public string AccessToken { get; set; } = string.Empty;
+        public string RefreshToken { get; set; } = string.Empty;
         public int ExpiresIn { get; set; }
-        public string TokenType { get; set; } = "Bearer";
-        public Guid UserId { get; set; }
-        public string Email { get; set; }
-         public RoleTypeEnum Role { get; set; }
+        public DateTime ExpiresAt { get; set; }
+        public UserInfoDto User { get; set; } = new();
+        public RoleTypeEnum Role { get; set; }
     }
 }

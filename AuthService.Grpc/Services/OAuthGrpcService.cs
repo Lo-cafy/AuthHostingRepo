@@ -29,9 +29,6 @@ namespace AuthService.Grpc.Services
                     AccessToken = request.AccessToken,
                     DeviceInfo = request.DeviceInfo != null ? new DeviceInfoDto
                     {
-                        DeviceId = request.DeviceInfo.DeviceId,
-                        DeviceName = request.DeviceInfo.DeviceName,
-                        DeviceType = request.DeviceInfo.DeviceType,
                         IpAddress = request.DeviceInfo.IpAddress,
                         UserAgent = request.DeviceInfo.UserAgent
                     } : null
@@ -71,9 +68,6 @@ namespace AuthService.Grpc.Services
                     AccessToken = request.AccessToken,
                     DeviceInfo = request.DeviceInfo != null ? new DeviceInfoDto
                     {
-                        DeviceId = request.DeviceInfo.DeviceId,
-                        DeviceName = request.DeviceInfo.DeviceName,
-                        DeviceType = request.DeviceInfo.DeviceType,
                         IpAddress = request.DeviceInfo.IpAddress,
                         UserAgent = request.DeviceInfo.UserAgent
                     } : null

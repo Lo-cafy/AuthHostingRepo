@@ -1,28 +1,22 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Http;
+using AuthService.Infrastructure.Extensions;
 using AuthService.Api.Middleware;
-using AuthService.Application.Extensions;
 using AuthService.Application.Options;
 using AuthService.Infrastructure.Data;
-using AuthService.Infrastructure.Data.Interfaces;
-using AuthService.Infrastructure.Extensions;
 using AuthService.Infrastructure.Interfaces;
-using AuthService.Infrastructure.Repositories; 
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Connections;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
+using AuthService.Infrastructure.Services;
+using AuthService.Infrastructure.Repositories;
+using AuthService.Application.Interfaces;
+using AuthService.Application.Services;
+using System.Text;
 using Serilog;
 using Serilog.Events;
-using Serilog.Sinks.File;
+using AuthService.Infrastructure.Data.Interfaces;
 using Serilog.Sinks.SystemConsole.Themes;
-using System.Text;
-using DatabaseOptions = AuthService.Application.Options.DatabaseOptions;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -38,32 +32,33 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Host.UseSerilog();
-
-builder.Services.AddDbContext<AuthDbContext>(options =>
-{
-    var connectionString = builder.Configuration.GetConnectionString("AuthDb");
-    options.UseNpgsql(connectionString); 
-});
-
-builder.Services.AddApplicationServices(builder.Configuration);
-
-// Add services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Configure Database
+builder.Services.AddHttpContextAccessor();
+
+
 builder.Services.Configure<DatabaseOptions>(
     builder.Configuration.GetSection(DatabaseOptions.SectionName));
 builder.Services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
-// ? Register IUserCredentialRepository implementation
+builder.Services.AddScoped<IDatabaseFunctionService, DatabaseFunctionService>();
+
+builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IDigitalFingerprintService, DigitalFingerprintService>();
+
+
 builder.Services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
+builder.Services.AddScoped<IJwtSessionRepository, JwtSessionRepository>();
+builder.Services.AddScoped<ILoginAttemptRepository, LoginAttemptRepository>();
+builder.Services.AddScoped<ISecurityTokenRepository, SecurityTokenRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 
-// Configure Infrastructure and Application services
-builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddScoped<IAuthService, AuthService.Application.Services.AuthService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 
-// Configure JWT
 var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 
@@ -78,19 +73,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtOptions.Issuer,
             ValidAudience = jwtOptions.Audience,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(jwtOptions.Secret)),
             ClockSkew = TimeSpan.Zero
         };
     });
 
-// Configure Rate Limiting
+
 builder.Services.Configure<RateLimitOptions>(
     builder.Configuration.GetSection("RateLimitOptions"));
 
-// Add HTTP Client
+
 builder.Services.AddHttpClient();
 
-// Configure CORS
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -110,10 +106,9 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {

@@ -19,10 +19,6 @@ namespace AuthService.Application.Services
             fingerprintData.Append(deviceInfo.IpAddress ?? "unknown");
             fingerprintData.Append("|");
             fingerprintData.Append(deviceInfo.UserAgent ?? "unknown");
-            fingerprintData.Append("|");
-            fingerprintData.Append(deviceInfo.DeviceId ?? "unknown");
-            fingerprintData.Append("|");
-            fingerprintData.Append(deviceInfo.DeviceType ?? "unknown");
 
             // Generate hash
             using (var sha256 = SHA256.Create())

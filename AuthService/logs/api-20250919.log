@@ -1,0 +1,15 @@
+2025-09-19 10:33:09.667 +05:30 [INF] Starting Auth API
+2025-09-19 10:33:09.878 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-19 10:33:10.949 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-19 10:33:10.958 +05:30 [INF] Now listening on: http://localhost:5179
+2025-09-19 10:33:11.051 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-19 10:33:11.084 +05:30 [INF] Hosting environment: Development
+2025-09-19 10:33:11.092 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceClone\AuthService
+2025-09-19 10:33:12.614 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-09-19 10:33:13.278 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 1009.5402ms
+2025-09-19 10:33:13.301 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-19 10:33:13.302 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-09-19 10:33:13.321 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 18.5336ms
+2025-09-19 10:33:13.415 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 113.5913ms
+2025-09-19 10:33:13.485 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-09-19 10:33:13.567 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 82.5915ms

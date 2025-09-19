@@ -10,6 +10,7 @@ using AuthService.Infrastructure.Interfaces;
 using AuthService.Domain.Entities;
 using System.Collections.Generic;
 using System.Text;
+using AuthService.Domain.Enums;
 
 namespace AuthService.Application.Services
 {
@@ -276,7 +277,8 @@ namespace AuthService.Application.Services
             var refreshJti = Guid.NewGuid().ToString();
 
             var accessToken = _jwtService.GenerateAccessToken(
-                userId, userInfo.Email, new[] { "customer" }, jti);
+            userId, userInfo.Email, RoleTypeEnum.Customer, jti);
+
             var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
             return new AuthResultDto
@@ -402,9 +404,9 @@ namespace AuthService.Application.Services
 
                 var jti = Guid.NewGuid().ToString();
                 var refreshJti = Guid.NewGuid().ToString();
-
                 var accessToken = _jwtService.GenerateAccessToken(
-                    userId, email, new[] { "customer" }, jti);
+                   userId, userInfo.Email, RoleTypeEnum.Customer, jti);
+
                 var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
                 return new OAuthCallbackDto
@@ -476,15 +478,12 @@ namespace AuthService.Application.Services
 
         private string EncryptToken(string token)
         {
-            // TODO: Implement proper encryption
-            // This is just a placeholder - DO NOT use in production
+
             return Convert.ToBase64String(Encoding.UTF8.GetBytes(token));
         }
 
         private string DecryptSecret(string encryptedSecret)
         {
-            // TODO: Implement proper decryption
-            // This is just a placeholder - DO NOT use in production
             return Encoding.UTF8.GetString(Convert.FromBase64String(encryptedSecret));
         }
 

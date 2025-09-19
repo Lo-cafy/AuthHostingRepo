@@ -800,23 +800,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mshah\\.nuget\\packages\\": {},
+    "C:\\Users\\muham\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mshah\\Locafy\\Locafy\\Backend\\LocafyMicroservice\\services\\auth-service\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj",
+      "projectUniqueName": "D:\\SingleProject1\\AuthServiceClone\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj",
       "projectName": "AuthService.Infrastructure",
-      "projectPath": "C:\\Users\\mshah\\Locafy\\Locafy\\Backend\\LocafyMicroservice\\services\\auth-service\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\mshah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mshah\\Locafy\\Locafy\\Backend\\LocafyMicroservice\\services\\auth-service\\AuthService.Infrastructure\\obj\\",
+      "projectPath": "D:\\SingleProject1\\AuthServiceClone\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
+      "outputPath": "D:\\SingleProject1\\AuthServiceClone\\AuthService.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\mshah\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -831,8 +831,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\mshah\\Locafy\\Locafy\\Backend\\LocafyMicroservice\\services\\auth-service\\AuthService.Domain\\AuthService.Domain.csproj": {
-              "projectPath": "C:\\Users\\mshah\\Locafy\\Locafy\\Backend\\LocafyMicroservice\\services\\auth-service\\AuthService.Domain\\AuthService.Domain.csproj"
+            "D:\\SingleProject1\\AuthServiceClone\\AuthService.Domain\\AuthService.Domain.csproj": {
+              "projectPath": "D:\\SingleProject1\\AuthServiceClone\\AuthService.Domain\\AuthService.Domain.csproj"
             }
           }
         }
@@ -847,7 +847,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "9.0.200"
     },
     "frameworks": {
       "net8.0": {
@@ -890,7 +890,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

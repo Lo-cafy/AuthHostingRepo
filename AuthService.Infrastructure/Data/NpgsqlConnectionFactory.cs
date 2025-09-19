@@ -1,4 +1,4 @@
-﻿// AuthService.Infrastructure/Data/NpgsqlConnectionFactory.cs
+﻿
 using Microsoft.Extensions.Options;
 using Npgsql;
 using AuthService.Infrastructure.Data.Interfaces;
@@ -7,7 +7,7 @@ namespace AuthService.Infrastructure.Data
 {
     public class NpgsqlConnectionFactory : IDbConnectionFactory
     {
-        private readonly DatabaseOptions _options; // Only ONE field declaration
+        private readonly DatabaseOptions _options; 
 
         public NpgsqlConnectionFactory(IOptions<DatabaseOptions> options)
         {

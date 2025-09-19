@@ -21,8 +21,6 @@ namespace AuthService.Api.Middleware
             {
                 IpAddress = context.Connection.RemoteIpAddress?.ToString(),
                 UserAgent = context.Request.Headers["User-Agent"].ToString(),
-                DeviceId = context.Request.Headers["X-Device-Id"].ToString(),
-                DeviceType = context.Request.Headers["X-Device-Type"].ToString()
             };
 
             // Store in HttpContext for later use
