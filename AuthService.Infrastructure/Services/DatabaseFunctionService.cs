@@ -4,6 +4,7 @@ using NpgsqlTypes;
 using AuthService.Infrastructure.Interfaces;
 using Microsoft.Extensions.Logging;
 using AuthService.Infrastructure.Data.Interfaces;
+using System.Net;   // <-- IMPORTANT: for IPAddress.Parse
 
 namespace AuthService.Infrastructure.Services
 {
@@ -31,7 +32,6 @@ namespace AuthService.Infrastructure.Services
         {
             try
             {
-                // Cast to NpgsqlConnection since we know it's the concrete type
                 using var connection = (NpgsqlConnection)_connectionFactory.CreateConnection();
                 await connection.OpenAsync();
 
@@ -43,7 +43,13 @@ namespace AuthService.Infrastructure.Services
                 command.Parameters.AddWithValue("@p_email", email.ToLower());
                 command.Parameters.AddWithValue("@p_password", password);
                 command.Parameters.AddWithValue("@p_role_name", role);
-                command.Parameters.AddWithValue("@p_ip_address", NpgsqlDbType.Inet, ipAddress ?? "127.0.0.1");
+
+                // FIX: convert string → IPAddress
+                var ip = !string.IsNullOrEmpty(ipAddress)
+                    ? IPAddress.Parse(ipAddress)
+                    : IPAddress.Loopback;
+                command.Parameters.AddWithValue("@p_ip_address", NpgsqlDbType.Inet, ip);
+
                 command.Parameters.AddWithValue("@p_user_agent", userAgent ?? "Unknown");
                 command.Parameters.AddWithValue("@p_request_id", requestId ?? Guid.NewGuid());
 
@@ -85,6 +91,7 @@ namespace AuthService.Infrastructure.Services
                 var deviceInfoJson = deviceInfo != null
                     ? JsonSerializer.Serialize(deviceInfo)
                     : "{}";
+
                 command.Parameters.AddWithValue("@p_device_info", NpgsqlDbType.Jsonb, deviceInfoJson);
                 command.Parameters.AddWithValue("@p_request_id", requestId ?? Guid.NewGuid());
 
@@ -100,8 +107,14 @@ namespace AuthService.Infrastructure.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Database function authenticate_password failed");
-                throw;
+                _logger.LogError(ex, "Database function authenticate_password failed for email {Email}", email);
+                var errorJson = @"{
+                ""success"": false,
+                ""error"": ""DB_EXECUTION_FAILED"",
+                ""message"": ""Login failed due to database error"",
+                ""code"": 500
+             }";
+                return JsonDocument.Parse(errorJson);
             }
         }
 
@@ -157,6 +170,7 @@ namespace AuthService.Infrastructure.Services
                 var deviceInfoJson = deviceInfo != null
                     ? JsonSerializer.Serialize(deviceInfo)
                     : "{}";
+
                 command.Parameters.AddWithValue("@p_device_info", NpgsqlDbType.Jsonb, deviceInfoJson);
                 command.Parameters.AddWithValue("@p_request_id", requestId ?? Guid.NewGuid());
 

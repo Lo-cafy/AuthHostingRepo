@@ -35,35 +35,35 @@ namespace AuthService.Application.Services
             _logger = logger;
         }
 
-        public async Task<bool> VerifyEmailAsync(VerifyEmailDto request)
-        {
-            try
-            {
-                var requestId = Guid.NewGuid();
-                var result = await _databaseFunctionService.VerifyEmailAsync(request.Token, requestId);
+        //public async Task<bool> VerifyEmailAsync(VerifyEmailDto request)
+        //{
+        //    try
+        //    {
+        //        var requestId = Guid.NewGuid();
+        //        var result = await _databaseFunctionService.VerifyEmailAsync(request.Token, requestId);
 
-                using (result)
-                {
-                    var root = result.RootElement;
+        //        using (result)
+        //        {
+        //            var root = result.RootElement;
 
-                    if (!root.GetProperty("success").GetBoolean())
-                    {
-                        var message = root.GetProperty("message").GetString();
-                        throw new ValidationException(message);
-                    }
+        //            if (!root.GetProperty("success").GetBoolean())
+        //            {
+        //                var message = root.GetProperty("message").GetString();
+        //                throw new ValidationException(message);
+        //            }
 
-                    _logger.LogInformation("Email verified for user: {UserId}",
-                        root.GetProperty("user_id").GetGuid());
+        //            _logger.LogInformation("Email verified for user: {UserId}",
+        //                root.GetProperty("user_id").GetGuid());
 
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Email verification failed");
-                throw;
-            }
-        }
+        //            return true;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Email verification failed");
+        //        throw;
+        //    }
+        //}
 
         public async Task<bool> RequestPasswordResetAsync(string email)
         {

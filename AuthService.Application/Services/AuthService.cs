@@ -147,72 +147,72 @@ namespace AuthService.Application.Services
             }
         }
 
-        public async Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request)
-        {
-            try
-            {
-                // Validate passwords match
-                if (request.Password != request.ConfirmPassword)
-                {
-                    throw new ValidationException("Passwords do not match");
-                }
+        //public async Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request)
+        //{
+        //    try
+        //    {
+        //        // Validate passwords match
+        //        if (request.Password != request.ConfirmPassword)
+        //        {
+        //            throw new ValidationException("Passwords do not match");
+        //        }
 
-                var userId = Guid.NewGuid();
-                var requestId = Guid.NewGuid();
+        //        var userId = Guid.NewGuid();
+        //        var requestId = Guid.NewGuid();
 
-                // Get client IP and User Agent from HttpContext
-                var deviceInfo = new
-                {
-                    ip_address = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "127.0.0.1",
-                    user_agent = _httpContextAccessor.HttpContext?.Request.Headers["User-Agent"].ToString() ?? "Unknown"
-                };
+        //        // Get client IP and User Agent from HttpContext
+        //        var deviceInfo = new
+        //        {
+        //            ip_address = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "127.0.0.1",
+        //            user_agent = _httpContextAccessor.HttpContext?.Request.Headers["User-Agent"].ToString() ?? "Unknown"
+        //        };
 
-                var result = await _databaseFunctionService.RegisterWithPasswordAsync(
-                    userId,
-                    request.Email,
-                    request.Password,
-                    "customer", // Default role
-                    deviceInfo.ip_address,
-                    deviceInfo.user_agent,
-                    requestId
-                );
+        //        var result = await _databaseFunctionService.RegisterWithPasswordAsync(
+        //            userId,
+        //            request.Email,
+        //            request.Password,
+        //            "customer", // Default role
+        //            deviceInfo.ip_address,
+        //            deviceInfo.user_agent,
+        //            requestId
+        //        );
 
-                using (result)
-                {
-                    var root = result.RootElement;
+        //        using (result)
+        //        {
+        //            var root = result.RootElement;
 
-                    if (!root.GetProperty("success").GetBoolean())
-                    {
-                        var error = root.GetProperty("error").GetString();
-                        var message = root.GetProperty("message").GetString();
-                        var code = root.GetProperty("code").GetInt32();
+        //            if (!root.GetProperty("success").GetBoolean())
+        //            {
+        //                var error = root.GetProperty("error").GetString();
+        //                var message = root.GetProperty("message").GetString();
+        //                var code = root.GetProperty("code").GetInt32();
 
-                        if (code == 429)
-                            throw new RateLimitException(message);
-                        else if (code == 409)
-                            throw new AuthException("Email already registered");
-                        else if (code == 400)
-                            throw new ValidationException(message);
-                        else
-                            throw new AuthException(message);
-                    }
+        //                if (code == 429)
+        //                    throw new RateLimitException(message);
+        //                else if (code == 409)
+        //                    throw new AuthException("Email already registered");
+        //                else if (code == 400)
+        //                    throw new ValidationException(message);
+        //                else
+        //                    throw new AuthException(message);
+        //            }
 
-                    return new RegisterResponseDto
-                    {
-                        Success = true,
-                        UserId = root.GetProperty("user_id").GetGuid(),
-                        Email = request.Email,
-                        VerificationToken = root.GetProperty("verification_token").GetString(),
-                        Message = root.GetProperty("message").GetString()
-                    };
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Registration failed for email: {Email}", request.Email);
-                throw;
-            }
-        }
+        //            return new RegisterResponseDto
+        //            {
+        //                Success = true,
+        //                UserId = root.GetProperty("user_id").GetGuid(),
+        //                Email = request.Email,
+        //                VerificationToken = root.GetProperty("verification_token").GetString(),
+        //                Message = root.GetProperty("message").GetString()
+        //            };
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogError(ex, "Registration failed for email: {Email}", request.Email);
+        //        throw;
+        //    }
+        //}
 
         public async Task<RefreshTokenResponseDto> RefreshTokenAsync(RefreshTokenRequestDto request)
         {

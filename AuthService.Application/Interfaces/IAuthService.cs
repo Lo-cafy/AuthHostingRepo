@@ -10,7 +10,7 @@ namespace AuthService.Application.Interfaces
 
         Task<LoginResponseDto> LoginAsync(LoginRequestDto request, DeviceInfoDto? deviceInfo = null);
 
-        Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request);
+        //Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request);
 
         Task<RefreshTokenResponseDto> RefreshTokenAsync(RefreshTokenRequestDto request);
 
