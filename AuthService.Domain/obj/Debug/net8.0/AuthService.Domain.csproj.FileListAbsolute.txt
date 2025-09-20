@@ -46,3 +46,15 @@ D:\SingleProject1\AuthServiceClone\AuthService.Domain\obj\Debug\net8.0\AuthServi
 D:\SingleProject1\AuthServiceClone\AuthService.Domain\obj\Debug\net8.0\refint\AuthService.Domain.dll
 D:\SingleProject1\AuthServiceClone\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.pdb
 D:\SingleProject1\AuthServiceClone\AuthService.Domain\obj\Debug\net8.0\ref\AuthService.Domain.dll
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\bin\Debug\net8.0\AuthService.Domain.deps.json
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\bin\Debug\net8.0\AuthService.Domain.dll
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\bin\Debug\net8.0\AuthService.Domain.pdb
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.AssemblyInfoInputs.cache
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.AssemblyInfo.cs
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.csproj.CoreCompileInputs.cache
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.sourcelink.json
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.dll
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\obj\Debug\net8.0\refint\AuthService.Domain.dll
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.pdb
+C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth_service1\AuthService.Domain\obj\Debug\net8.0\ref\AuthService.Domain.dll

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   dns-test:
     image: busybox
@@ -7,19 +5,21 @@ services:
     dns:
       - 8.8.8.8
       - 8.8.4.4
-
   auth-database:
     image: postgres:15
+    container_name: authdatabase
     env_file: .env
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+     
+      POSTGRES_HOST_AUTH_METHOD: md5
     volumes:
       - auth_pg_data:/var/lib/postgresql/data
-      - ./init-scripts:/docker-entrypoint-initdb.d 
+      - ./init-scripts:/docker-entrypoint-initdb.d
+     
+      - ./postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "5432:5432"
     networks:
       - user-network
     restart: unless-stopped
@@ -28,24 +28,23 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
   user-service:
     build:
-      context: .                        
+      context: .
       dockerfile: Dockerfile
     ports:
       - "${API_PORT}:${API_PORT}"
     depends_on:
-      - auth-database
+      auth-database:
+        condition: service_healthy
+    env_file: .env
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ConnectionStrings__AuthDb: Host=auth-database;Port=${DB_PORT};Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
     networks:
       - user-network
-
 volumes:
   auth_pg_data:
-
 networks:
   user-network:
     driver: bridge
