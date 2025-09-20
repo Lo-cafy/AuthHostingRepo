@@ -18,7 +18,7 @@ public class JwtService : IJwtService
         _tokenHandler = new JwtSecurityTokenHandler();
     }
 
-    public string GenerateAccessToken(Guid userId, string email, RoleTypeEnum role, string sessionJti)
+    public string GenerateAccessToken(int userId, string email, RoleTypeEnum role, string sessionJti)
     {
         var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
         var claims = new List<Claim>
@@ -44,7 +44,7 @@ public class JwtService : IJwtService
         return _tokenHandler.WriteToken(token);
     }
 
-    public string GenerateRefreshToken(Guid userId, string refreshJti)
+    public string GenerateRefreshToken(int userId, string refreshJti)
     {
         var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
         var claims = new List<Claim>

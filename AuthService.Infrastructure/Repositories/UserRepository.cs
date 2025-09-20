@@ -6,7 +6,6 @@ namespace AuthService.Infrastructure.Repositories
     {
         public async Task<bool> Exists(string userId)
         {
-            // Implementation
             return true;
         }
     }

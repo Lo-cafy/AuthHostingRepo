@@ -5,7 +5,7 @@ namespace AuthService.Domain.Entities
 {
     public class LoginAttempt
     {
-        public Guid AttemptId { get; set; }
+        public int AttemptId { get; set; }
         public string Identifier { get; set; }
         public AuthProviderEnum AuthProvider { get; set; }
         public bool Success { get; set; }

@@ -40,13 +40,13 @@ namespace AuthService.Infrastructure.Repositories
                     @City, @AttemptedAt, @Fingerprint
                 )";
 
-            attempt.AttemptId = Guid.NewGuid();
+            attempt.AttemptId = new int();
             attempt.AttemptedAt = DateTime.UtcNow;
 
             await ExecuteCommandAsync(sql, attempt);
         }
 
-        public async Task<int> GetFailedAttemptsCountAsync(Guid userId, int hours = 24)
+        public async Task<int> GetFailedAttemptsCountAsync(int userId, int hours = 24)
         {
             const string sql = @"
                 SELECT COUNT(*) 
@@ -59,7 +59,7 @@ namespace AuthService.Infrastructure.Repositories
             return await ExecuteScalarAsync<int>(formattedSql, new { userId });
         }
 
-        public async Task<bool> HasRecentSuccessfulLoginAsync(Guid userId, string ipAddress, int days = 7)
+        public async Task<bool> HasRecentSuccessfulLoginAsync(int userId, string ipAddress, int days = 7)
         {
             const string sql = @"
                 SELECT EXISTS(

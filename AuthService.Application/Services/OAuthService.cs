@@ -74,7 +74,7 @@ namespace AuthService.Application.Services
             }
         }
 
-        public async Task<bool> LinkOAuthAccountAsync(Guid userId, string provider, string accessToken)
+        public async Task<bool> LinkOAuthAccountAsync(int userId, string provider, string accessToken)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace AuthService.Application.Services
             }
         }
 
-        public async Task<IEnumerable<LinkedAccountDto>> GetLinkedAccountsAsync(Guid userId)
+        public async Task<IEnumerable<LinkedAccountDto>> GetLinkedAccountsAsync(int userId)
         {
             try
             {
@@ -213,7 +213,7 @@ namespace AuthService.Application.Services
             var connection = await _oauthRepository.GetConnectionAsync(
                 oauthProvider.ProviderId, userInfo.Id);
 
-            Guid userId;
+            int userId;
             bool isNewUser = false;
 
             if (connection == null)
@@ -226,7 +226,7 @@ namespace AuthService.Application.Services
                 }
                 else
                 {
-                    userId = Guid.NewGuid();
+                    userId = new int();
                     isNewUser = true;
 
                     var credential = new UserCredential
@@ -273,8 +273,8 @@ namespace AuthService.Application.Services
                 await _oauthRepository.UpdateConnectionAsync(connection);
             }
 
-            var jti = Guid.NewGuid().ToString();
-            var refreshJti = Guid.NewGuid().ToString();
+            var jti = new int().ToString();
+            var refreshJti = new int().ToString();
 
             var accessToken = _jwtService.GenerateAccessToken(
             userId, userInfo.Email, RoleTypeEnum.Customer, jti);
@@ -301,7 +301,7 @@ namespace AuthService.Application.Services
                 throw new Exception($"OAuth provider {provider} not found or inactive");
             }
 
-            var state = Guid.NewGuid().ToString();
+            var state = new int();
             var redirectUri = GetRedirectUri(provider);
 
             var authUrl = $"{oauthProvider.AuthorizationUrl}?" +
@@ -331,7 +331,7 @@ namespace AuthService.Application.Services
                 var connection = await _oauthRepository.GetConnectionAsync(
                     oauthProvider.ProviderId, userInfo.Id);
 
-                Guid userId;
+                int userId;
                 string email = userInfo.Email;
                 bool isNewUser = false;
 
@@ -345,7 +345,7 @@ namespace AuthService.Application.Services
                     }
                     else
                     {
-                        userId = Guid.NewGuid();
+                        userId = new int();
                         isNewUser = true;
 
                         var credential = new UserCredential
@@ -402,8 +402,8 @@ namespace AuthService.Application.Services
                     await _oauthRepository.UpdateConnectionAsync(connection);
                 }
 
-                var jti = Guid.NewGuid().ToString();
-                var refreshJti = Guid.NewGuid().ToString();
+                var jti = new int().ToString();
+                var refreshJti = new int().ToString();
                 var accessToken = _jwtService.GenerateAccessToken(
                    userId, userInfo.Email, RoleTypeEnum.Customer, jti);
 

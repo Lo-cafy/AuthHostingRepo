@@ -8,10 +8,10 @@ namespace AuthService.Infrastructure.Interfaces
     public interface IRoleRepository
     {
         Task<IEnumerable<Role>> GetAllAsync();
-        Task<Role> GetByIdAsync(Guid roleId);
+        Task<Role> GetByIdAsync(int roleId);
         Task<Role> GetByNameAsync(string roleName);
         Task AssignRoleAsync(UserRole userRole);
-        Task RemoveRoleAsync(Guid userId, Guid roleId);
-        Task<IEnumerable<UserRole>> GetUserRolesAsync(Guid userId);
+        Task RemoveRoleAsync(int userId, int roleId);
+        Task<IEnumerable<UserRole>> GetUserRolesAsync(int userId);
     }
 }

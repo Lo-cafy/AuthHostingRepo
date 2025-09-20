@@ -6,7 +6,7 @@ namespace AuthService.Application.DTOs.Account
     public class ChangePasswordDto
     {
         [Required]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         public string CurrentPassword { get; set; }

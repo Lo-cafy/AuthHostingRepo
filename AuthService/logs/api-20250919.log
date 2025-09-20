@@ -41,7 +41,7 @@ Npgsql.PostgresException (0x80004005): 3D000: database "auth_services" does not 
    at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
   Exception data:
     Severity: FATAL
     SqlState: 3D000
@@ -58,7 +58,7 @@ Npgsql.PostgresException (0x80004005): 3D000: database "auth_services" does not 
    at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
    at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 170
   Exception data:
     Severity: FATAL
@@ -78,7 +78,7 @@ Npgsql.PostgresException (0x80004005): 3D000: database "auth_services" does not 
    at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
    at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 170
    at AuthService.Api.Controllers.AuthController.Register(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService\Controllers\AuthController.cs:line 47
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
@@ -133,7 +133,7 @@ System.InvalidCastException: Writing values of 'System.String' is not supported 
    at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
    at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
    at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 50
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 50
 2025-09-19 10:42:01.603 +05:30 [ERR] Registration failed for email: check@test.com
 System.InvalidCastException: Writing values of 'System.String' is not supported for parameters having NpgsqlDbType 'Inet'.
    at Npgsql.Internal.AdoSerializerHelpers.<GetTypeInfoForWriting>g__ThrowWritingNotSupported|1_0(Type type, PgSerializerOptions options, Nullable`1 pgTypeId, Nullable`1 npgsqlDbType, Exception inner)
@@ -143,7 +143,7 @@ System.InvalidCastException: Writing values of 'System.String' is not supported 
    at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
    at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
    at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 50
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 50
    at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 170
 2025-09-19 10:42:01.801 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Register (AuthService.Api) in 1124.2488ms
 2025-09-19 10:42:01.803 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Register (AuthService.Api)'
@@ -156,7 +156,7 @@ System.InvalidCastException: Writing values of 'System.String' is not supported 
    at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
    at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
    at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 50
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 50
    at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 170
    at AuthService.Api.Controllers.AuthController.Register(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService\Controllers\AuthController.cs:line 47
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
@@ -1082,3 +1082,81 @@ AuthService.Shared.Exceptions.AuthException: Authentication failed due to system
 2025-09-19 19:18:00.051 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
 2025-09-19 19:18:00.051 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 166.4056 ms
 2025-09-19 19:18:00.052 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 189.7646ms
+2025-09-19 19:25:48.436 +05:30 [INF] Starting Auth API
+2025-09-19 19:25:48.589 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-19 19:25:49.638 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-19 19:25:49.639 +05:30 [INF] Now listening on: http://localhost:5179
+2025-09-19 19:25:49.717 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-19 19:25:49.719 +05:30 [INF] Hosting environment: Development
+2025-09-19 19:25:49.719 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceClone\AuthService
+2025-09-19 19:25:50.610 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-09-19 19:25:50.974 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 379.4935ms
+2025-09-19 19:25:51.023 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-19 19:25:51.028 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-09-19 19:25:51.074 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 49.084ms
+2025-09-19 19:25:51.136 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 108.1331ms
+2025-09-19 19:25:51.197 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-09-19 19:25:51.235 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 33.3108ms
+2025-09-19 19:26:41.869 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 72
+2025-09-19 19:26:41.881 +05:30 [INF] CORS policy execution successful.
+2025-09-19 19:26:42.008 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-19 19:26:42.048 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-09-19 19:26:42.835 +05:30 [ERR] Login failed for email: yasaryasar@gmail.com
+AuthService.Shared.Exceptions.AuthException: Authentication failed due to system error
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 100
+2025-09-19 19:26:43.078 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-19 19:26:43.091 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 1034.9162ms
+2025-09-19 19:26:43.092 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-19 19:26:43.098 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 1212.6508 ms
+2025-09-19 19:26:43.163 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 1295.1462ms
+2025-09-19 19:26:53.574 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 72
+2025-09-19 19:26:53.593 +05:30 [INF] CORS policy execution successful.
+2025-09-19 19:26:53.595 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-19 19:26:53.596 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-09-19 19:26:53.649 +05:30 [ERR] Login failed for email: yasaryasar@gmail.com
+AuthService.Shared.Exceptions.AuthException: Authentication failed due to system error
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 100
+2025-09-19 19:26:53.729 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-19 19:26:53.730 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 133.1243ms
+2025-09-19 19:26:53.730 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-19 19:26:53.731 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 137.2611 ms
+2025-09-19 19:26:53.732 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 157.753ms
+2025-09-19 20:27:49.956 +05:30 [INF] Starting Auth API
+2025-09-19 20:27:50.165 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-19 20:27:50.724 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-19 20:27:50.724 +05:30 [INF] Now listening on: http://localhost:5179
+2025-09-19 20:27:50.965 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-19 20:27:50.966 +05:30 [INF] Hosting environment: Development
+2025-09-19 20:27:50.967 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceClone\AuthService
+2025-09-19 20:27:52.528 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-09-19 20:27:53.127 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 613.2664ms
+2025-09-19 20:27:53.153 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-19 20:27:53.157 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-09-19 20:27:53.176 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 22.606ms
+2025-09-19 20:27:53.293 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 135.9637ms
+2025-09-19 20:27:53.522 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-09-19 20:27:53.543 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 21.9669ms
+2025-09-19 20:30:21.859 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 71
+2025-09-19 20:30:21.868 +05:30 [INF] CORS policy execution successful.
+2025-09-19 20:30:21.999 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-19 20:30:22.048 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-09-19 20:30:22.718 +05:30 [ERR] Login failed for email: yasaryasar@gmail.com
+AuthService.Shared.Exceptions.AuthException: Invalid email or password
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 100
+2025-09-19 20:30:22.893 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-19 20:30:22.902 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 848.7931ms
+2025-09-19 20:30:22.904 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-19 20:30:22.909 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 1033.2813 ms
+2025-09-19 20:30:22.910 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 1051.3613ms
+2025-09-19 20:35:06.196 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 71
+2025-09-19 20:35:06.216 +05:30 [INF] CORS policy execution successful.
+2025-09-19 20:35:06.230 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-19 20:35:06.232 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-09-19 20:35:06.294 +05:30 [ERR] Login failed for email: yasaryasar@gmail.com
+AuthService.Shared.Exceptions.AuthException: Authentication failed due to system error
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 100
+2025-09-19 20:35:06.395 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-19 20:35:06.396 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 162.6511ms
+2025-09-19 20:35:06.397 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-19 20:35:06.402 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 183.4334 ms
+2025-09-19 20:35:06.402 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 206.8674ms

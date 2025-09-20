@@ -17,6 +17,7 @@ namespace AuthService.Infrastructure.Repositories
             : base(connectionFactory)
         {
         }
+
         public async Task<OAuthConnection> CreateConnectionAsync(OAuthConnection connection)
         {
             const string sql = @"
@@ -54,7 +55,7 @@ namespace AuthService.Infrastructure.Repositories
             using var dbConnection = await _connectionFactory.CreateConnectionAsync();
             var result = await dbConnection.QuerySingleAsync<OAuthConnection>(sql, parameters);
 
-            // Update the original connection object with the generated values
+            // Update
             connection.ConnectionId = result.ConnectionId;
             connection.ConnectedAt = result.ConnectedAt;
             connection.LastUsedAt = result.LastUsedAt;
@@ -85,7 +86,8 @@ namespace AuthService.Infrastructure.Repositories
             return await ExecuteAsync<OAuthProvider>(sql, new { Provider = provider });
         }
 
-        public async Task<OAuthConnection> GetConnectionAsync(Guid providerId, string providerUserId)
+        // ✅ FIXED: providerId is int now
+        public async Task<OAuthConnection> GetConnectionAsync(int providerId, string providerUserId)
         {
             const string sql = @"
                 SELECT 
@@ -135,7 +137,8 @@ namespace AuthService.Infrastructure.Repositories
             return result.FirstOrDefault();
         }
 
-        public async Task<IEnumerable<OAuthConnection>> GetUserConnectionsAsync(Guid userId)
+        // ✅ FIXED: userId is int now
+        public async Task<IEnumerable<OAuthConnection>> GetUserConnectionsAsync(int userId)
         {
             const string sql = @"
                 SELECT 

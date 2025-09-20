@@ -3,7 +3,7 @@
     public class UserCredential
     {
         public long CredentialId { get; set; }
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
         public string Email { get; set; } = string.Empty;
         public string PasswordHash { get; set; } = string.Empty;
         public string PasswordSalt { get; set; } = string.Empty;

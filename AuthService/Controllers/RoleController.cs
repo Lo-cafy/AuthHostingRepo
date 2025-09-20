@@ -41,7 +41,7 @@ namespace AuthService.Api.Controllers
         }
 
         [HttpDelete("{userId}/roles/{roleId}")]
-        public async Task<IActionResult> RemoveRole(Guid userId, Guid roleId)
+        public async Task<IActionResult> RemoveRole(int userId, int roleId)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace AuthService.Api.Controllers
         }
 
         [HttpGet("user/{userId}")]
-        public async Task<IActionResult> GetUserRoles(Guid userId)
+        public async Task<IActionResult> GetUserRoles(int userId)
         {
             var roles = await _roleService.GetUserRolesAsync(userId);
             return Ok(roles);

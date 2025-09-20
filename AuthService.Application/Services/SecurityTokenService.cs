@@ -17,14 +17,14 @@ namespace AuthService.Application.Services
             _tokenRepository = tokenRepository;
         }
 
-        public async Task<string> GenerateTokenAsync(Guid userId, TokenTypeEnum tokenType)
+        public async Task<string> GenerateTokenAsync(int userId, TokenTypeEnum tokenType)
         {
             var token = GenerateSecureToken();
             var tokenHash = HashToken(token);
 
             var securityToken = new SecurityToken
             {
-                TokenId = Guid.NewGuid(),
+                TokenId = new int(),
                 UserId = userId,
                 TokenType = tokenType,
                 TokenHash = tokenHash,

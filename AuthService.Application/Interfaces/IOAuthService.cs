@@ -10,7 +10,7 @@ namespace AuthService.Application.Interfaces
         Task<OAuthCallbackDto> HandleCallbackAsync(string provider, string code, string state);
         Task<AuthResultDto> AuthenticateGoogleAsync(GoogleAuthRequestDto request);
         Task<AuthResultDto> AuthenticateFacebookAsync(FacebookAuthRequestDto request);
-        Task<bool> LinkOAuthAccountAsync(Guid userId, string provider, string accessToken);
-        Task<IEnumerable<LinkedAccountDto>> GetLinkedAccountsAsync(Guid userId);
+        Task<bool> LinkOAuthAccountAsync(int userId, string provider, string accessToken);
+        Task<IEnumerable<LinkedAccountDto>> GetLinkedAccountsAsync(int userId);
     }
 }

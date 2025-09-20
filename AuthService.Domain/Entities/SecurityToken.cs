@@ -6,8 +6,8 @@ namespace AuthService.Domain.Entities
 {
     public class SecurityToken
     {
-        public Guid TokenId { get; set; }
-        public Guid UserId { get; set; }
+        public int TokenId { get; set; }
+        public int UserId { get; set; }
         public TokenTypeEnum TokenType { get; set; }
         public string TokenHash { get; set; }
         public string TokenPlain { get; set; }

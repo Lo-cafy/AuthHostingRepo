@@ -41,16 +41,6 @@ namespace AuthService.Api.Controllers
             }
         }
 
-        //[HttpPost("register")]
-        //public async Task<IActionResult> Register([FromBody] RegisterRequestDto request)
-        //{
-        //    var result = await _authService.RegisterAsync(request);
-
-        //    if (!result.Success)
-        //        return BadRequest(result);  // Returns 400 with the error message
-
-        //    return Created($"/api/users/{result.UserId}", result);  // Returns 201 Created on success
-        //}
 
         [HttpPost("refresh")]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestDto request)
@@ -93,9 +83,8 @@ namespace AuthService.Api.Controllers
 
         [HttpGet("user/{id}")]
         [Authorize]
-        public async Task<IActionResult> GetUser(Guid id)
+        public async Task<IActionResult> GetUser(int id)
         {
-            // Placeholder for getting user details
             return Ok(new { userId = id });
         }
     }

@@ -6,7 +6,7 @@ namespace AuthService.Application.Interfaces
 {
     public interface ISecurityTokenService
     {
-        Task<string> GenerateTokenAsync(Guid userId, TokenTypeEnum tokenType);
+        Task<string> GenerateTokenAsync(int userId, TokenTypeEnum tokenType);
         Task<bool> ValidateTokenAsync(string token, TokenTypeEnum tokenType);
         Task<bool> RevokeTokenAsync(string token);
     }

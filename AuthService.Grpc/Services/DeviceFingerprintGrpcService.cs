@@ -29,7 +29,7 @@ namespace AuthService.Grpc.Services
         {
             try
             {
-                var userId = Guid.Parse(request.UserId);
+                var userId = int.Parse(request.UserId);
                 var deviceInfo = new DeviceFingerprintDto
                 {
                     OperatingSystem = request.DeviceInfo.OperatingSystem,
@@ -47,8 +47,8 @@ namespace AuthService.Grpc.Services
 
                 return new RegisterDeviceResponse
                 {
-                    Success = true,
-                    FingerprintId = Guid.NewGuid().ToString(),
+                    Success = true, 
+                    FingerprintId = new int().ToString(),
                     FingerprintHash = fingerprintHash,
                     Message = "Device registered successfully"
                 };
@@ -68,10 +68,10 @@ namespace AuthService.Grpc.Services
         {
             try
             {
-                var userId = Guid.Parse(request.UserId);
+                var userId = int.Parse(request.UserId);
                 var isValid = await _deviceFingerprintService.ValidateFingerprintAsync(userId, request.FingerprintHash);
 
-                // Get device details if valid
+                 
                 if (isValid)
                 {
                     var devices = await _deviceFingerprintService.GetUserDevicesAsync(userId);
@@ -81,7 +81,7 @@ namespace AuthService.Grpc.Services
                     return new ValidateFingerprintResponse
                     {
                         IsValid = true,
-                        IsTrusted = device != null, // You might want to add IsTrusted to the DTO
+                        IsTrusted = device != null, 
                         LastUsedAt = Timestamp.FromDateTime(DateTime.UtcNow)
                     };
                 }
@@ -103,8 +103,8 @@ namespace AuthService.Grpc.Services
         {
             try
             {
-                var userId = Guid.Parse(request.UserId);
-                var fingerprintId = Guid.Parse(request.FingerprintId);
+                var userId = int.Parse(request.UserId);
+                var fingerprintId = int.Parse(request.FingerprintId);
 
                 var trustInfo = new TrustDeviceDto
                 {
@@ -137,7 +137,7 @@ namespace AuthService.Grpc.Services
         {
             try
             {
-                var userId = Guid.Parse(request.UserId);
+                var userId = int.Parse(request.UserId);
                 var devices = await _deviceFingerprintService.GetUserDevicesAsync(userId);
 
                 var response = new GetUserDevicesResponse();
@@ -145,10 +145,10 @@ namespace AuthService.Grpc.Services
                 {
                     response.Devices.Add(new UserDevice
                     {
-                        FingerprintId = Guid.NewGuid().ToString(),
+                        FingerprintId = new int().ToString(),
                         OperatingSystem = device.OperatingSystem,
                         Browser = device.Browser,
-                        IsTrusted = false, // You might want to add this to DTO
+                        IsTrusted = false, 
                         CreatedAt = Timestamp.FromDateTime(DateTime.UtcNow),
                         LastUsedAt = Timestamp.FromDateTime(DateTime.UtcNow)
                     });
@@ -167,7 +167,7 @@ namespace AuthService.Grpc.Services
         {
             try
             {
-                var userId = Guid.Parse(request.UserId);
+                var userId = int.Parse(request.UserId);
                 var isValid = await _deviceFingerprintService.ValidateFingerprintAsync(userId, request.DeviceFingerprint);
 
                 // Determine trust level and MFA requirement

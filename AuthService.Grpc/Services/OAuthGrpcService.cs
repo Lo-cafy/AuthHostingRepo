@@ -102,7 +102,7 @@ namespace AuthService.Grpc.Services
         {
             try
             {
-                var userId = Guid.Parse(request.UserId);
+                var userId = int.Parse(request.UserId);
                 var success = await _oAuthService.LinkOAuthAccountAsync(userId, request.Provider, request.AccessToken);
 
                 return new LinkOAuthResponse
@@ -126,7 +126,7 @@ namespace AuthService.Grpc.Services
         {
             try
             {
-                var userId = Guid.Parse(request.UserId);
+                var userId = int.Parse(request.UserId);
                 var accounts = await _oAuthService.GetLinkedAccountsAsync(userId);
 
                 var response = new GetLinkedAccountsResponse();

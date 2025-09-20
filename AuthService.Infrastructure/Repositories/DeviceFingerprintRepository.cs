@@ -15,7 +15,7 @@ namespace AuthService.Infrastructure.Repositories
         {
         }
 
-        public async Task<DeviceFingerprint> GetByIdAsync(Guid fingerprintId)
+        public async Task<DeviceFingerprint> GetByIdAsync(int fingerprintId)
         {
             const string sql = @"
                 SELECT * FROM auth.device_fingerprints 
@@ -33,7 +33,7 @@ namespace AuthService.Infrastructure.Repositories
             return await ExecuteAsync<DeviceFingerprint>(sql, new { DeviceId = deviceId });
         }
 
-        public async Task<IEnumerable<DeviceFingerprint>> GetByUserIdAsync(Guid userId)
+        public async Task<IEnumerable<DeviceFingerprint>> GetByUserIdAsync(int userId)
         {
             const string sql = @"
                 SELECT * FROM auth.device_fingerprints 
@@ -75,7 +75,7 @@ namespace AuthService.Infrastructure.Repositories
             await ExecuteCommandAsync(sql, deviceFingerprint);
         }
 
-        public async Task<bool> DeleteAsync(Guid fingerprintId)
+        public async Task<bool> DeleteAsync(int fingerprintId)
         {
             const string sql = @"
                 DELETE FROM auth.device_fingerprints 
@@ -95,7 +95,7 @@ namespace AuthService.Infrastructure.Repositories
             return count > 0;
         }
 
-        public async Task<bool> ValidateFingerprintAsync(Guid userId, string fingerprintHash)
+        public async Task<bool> ValidateFingerprintAsync(int userId, string fingerprintHash)
         {
             const string sql = @"
                 SELECT COUNT(1) FROM auth.device_fingerprints 
@@ -107,7 +107,7 @@ namespace AuthService.Infrastructure.Repositories
             return count > 0;
         }
 
-        public async Task<bool> UpdateTrustStatusAsync(Guid fingerprintId, bool isTrusted)
+        public async Task<bool> UpdateTrustStatusAsync(int fingerprintId, bool isTrusted)
         {
             const string sql = @"
                 UPDATE auth.device_fingerprints 
@@ -125,7 +125,7 @@ namespace AuthService.Infrastructure.Repositories
             return rowsAffected > 0;
         }
 
-        public async Task<IEnumerable<DeviceFingerprint>> GetTrustedDevicesAsync(Guid userId)
+        public async Task<IEnumerable<DeviceFingerprint>> GetTrustedDevicesAsync(int userId)
         {
             const string sql = @"
                 SELECT * FROM auth.device_fingerprints 

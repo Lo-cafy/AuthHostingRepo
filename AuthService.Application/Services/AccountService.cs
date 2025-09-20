@@ -39,7 +39,7 @@ namespace AuthService.Application.Services
         //{
         //    try
         //    {
-        //        var requestId = Guid.NewGuid();
+        //        var requestId = int.Newint();
         //        var result = await _databaseFunctionService.VerifyEmailAsync(request.Token, requestId);
 
         //        using (result)
@@ -53,7 +53,7 @@ namespace AuthService.Application.Services
         //            }
 
         //            _logger.LogInformation("Email verified for user: {UserId}",
-        //                root.GetProperty("user_id").GetGuid());
+        //                root.GetProperty("user_id").Getint());
 
         //            return true;
         //        }
@@ -83,7 +83,7 @@ namespace AuthService.Application.Services
 
                 var securityToken = new SecurityToken
                 {
-                    TokenId = Guid.NewGuid(),
+                    TokenId = new int(),
                     UserId = credential.UserId,
                     TokenType = TokenTypeEnum.ResetPassword,
                     TokenHash = tokenHash,
@@ -175,8 +175,6 @@ namespace AuthService.Application.Services
                 {
                     throw new ValidationException("User not found");
                 }
-
-                // Verify current password with salt
                 var currentPasswordWithSalt = request.CurrentPassword + credential.PasswordSalt;
                 if (!BCrypt.Net.BCrypt.Verify(currentPasswordWithSalt, credential.PasswordHash))
                 {

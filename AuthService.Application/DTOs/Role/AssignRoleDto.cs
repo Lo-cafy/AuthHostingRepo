@@ -6,12 +6,12 @@ namespace AuthService.Application.DTOs.Role
     public class AssignRoleDto
     {
         [Required]
-        public Guid UserId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
-        public Guid RoleId { get; set; }
+        public int RoleId { get; set; }
 
-        public Guid? AssignedBy { get; set; }
+        public int? AssignedBy { get; set; }
 
         public DateTime? ExpiresAt { get; set; }
     }

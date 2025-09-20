@@ -9,7 +9,7 @@ namespace AuthService.Application.Interfaces
     {
         Task<IEnumerable<RoleDto>> GetRolesAsync();
         Task<bool> AssignRoleAsync(AssignRoleDto request);
-        Task<bool> RemoveRoleAsync(Guid userId, Guid roleId);
-        Task<IEnumerable<UserRoleDto>> GetUserRolesAsync(Guid userId);
+        Task<bool> RemoveRoleAsync(int userId, int roleId);
+        Task<IEnumerable<UserRoleDto>> GetUserRolesAsync(int userId);
     }
 }

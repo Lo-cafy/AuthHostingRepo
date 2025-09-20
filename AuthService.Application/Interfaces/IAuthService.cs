@@ -10,7 +10,6 @@ namespace AuthService.Application.Interfaces
 
         Task<LoginResponseDto> LoginAsync(LoginRequestDto request, DeviceInfoDto? deviceInfo = null);
 
-        //Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request);
 
         Task<RefreshTokenResponseDto> RefreshTokenAsync(RefreshTokenRequestDto request);
 
@@ -23,6 +22,6 @@ namespace AuthService.Application.Interfaces
         Task<bool> LogoutAsync(string jti);
 
 
-        Task<bool> RevokeAllSessionsAsync(Guid userId);
+        Task<bool> RevokeAllSessionsAsync(int userId);
     }
 }

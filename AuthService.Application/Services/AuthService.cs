@@ -62,7 +62,7 @@ namespace AuthService.Application.Services
                     UserAgent = "Unknown"
                 };
 
-                var requestId = Guid.NewGuid();
+                var requestId = new int();
 
                 var deviceInfoForSP = new
                 {
@@ -100,7 +100,7 @@ namespace AuthService.Application.Services
                             throw new AuthException(message);
                     }
 
-                    var userId = root.GetProperty("user_id").GetGuid();
+                    var userId = root.GetProperty("user_id").GetInt32();
                     var email = root.GetProperty("email").GetString();
                     var emailVerified = root.GetProperty("email_verified").GetBoolean();
                     var accountStatus = root.GetProperty("account_status").GetString();
@@ -115,7 +115,7 @@ namespace AuthService.Application.Services
                     var expiresIn = tokens.GetProperty("expires_in").GetInt32();
 
                     var session = root.GetProperty("session");
-                    var sessionId = session.GetProperty("session_id").GetGuid();
+                   var sessionId = session.GetProperty("session_id").GetInt32();
 
                     // Generate actual JWT tokens
                     var roleEnum = Enum.Parse<RoleTypeEnum>(roles.FirstOrDefault() ?? "Customer", true);
@@ -147,73 +147,6 @@ namespace AuthService.Application.Services
             }
         }
 
-        //public async Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request)
-        //{
-        //    try
-        //    {
-        //        // Validate passwords match
-        //        if (request.Password != request.ConfirmPassword)
-        //        {
-        //            throw new ValidationException("Passwords do not match");
-        //        }
-
-        //        var userId = Guid.NewGuid();
-        //        var requestId = Guid.NewGuid();
-
-        //        // Get client IP and User Agent from HttpContext
-        //        var deviceInfo = new
-        //        {
-        //            ip_address = _httpContextAccessor.HttpContext?.Connection.RemoteIpAddress?.ToString() ?? "127.0.0.1",
-        //            user_agent = _httpContextAccessor.HttpContext?.Request.Headers["User-Agent"].ToString() ?? "Unknown"
-        //        };
-
-        //        var result = await _databaseFunctionService.RegisterWithPasswordAsync(
-        //            userId,
-        //            request.Email,
-        //            request.Password,
-        //            "customer", // Default role
-        //            deviceInfo.ip_address,
-        //            deviceInfo.user_agent,
-        //            requestId
-        //        );
-
-        //        using (result)
-        //        {
-        //            var root = result.RootElement;
-
-        //            if (!root.GetProperty("success").GetBoolean())
-        //            {
-        //                var error = root.GetProperty("error").GetString();
-        //                var message = root.GetProperty("message").GetString();
-        //                var code = root.GetProperty("code").GetInt32();
-
-        //                if (code == 429)
-        //                    throw new RateLimitException(message);
-        //                else if (code == 409)
-        //                    throw new AuthException("Email already registered");
-        //                else if (code == 400)
-        //                    throw new ValidationException(message);
-        //                else
-        //                    throw new AuthException(message);
-        //            }
-
-        //            return new RegisterResponseDto
-        //            {
-        //                Success = true,
-        //                UserId = root.GetProperty("user_id").GetGuid(),
-        //                Email = request.Email,
-        //                VerificationToken = root.GetProperty("verification_token").GetString(),
-        //                Message = root.GetProperty("message").GetString()
-        //            };
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Registration failed for email: {Email}", request.Email);
-        //        throw;
-        //    }
-        //}
-
         public async Task<RefreshTokenResponseDto> RefreshTokenAsync(RefreshTokenRequestDto request)
         {
             try
@@ -225,7 +158,7 @@ namespace AuthService.Application.Services
                 }
 
                 var refreshJti = principal.FindFirst("jti")?.Value;
-                var requestId = Guid.NewGuid();
+                var requestId = new int();
 
                 var result = await _databaseFunctionService.RefreshJwtTokenAsync(
                     refreshJti,
@@ -244,7 +177,7 @@ namespace AuthService.Application.Services
                         throw new AuthException(message);
                     }
 
-                    var userId = root.GetProperty("user_id").GetGuid();
+                    var userId = root.GetProperty("user_id").GetInt32();
                     var roles = root.GetProperty("roles").EnumerateArray()
                         .Select(r => r.GetString())
                         .ToList();
@@ -253,10 +186,10 @@ namespace AuthService.Application.Services
                     var newAccessJti = tokens.GetProperty("access_token_jti").GetString();
                     var expiresIn = tokens.GetProperty("expires_in").GetInt32();
 
-                    // Get user email from principal
+                  
                     var email = principal.FindFirst("email")?.Value ?? "";
 
-                    // Generate actual JWT token
+                  
                     var roleEnum = Enum.Parse<RoleTypeEnum>(roles.FirstOrDefault() ?? "Customer", true);
                     var accessToken = _jwtService.GenerateAccessToken(userId, email, roleEnum, newAccessJti);
 
@@ -279,7 +212,7 @@ namespace AuthService.Application.Services
         {
             try
             {
-                var requestId = Guid.NewGuid();
+                var requestId = new int();
                 var result = await _databaseFunctionService.LogoutSessionAsync(jti, "user_logout", requestId);
 
                 using (result)
@@ -295,11 +228,13 @@ namespace AuthService.Application.Services
             }
         }
 
-        public async Task<bool> RevokeAllSessionsAsync(Guid userId)
+        public async Task<bool> RevokeAllSessionsAsync(int userId)
         {
             try
             {
-                var sessions = await _sessionRepository.GetActiveSessionsByUserIdAsync(userId);
+                
+                var userIdInt = int.Parse(userId.ToString("N").Substring(0, 8), System.Globalization.NumberStyles.HexNumber);
+                var sessions = await _sessionRepository.GetActiveSessionsByUserIdAsync(userIdInt);
 
                 foreach (var session in sessions)
                 {
@@ -377,15 +312,14 @@ namespace AuthService.Application.Services
             }
         }
 
-        private async Task<JwtSession> CreateSessionAsync(Guid userId, DeviceInfoDto deviceInfo)
+        public async Task<JwtSession> CreateSessionAsync(int userId, DeviceInfoDto deviceInfo)
         {
             var session = new JwtSession
             {
-                SessionId = Guid.NewGuid(),
+                SessionId = new int(),
                 UserId = userId,
-                Jti = Guid.NewGuid().ToString(),
-                RefreshJti = Guid.NewGuid().ToString(),
-
+                Jti = new int().ToString(),
+                RefreshJti = new int().ToString(),
                 IpAddress = deviceInfo?.IpAddress,
                 UserAgent = deviceInfo?.UserAgent,
                 Location = deviceInfo?.Location != null ? JsonConvert.SerializeObject(deviceInfo.Location) : null,
@@ -398,11 +332,11 @@ namespace AuthService.Application.Services
             return await _sessionRepository.CreateAsync(session);
         }
 
-        private async Task LogLoginAttempt(string identifier, bool success, string? failureReason, DeviceInfoDto deviceInfo, string fingerprint)
+        public async Task LogLoginAttempt(string identifier, bool success, string? failureReason, DeviceInfoDto deviceInfo, string fingerprint)
         {
             var attempt = new LoginAttempt
             {
-                AttemptId = Guid.NewGuid(),
+                AttemptId = new int(),
                 Identifier = identifier,
                 AuthProvider = AuthProviderEnum.Password,
                 Success = success,
@@ -416,7 +350,7 @@ namespace AuthService.Application.Services
             await _loginAttemptRepository.CreateAsync(attempt);
         }
 
-        private string GenerateSecureToken()
+        public string GenerateSecureToken()
         {
             var randomBytes = new byte[32];
             using (var rng = RandomNumberGenerator.Create())

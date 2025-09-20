@@ -9,6 +9,6 @@ namespace AuthService.Infrastructure.Interfaces
         Task<SecurityToken> GetByTokenHashAsync(string tokenHash);
         Task<SecurityToken> CreateAsync(SecurityToken token);
         Task<bool> UpdateAsync(SecurityToken token);
-        Task<bool> MarkAsUsedAsync(Guid tokenId);
+        Task<bool> MarkAsUsedAsync(int tokenId);
     }
 }

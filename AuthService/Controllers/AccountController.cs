@@ -18,23 +18,6 @@ namespace AuthService.Api.Controllers
             _accountService = accountService;
         }
 
-        //[HttpPost("verify-email")]
-        //public async Task<IActionResult> VerifyEmail([FromBody] VerifyEmailDto request)
-        //{
-        //    try
-        //    {
-        //        var result = await _accountService.VerifyEmailAsync(request);
-        //        return Ok(new { success = result, message = "Email verified successfully" });
-        //    }
-        //    catch (ValidationException ex)
-        //    {
-        //        return BadRequest(new { error = ex.Message });
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return StatusCode(500, new { error = "An error occurred during email verification" });
-        //    }
-        //}
 
         [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequestDto request)
@@ -46,7 +29,6 @@ namespace AuthService.Api.Controllers
             }
             catch (Exception)
             {
-                // Always return success to prevent email enumeration
                 return Ok(new { message = "If the email exists, a password reset link has been sent" });
             }
         }

@@ -94,7 +94,7 @@ namespace AuthService.Infrastructure.Repositories
             return affected > 0;
         }
 
-        public async Task<bool> MarkAsUsedAsync(Guid tokenId)
+        public async Task<bool> MarkAsUsedAsync(int tokenId)
         {
             const string sql = @"
                 UPDATE auth.security_tokens 

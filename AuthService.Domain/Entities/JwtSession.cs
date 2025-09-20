@@ -4,8 +4,8 @@ namespace AuthService.Domain.Entities
 {
     public class JwtSession
     {
-        public Guid SessionId { get; set; }
-        public Guid UserId { get; set; }
+        public int SessionId { get; set; }
+        public int UserId { get; set; }
         public string Jti { get; set; }
         public string RefreshJti { get; set; }
         public string IpAddress { get; set; }

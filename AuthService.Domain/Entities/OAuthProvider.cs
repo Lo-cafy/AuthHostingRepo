@@ -4,7 +4,7 @@ namespace AuthService.Domain.Entities
 {
     public class OAuthProvider
     {
-        public Guid ProviderId { get; set; }
+        public int ProviderId { get; set; }
         public string ProviderName { get; set; } = string.Empty;
         public string ClientId { get; set; } = string.Empty;
         public string ClientSecretEncrypted { get; set; } = string.Empty;

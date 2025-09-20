@@ -4,7 +4,7 @@ using NpgsqlTypes;
 using AuthService.Infrastructure.Interfaces;
 using Microsoft.Extensions.Logging;
 using AuthService.Infrastructure.Data.Interfaces;
-using System.Net;   // <-- IMPORTANT: for IPAddress.Parse
+using System.Net;
 
 namespace AuthService.Infrastructure.Services
 {
@@ -21,52 +21,111 @@ namespace AuthService.Infrastructure.Services
             _logger = logger;
         }
 
+        private async Task<NpgsqlConnection> GetConnectionAsync()
+        {
+            var connection = (NpgsqlConnection)await _connectionFactory.CreateConnectionAsync();
+
+            // Set search path
+            using var schemaCommand = new NpgsqlCommand(
+                "SET search_path = auth, public;",
+                connection);
+            await schemaCommand.ExecuteNonQueryAsync();
+
+            return connection;
+        }
+
         public async Task<JsonDocument> RegisterWithPasswordAsync(
-            Guid userId,
+            int userId,
             string email,
             string password,
             string role = "customer",
             string ipAddress = null,
             string userAgent = null,
-            Guid? requestId = null)
+            int? requestId = null)
         {
             try
             {
-                using var connection = (NpgsqlConnection)_connectionFactory.CreateConnection();
-                await connection.OpenAsync();
-
+                using var connection = await GetConnectionAsync();
                 using var command = new NpgsqlCommand(
-                    "SELECT auth.register_with_password(@p_user_id, @p_email, @p_password, @p_role_name, @p_ip_address::inet, @p_user_agent, @p_request_id)",
+                    "SELECT auth.register_user_enhanced(@p_email, @p_password, @p_role_name, @p_device_info::jsonb, @p_request_id)",
                     connection);
 
-                command.Parameters.AddWithValue("@p_user_id", userId);
-                command.Parameters.AddWithValue("@p_email", email.ToLower());
-                command.Parameters.AddWithValue("@p_password", password);
-                command.Parameters.AddWithValue("@p_role_name", role);
+                command.Parameters.Add(new NpgsqlParameter("@p_email", NpgsqlDbType.Varchar)
+                {
+                    Value = email.ToLower()
+                });
 
-                // FIX: convert string → IPAddress
-                var ip = !string.IsNullOrEmpty(ipAddress)
-                    ? IPAddress.Parse(ipAddress)
-                    : IPAddress.Loopback;
-                command.Parameters.AddWithValue("@p_ip_address", NpgsqlDbType.Inet, ip);
+                command.Parameters.Add(new NpgsqlParameter("@p_password", NpgsqlDbType.Varchar)
+                {
+                    Value = password
+                });
 
-                command.Parameters.AddWithValue("@p_user_agent", userAgent ?? "Unknown");
-                command.Parameters.AddWithValue("@p_request_id", requestId ?? Guid.NewGuid());
+                command.Parameters.Add(new NpgsqlParameter("@p_role_name", NpgsqlDbType.Varchar)
+                {
+                    Value = role
+                });
+
+                var deviceInfo = new
+                {
+                    ip_address = !string.IsNullOrEmpty(ipAddress) ? ipAddress : "127.0.0.1",
+                    user_agent = userAgent ?? "Unknown"
+                };
+
+                command.Parameters.Add(new NpgsqlParameter("@p_device_info", NpgsqlDbType.Jsonb)
+                {
+                    Value = JsonSerializer.Serialize(deviceInfo)
+                });
+
+                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Uuid)
+                {
+                    Value = requestId ?? new int()
+                });
 
                 var result = await command.ExecuteScalarAsync();
                 var jsonResult = result?.ToString();
 
                 if (string.IsNullOrEmpty(jsonResult))
                 {
-                    throw new InvalidOperationException("No result from stored procedure");
+                    throw new InvalidOperationException("No result from registration procedure");
                 }
 
                 return JsonDocument.Parse(jsonResult);
             }
+            catch (PostgresException pgEx)
+            {
+                _logger.LogError(pgEx,
+                    "PostgreSQL error during registration for email {Email}. Code: {Code}, Message: {Message}",
+                    email, pgEx.SqlState, pgEx.Message);
+
+                var errorResponse = new
+                {
+                    success = false,
+                    error = "DB_ERROR",
+                    message = "Registration failed due to database error",
+                    code = 500,
+                    details = new
+                    {
+                        sqlState = pgEx.SqlState,
+                        severity = pgEx.Severity,
+                        hint = pgEx.Hint
+                    }
+                };
+
+                return JsonDocument.Parse(JsonSerializer.Serialize(errorResponse));
+            }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Database function register_with_password failed");
-                throw;
+                _logger.LogError(ex, "Registration failed for email {Email}", email);
+
+                var errorResponse = new
+                {
+                    success = false,
+                    error = "INTERNAL_ERROR",
+                    message = "Registration failed due to an internal error",
+                    code = 500
+                };
+
+                return JsonDocument.Parse(JsonSerializer.Serialize(errorResponse));
             }
         }
 
@@ -74,155 +133,247 @@ namespace AuthService.Infrastructure.Services
             string email,
             string password,
             object deviceInfo = null,
-            Guid? requestId = null)
+            int? requestId = null)
         {
             try
             {
-                using var connection = (NpgsqlConnection)_connectionFactory.CreateConnection();
-                await connection.OpenAsync();
-
+                using var connection = await GetConnectionAsync();
                 using var command = new NpgsqlCommand(
-                    "SELECT auth.authenticate_password(@p_email, @p_password, @p_device_info::jsonb, @p_request_id)",
+                    "SELECT auth.authenticate_user_enhanced(@p_email, @p_password, @p_device_info::jsonb, @p_request_id)",
                     connection);
 
-                command.Parameters.AddWithValue("@p_email", email.ToLower());
-                command.Parameters.AddWithValue("@p_password", password);
+                command.Parameters.Add(new NpgsqlParameter("@p_email", NpgsqlDbType.Varchar)
+                {
+                    Value = email.ToLower()
+                });
+
+                command.Parameters.Add(new NpgsqlParameter("@p_password", NpgsqlDbType.Varchar)
+                {
+                    Value = password
+                });
 
                 var deviceInfoJson = deviceInfo != null
                     ? JsonSerializer.Serialize(deviceInfo)
                     : "{}";
 
-                command.Parameters.AddWithValue("@p_device_info", NpgsqlDbType.Jsonb, deviceInfoJson);
-                command.Parameters.AddWithValue("@p_request_id", requestId ?? Guid.NewGuid());
+                command.Parameters.Add(new NpgsqlParameter("@p_device_info", NpgsqlDbType.Jsonb)
+                {
+                    Value = deviceInfoJson
+                });
+
+                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Uuid)
+                {
+                    Value = requestId ?? new int()
+                });
 
                 var result = await command.ExecuteScalarAsync();
                 var jsonResult = result?.ToString();
 
                 if (string.IsNullOrEmpty(jsonResult))
                 {
-                    throw new InvalidOperationException("No result from stored procedure");
+                    _logger.LogWarning("No result returned from authenticate_user_enhanced for email: {Email}", email);
+                    return JsonDocument.Parse(@"{
+                        ""success"": false,
+                        ""error"": ""NO_RESULT"",
+                        ""message"": ""Authentication failed"",
+                        ""code"": 500
+                    }");
                 }
 
                 return JsonDocument.Parse(jsonResult);
             }
-            catch (Exception ex)
+            catch (PostgresException pgEx)
             {
-                _logger.LogError(ex, "Database function authenticate_password failed for email {Email}", email);
-                var errorJson = @"{
-                ""success"": false,
-                ""error"": ""DB_EXECUTION_FAILED"",
-                ""message"": ""Login failed due to database error"",
-                ""code"": 500
-             }";
-                return JsonDocument.Parse(errorJson);
-            }
-        }
+                _logger.LogError(pgEx,
+                    "PostgreSQL error during authentication for email {Email}. Code: {Code}, Message: {Message}",
+                    email, pgEx.SqlState, pgEx.Message);
 
-        public async Task<JsonDocument> VerifyEmailAsync(
-            string token,
-            Guid? requestId = null)
-        {
-            try
-            {
-                using var connection = (NpgsqlConnection)_connectionFactory.CreateConnection();
-                await connection.OpenAsync();
-
-                using var command = new NpgsqlCommand(
-                    "SELECT auth.verify_email(@p_token, @p_request_id)",
-                    connection);
-
-                command.Parameters.AddWithValue("@p_token", token);
-                command.Parameters.AddWithValue("@p_request_id", requestId ?? Guid.NewGuid());
-
-                var result = await command.ExecuteScalarAsync();
-                var jsonResult = result?.ToString();
-
-                if (string.IsNullOrEmpty(jsonResult))
+                var errorResponse = new
                 {
-                    throw new InvalidOperationException("No result from stored procedure");
-                }
+                    success = false,
+                    error = "DB_ERROR",
+                    message = "Authentication failed due to database error",
+                    code = 500,
+                    details = new
+                    {
+                        sqlState = pgEx.SqlState,
+                        severity = pgEx.Severity,
+                        hint = pgEx.Hint
+                    }
+                };
 
-                return JsonDocument.Parse(jsonResult);
+                return JsonDocument.Parse(JsonSerializer.Serialize(errorResponse));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Database function verify_email failed");
-                throw;
+                _logger.LogError(ex,
+                    "Unexpected error during authentication for email {Email}",
+                    email);
+
+                return JsonDocument.Parse(@"{
+                    ""success"": false,
+                    ""error"": ""INTERNAL_ERROR"",
+                    ""message"": ""An unexpected error occurred during authentication"",
+                    ""code"": 500
+                }");
             }
         }
 
         public async Task<JsonDocument> RefreshJwtTokenAsync(
             string refreshJti,
             object deviceInfo = null,
-            Guid? requestId = null)
+            int? requestId = null)
         {
             try
             {
-                using var connection = (NpgsqlConnection)_connectionFactory.CreateConnection();
-                await connection.OpenAsync();
-
+                using var connection = await GetConnectionAsync();
                 using var command = new NpgsqlCommand(
                     "SELECT auth.refresh_jwt_token(@p_refresh_jti, @p_device_info::jsonb, @p_request_id)",
                     connection);
 
-                command.Parameters.AddWithValue("@p_refresh_jti", refreshJti);
+                command.Parameters.Add(new NpgsqlParameter("@p_refresh_jti", NpgsqlDbType.Varchar)
+                {
+                    Value = refreshJti
+                });
 
                 var deviceInfoJson = deviceInfo != null
                     ? JsonSerializer.Serialize(deviceInfo)
                     : "{}";
 
-                command.Parameters.AddWithValue("@p_device_info", NpgsqlDbType.Jsonb, deviceInfoJson);
-                command.Parameters.AddWithValue("@p_request_id", requestId ?? Guid.NewGuid());
+                command.Parameters.Add(new NpgsqlParameter("@p_device_info", NpgsqlDbType.Jsonb)
+                {
+                    Value = deviceInfoJson
+                });
+
+                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Uuid)
+                {
+                    Value = requestId ?? new int()
+                });
 
                 var result = await command.ExecuteScalarAsync();
                 var jsonResult = result?.ToString();
 
                 if (string.IsNullOrEmpty(jsonResult))
                 {
-                    throw new InvalidOperationException("No result from stored procedure");
+                    return JsonDocument.Parse(@"{
+                        ""success"": false,
+                        ""error"": ""NO_RESULT"",
+                        ""message"": ""Token refresh failed"",
+                        ""code"": 500
+                    }");
                 }
 
                 return JsonDocument.Parse(jsonResult);
             }
+            catch (PostgresException pgEx)
+            {
+                _logger.LogError(pgEx,
+                    "PostgreSQL error during token refresh. Code: {Code}, Message: {Message}",
+                    pgEx.SqlState, pgEx.Message);
+
+                var errorResponse = new
+                {
+                    success = false,
+                    error = "DB_ERROR",
+                    message = "Token refresh failed due to database error",
+                    code = 500,
+                    details = new
+                    {
+                        sqlState = pgEx.SqlState,
+                        severity = pgEx.Severity,
+                        hint = pgEx.Hint
+                    }
+                };
+
+                return JsonDocument.Parse(JsonSerializer.Serialize(errorResponse));
+            }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Database function refresh_jwt_token failed");
-                throw;
+                _logger.LogError(ex, "Token refresh failed");
+
+                return JsonDocument.Parse(@"{
+                    ""success"": false,
+                    ""error"": ""INTERNAL_ERROR"",
+                    ""message"": ""An unexpected error occurred during token refresh"",
+                    ""code"": 500
+                }");
             }
         }
 
         public async Task<JsonDocument> LogoutSessionAsync(
             string jti,
             string reason = "user_logout",
-            Guid? requestId = null)
+            int? requestId = null)
         {
             try
             {
-                using var connection = (NpgsqlConnection)_connectionFactory.CreateConnection();
-                await connection.OpenAsync();
-
+                using var connection = await GetConnectionAsync();
                 using var command = new NpgsqlCommand(
                     "SELECT auth.logout_session(@p_jti, @p_reason, @p_request_id)",
                     connection);
 
-                command.Parameters.AddWithValue("@p_jti", jti);
-                command.Parameters.AddWithValue("@p_reason", reason);
-                command.Parameters.AddWithValue("@p_request_id", requestId ?? Guid.NewGuid());
+                command.Parameters.Add(new NpgsqlParameter("@p_jti", NpgsqlDbType.Varchar)
+                {
+                    Value = jti
+                });
+
+                command.Parameters.Add(new NpgsqlParameter("@p_reason", NpgsqlDbType.Varchar)
+                {
+                    Value = reason
+                });
+
+                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Uuid)
+                {
+                    Value = requestId ?? new int()
+                });
 
                 var result = await command.ExecuteScalarAsync();
                 var jsonResult = result?.ToString();
 
                 if (string.IsNullOrEmpty(jsonResult))
                 {
-                    throw new InvalidOperationException("No result from stored procedure");
+                    return JsonDocument.Parse(@"{
+                        ""success"": false,
+                        ""error"": ""NO_RESULT"",
+                        ""message"": ""Logout failed"",
+                        ""code"": 500
+                    }");
                 }
 
                 return JsonDocument.Parse(jsonResult);
             }
+            catch (PostgresException pgEx)
+            {
+                _logger.LogError(pgEx,
+                    "PostgreSQL error during logout. Code: {Code}, Message: {Message}",
+                    pgEx.SqlState, pgEx.Message);
+
+                var errorResponse = new
+                {
+                    success = false,
+                    error = "DB_ERROR",
+                    message = "Logout failed due to database error",
+                    code = 500,
+                    details = new
+                    {
+                        sqlState = pgEx.SqlState,
+                        severity = pgEx.Severity,
+                        hint = pgEx.Hint
+                    }
+                };
+
+                return JsonDocument.Parse(JsonSerializer.Serialize(errorResponse));
+            }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Database function logout_session failed");
-                throw;
+                _logger.LogError(ex, "Logout failed for JTI: {Jti}", jti);
+
+                return JsonDocument.Parse(@"{
+                    ""success"": false,
+                    ""error"": ""INTERNAL_ERROR"",
+                    ""message"": ""An unexpected error occurred during logout"",
+                    ""code"": 500
+                }");
             }
         }
     }

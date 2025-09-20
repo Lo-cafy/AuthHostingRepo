@@ -43,7 +43,7 @@ namespace AuthService.Infrastructure.Repositories
             return roles;
         }
 
-        public async Task<Role> GetByIdAsync(Guid roleId)
+        public async Task<Role> GetByIdAsync(int roleId)
         {
             const string sql = @"
             SELECT 
@@ -106,7 +106,7 @@ namespace AuthService.Infrastructure.Repositories
             await ExecuteCommandAsync(sql, userRole);
         }
 
-        public async Task RemoveRoleAsync(Guid userId, Guid roleId)
+        public async Task RemoveRoleAsync(int userId, int roleId)
         {
             const string sql = @"
             UPDATE auth.user_roles 
@@ -116,7 +116,7 @@ namespace AuthService.Infrastructure.Repositories
             await ExecuteCommandAsync(sql, new { UserId = userId, RoleId = roleId });
         }
 
-        public async Task<IEnumerable<UserRole>> GetUserRolesAsync(Guid userId)
+        public async Task<IEnumerable<UserRole>> GetUserRolesAsync(int userId)
         {
             const string sql = @"
             SELECT 

@@ -17,13 +17,13 @@ namespace AuthService.Infrastructure.Repositories
         }
 
         public async Task<dynamic> RegisterWithPassword(
-            Guid userId,
+            int userId,
             string email,
             string password,
             string role = "customer",
             string ipAddress = null,
             string userAgent = null,
-            Guid? requestId = null)
+            int? requestId = null)
         {
             using var connection = _context.CreateConnection();
 
@@ -49,7 +49,7 @@ namespace AuthService.Infrastructure.Repositories
             string email,
             string password,
             string deviceInfo = "{}",
-            Guid? requestId = null)
+            int? requestId = null)
         {
             using var connection = _context.CreateConnection();
 
@@ -68,7 +68,7 @@ namespace AuthService.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<dynamic> VerifyEmail(string token, Guid? requestId = null)
+        public async Task<dynamic> VerifyEmail(string token, int? requestId = null)
         {
             using var connection = _context.CreateConnection();
 
@@ -88,7 +88,7 @@ namespace AuthService.Infrastructure.Repositories
         public async Task<dynamic> RefreshJwtToken(
             string refreshJti,
             string deviceInfo = "{}",
-            Guid? requestId = null)
+            int? requestId = null)
         {
             using var connection = _context.CreateConnection();
 
@@ -109,7 +109,7 @@ namespace AuthService.Infrastructure.Repositories
         public async Task<dynamic> LogoutSession(
             string jti,
             string reason = "user_logout",
-            Guid? requestId = null)
+            int? requestId = null)
         {
             using var connection = _context.CreateConnection();
 
@@ -127,7 +127,7 @@ namespace AuthService.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<int> GetActiveSessionsCount(Guid userId)
+        public async Task<int> GetActiveSessionsCount(int userId)
         {
             using var connection = _context.CreateConnection();
 

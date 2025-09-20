@@ -304,7 +304,7 @@ Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for
    at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
   Exception data:
     Severity: FATAL
     SqlState: 28P01
@@ -323,7 +323,7 @@ Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for
    at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
    at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 170
   Exception data:
     Severity: FATAL
@@ -345,7 +345,7 @@ Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for
    at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
    at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 170
    at AuthService.Api.Controllers.AuthController.Register(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService\Controllers\AuthController.cs:line 47
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
@@ -417,7 +417,7 @@ Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for
    at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
   Exception data:
     Severity: FATAL
     SqlState: 28P01
@@ -436,7 +436,7 @@ Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for
    at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
    at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 170
   Exception data:
     Severity: FATAL
@@ -458,7 +458,7 @@ Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for
    at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
    at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
-   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(Guid userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.RegisterWithPasswordAsync(int userId, String email, String password, String role, String ipAddress, String userAgent, Nullable`1 requestId) in D:\SingleProject1\AuthServiceClone\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 36
    at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService.Application\Services\AuthService.cs:line 170
    at AuthService.Api.Controllers.AuthController.Register(RegisterRequestDto request) in D:\SingleProject1\AuthServiceClone\AuthService\Controllers\AuthController.cs:line 47
    at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)

@@ -7,10 +7,10 @@ namespace AuthService.Application.Interfaces
 {
     public interface IDeviceFingerprintService
     {
-        Task<bool> RegisterDeviceAsync(Guid userId, DeviceFingerprintDto deviceInfo);
+        Task<bool> RegisterDeviceAsync(int userId, DeviceFingerprintDto deviceInfo);
         Task<string> GenerateFingerprintAsync(DeviceFingerprintDto deviceInfo);
-        Task<bool> ValidateFingerprintAsync(Guid userId, string fingerprintHash);
-        Task<bool> TrustDeviceAsync(Guid userId, TrustDeviceDto trustInfo);
-        Task<IEnumerable<DeviceFingerprintDto>> GetUserDevicesAsync(Guid userId);
+        Task<bool> ValidateFingerprintAsync(int userId, string fingerprintHash);
+        Task<bool> TrustDeviceAsync(int userId, TrustDeviceDto trustInfo);
+        Task<IEnumerable<DeviceFingerprintDto>> GetUserDevicesAsync(int userId);
     }
 }

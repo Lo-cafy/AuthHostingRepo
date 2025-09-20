@@ -17,7 +17,7 @@ namespace AuthService.Application.Services
             _logger = logger;
         }
 
-        public async Task<bool> RegisterDeviceAsync(Guid userId, DeviceFingerprintDto deviceInfo)
+        public async Task<bool> RegisterDeviceAsync(int userId, DeviceFingerprintDto deviceInfo)
         {
             // Implementation
             return true;
@@ -26,22 +26,22 @@ namespace AuthService.Application.Services
         public async Task<string> GenerateFingerprintAsync(DeviceFingerprintDto deviceInfo)
         {
             // Implementation
-            return Guid.NewGuid().ToString();
+            return new int().ToString();
         }
 
-        public async Task<bool> ValidateFingerprintAsync(Guid userId, string fingerprintHash)
+        public async Task<bool> ValidateFingerprintAsync(int userId, string fingerprintHash)
         {
             // Implementation
             return true;
         }
 
-        public async Task<bool> TrustDeviceAsync(Guid userId, TrustDeviceDto trustInfo)
+        public async Task<bool> TrustDeviceAsync(int userId, TrustDeviceDto trustInfo)
         {
             // Implementation
             return true;
         }
 
-        public async Task<IEnumerable<DeviceFingerprintDto>> GetUserDevicesAsync(Guid userId)
+        public async Task<IEnumerable<DeviceFingerprintDto>> GetUserDevicesAsync(int userId)
         {
             // Implementation
             return new List<DeviceFingerprintDto>();

@@ -45,7 +45,7 @@ namespace AuthService.Application.Services
 
                 var userRole = new UserRole
                 {
-                    AssignmentId = Guid.NewGuid(),
+                    AssignmentId = new int(),
                     UserId = request.UserId,
                     RoleId = request.RoleId,
                     AssignedBy = request.AssignedBy,
@@ -64,7 +64,7 @@ namespace AuthService.Application.Services
             }
         }
 
-        public async Task<bool> RemoveRoleAsync(Guid userId, Guid roleId)
+        public async Task<bool> RemoveRoleAsync(int userId, int roleId)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace AuthService.Application.Services
             }
         }
 
-        public async Task<IEnumerable<UserRoleDto>> GetUserRolesAsync(Guid userId)
+        public async Task<IEnumerable<UserRoleDto>> GetUserRolesAsync(int userId)
         {
             var userRoles = await _roleRepository.GetUserRolesAsync(userId);
             return userRoles.Select(ur => new UserRoleDto

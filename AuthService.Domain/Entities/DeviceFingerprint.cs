@@ -4,8 +4,8 @@ namespace AuthService.Domain.Entities
 {
     public class DeviceFingerprint
     {
-        public Guid FingerprintId { get; set; }
-        public Guid UserId { get; set; }
+        public int FingerprintId { get; set; }
+        public int UserId { get; set; }
         public string Browser { get; set; }
         public string UserAgent { get; set; }
         public string IpAddress { get; set; }

@@ -1,157 +1,142 @@
-﻿using AuthService.Domain.Entities;
+﻿using Dapper;
+using AuthService.Domain.Entities;
 using AuthService.Infrastructure.Data.Interfaces;
 using AuthService.Infrastructure.Interfaces;
-using Dapper;
 
 namespace AuthService.Infrastructure.Repositories
 {
-    public class UserCredentialRepository : BaseRepository, IUserCredentialRepository
+    public class UserCredentialRepository : IUserCredentialRepository
     {
-        public UserCredentialRepository(Data.Interfaces.IDbConnectionFactory connectionFactory)
-            : base(connectionFactory)
+        private readonly IDbConnectionFactory _connectionFactory;
+
+        public UserCredentialRepository(IDbConnectionFactory connectionFactory)
         {
+            _connectionFactory = connectionFactory;
         }
 
-        public async Task<UserCredential> GetByEmailAsync(string email)
+        public async Task<UserCredential?> GetByEmailAsync(string email)
         {
-            const string sql = @"
+            using var connection = await _connectionFactory.CreateConnectionAsync();
+
+            var sql = @"
                 SELECT 
-                    credential_id as CredentialId,
-                    user_id as UserId,
-                    email as Email,
-                    password_hash as PasswordHash,
-                    password_salt as PasswordSalt,
-                    role as Role,
-                    is_active as IsActive,
-                    failed_attempts as FailedAttempts,
-                    locked_until as LockedUntil,
-                    password_changed_at as PasswordChangedAt,
-                    created_at as CreatedAt,
-                    updated_at as UpdatedAt
-                FROM auth.user_credentials 
+                    credential_id AS CredentialId,
+                    user_id AS UserId,
+                    email AS Email,
+                    password_hash AS PasswordHash,
+                    password_salt AS PasswordSalt,
+                    role AS Role,
+                    is_active AS IsActive,
+                    failed_attempts AS FailedAttempts,
+                    locked_until AS LockedUntil,
+                    password_changed_at AS PasswordChangedAt,
+                    created_at AS CreatedAt,
+                    updated_at AS UpdatedAt
+                FROM auth.user_credentials
                 WHERE email = @Email AND is_active = true";
 
-            return await ExecuteAsync<UserCredential>(sql, new { Email = email });
+            return await connection.QueryFirstOrDefaultAsync<UserCredential>(sql, new { Email = email });
         }
 
-        public async Task<UserCredential> GetByUserIdAsync(Guid userId)
+        public async Task<UserCredential?> GetByUserIdAsync(int userId)
         {
-            const string sql = @"
+            using var connection = await _connectionFactory.CreateConnectionAsync();
+
+            var sql = @"
                 SELECT 
-                    credential_id as CredentialId,
-                    user_id as UserId,
-                    email as Email,
-                    password_hash as PasswordHash,
-                    password_salt as PasswordSalt,
-                    role as Role,
-                    is_active as IsActive,
-                    failed_attempts as FailedAttempts,
-                    locked_until as LockedUntil,
-                    password_changed_at as PasswordChangedAt,
-                    created_at as CreatedAt,
-                    updated_at as UpdatedAt
-                FROM auth.user_credentials 
+                    credential_id AS CredentialId,
+                    user_id AS UserId,
+                    email AS Email,
+                    password_hash AS PasswordHash,
+                    password_salt AS PasswordSalt,
+                    role AS Role,
+                    is_active AS IsActive,
+                    failed_attempts AS FailedAttempts,
+                    locked_until AS LockedUntil,
+                    password_changed_at AS PasswordChangedAt,
+                    created_at AS CreatedAt,
+                    updated_at AS UpdatedAt
+                FROM auth.user_credentials
                 WHERE user_id = @UserId AND is_active = true";
 
-            return await ExecuteAsync<UserCredential>(sql, new { UserId = userId });
+            return await connection.QueryFirstOrDefaultAsync<UserCredential>(sql, new { UserId = userId });
         }
-
-        public async Task<bool> EmailExistsAsync(string email)
-        {
-            const string sql = @"
-                SELECT COUNT(1) 
-                FROM auth.user_credentials 
-                WHERE email = @Email AND is_active = true";
-
-            var count = await ExecuteScalarAsync<int>(sql, new { Email = email });
-            return count > 0;
-        }
-
         public async Task<UserCredential> CreateAsync(UserCredential credential)
         {
-            const string sql = @"
-                INSERT INTO auth.user_credentials 
-                (
-                    user_id, 
-                    email, 
-                    password_hash, 
-                    password_salt, 
-                    role, 
-                    is_active, 
-                    failed_attempts,
-                    locked_until,
-                    password_changed_at,
-                    created_at, 
-                    updated_at
-                )
-                VALUES 
-                (
-                    @UserId, 
-                    @Email, 
-                    @PasswordHash, 
-                    @PasswordSalt, 
-                    @Role, 
-                    @IsActive, 
-                    @FailedAttempts,
-                    @LockedUntil,
-                    @PasswordChangedAt,
-                    @CreatedAt, 
-                    @UpdatedAt
-                )
-                RETURNING credential_id as CredentialId";
+            using var connection = await _connectionFactory.CreateConnectionAsync();
 
-            var credentialId = await ExecuteScalarAsync<long>(sql, credential);
+            var sql = @"
+            INSERT INTO auth.user_credentials (
+                user_id,
+                email,
+                password_hash,
+                password_salt,
+                password_algorithm,
+                password_iterations,
+                password_memory,
+                password_parallelism,
+                role,
+                created_at,
+                updated_at,
+                is_active
+            ) VALUES (
+                @UserId,
+                @Email,
+                @PasswordHash,
+                @PasswordSalt,
+                'argon2id',
+                3,
+                65536,
+                1,
+                @Role,
+                CURRENT_TIMESTAMP,
+                CURRENT_TIMESTAMP,
+                true
+            ) RETURNING credential_id";
+
+            var credentialId = await connection.ExecuteScalarAsync<int>(sql, credential);
             credential.CredentialId = credentialId;
+
             return credential;
         }
 
         public async Task UpdateAsync(UserCredential credential)
         {
-            const string sql = @"
-                UPDATE auth.user_credentials 
-                SET 
-                    password_hash = @PasswordHash,
-                    password_salt = @PasswordSalt,
-                    role = @Role,
-                    is_active = @IsActive,
-                    failed_attempts = @FailedAttempts,
-                    locked_until = @LockedUntil,
-                    password_changed_at = @PasswordChangedAt,
-                    updated_at = @UpdatedAt
-                WHERE credential_id = @CredentialId";
+            using var connection = await _connectionFactory.CreateConnectionAsync();
 
-            await ExecuteCommandAsync(sql, credential);
+            var sql = @"
+            UPDATE auth.user_credentials 
+            SET 
+                password_hash = @PasswordHash,
+                password_salt = @PasswordSalt,
+                role = @Role,
+                is_active = @IsActive,
+                failed_attempts = @FailedAttempts,
+                locked_until = @LockedUntil,
+                password_changed_at = CASE 
+                    WHEN @PasswordHash != password_hash 
+                    THEN CURRENT_TIMESTAMP 
+                    ELSE password_changed_at 
+                END,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE credential_id = @CredentialId";
+
+            await connection.ExecuteAsync(sql, credential);
         }
 
-        public async Task UpdateLoginAttemptsAsync(long credentialId, int failedAttempts, DateTime? lockedUntil)
+        public async Task<bool> EmailExistsAsync(string email)
         {
-            const string sql = @"
-                UPDATE auth.user_credentials 
-                SET 
-                    failed_attempts = @FailedAttempts,
-                    locked_until = @LockedUntil,
-                    updated_at = CURRENT_TIMESTAMP
-                WHERE credential_id = @CredentialId";
+            using var connection = await _connectionFactory.CreateConnectionAsync();
 
-            await ExecuteCommandAsync(sql, new
-            {
-                CredentialId = credentialId,
-                FailedAttempts = failedAttempts,
-                LockedUntil = lockedUntil
-            });
-        }
+            var sql = @"
+            SELECT EXISTS(
+                SELECT 1 
+                FROM auth.user_credentials 
+                WHERE email = @Email 
+                AND is_active = true
+            )";
 
-        public async Task ResetLoginAttemptsAsync(long credentialId)
-        {
-            const string sql = @"
-                UPDATE auth.user_credentials 
-                SET 
-                    failed_attempts = 0,
-                    locked_until = NULL,
-                    updated_at = CURRENT_TIMESTAMP
-                WHERE credential_id = @CredentialId";
-
-            await ExecuteCommandAsync(sql, new { CredentialId = credentialId });
+            return await connection.ExecuteScalarAsync<bool>(sql, new { Email = email });
         }
     }
 }
