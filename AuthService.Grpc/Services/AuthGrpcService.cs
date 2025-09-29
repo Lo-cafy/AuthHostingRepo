@@ -2,41 +2,49 @@
 using Microsoft.Extensions.Logging;
 using AuthService.Application.Interfaces;
 using AuthService.Grpc.Protos;
+using AuthService.Application.DTOs.Auth;
 
 namespace AuthService.Grpc.Services
 {
     public class AuthGrpcService : Protos.AuthService.AuthServiceBase
     {
         private readonly IAuthService _authService;
+        private readonly IAccountService _accountService;
         private readonly ILogger<AuthGrpcService> _logger;
 
-        public AuthGrpcService(IAuthService authService, ILogger<AuthGrpcService> logger)
+        public AuthGrpcService(IAuthService authService, IAccountService accountService, ILogger<AuthGrpcService> logger)
         {
             _authService = authService;
+            _accountService = accountService;
             _logger = logger;
         }
 
-        public override async Task<Protos.AuthResponse> Authenticate(
-            Protos.AuthRequest request, ServerCallContext context)
+        public override async Task<RegisterUserResponse> RegisterUser(RegisterUserRequest request, ServerCallContext context)
         {
             try
             {
-                var result = await _authService.AuthenticateAsync(request.Email, request.Password);
+                var registerDto = new RegisterRequestDto
+                {
+                    Email = request.Email,
+                    Password = request.Password,
+                    ConfirmPassword = request.ConfirmPassword
+                };
 
-                return new Protos.AuthResponse
+                var result = await _accountService.RegisterAsync(registerDto);
+
+                return new RegisterUserResponse
                 {
                     Success = result.Success,
-                    Token = result.Success ? result.AccessToken : string.Empty,
-                    Error = result.Success ? string.Empty : result.Error
+                    Message = result.Message
                 };
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error during authentication");
-                return new Protos.AuthResponse
+                _logger.LogError(ex, "Error during user registration");
+                return new RegisterUserResponse
                 {
                     Success = false,
-                    Error = "Internal server error"
+                    Message = "Internal server error"
                 };
             }
         }

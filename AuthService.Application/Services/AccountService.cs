@@ -10,6 +10,7 @@ using AuthService.Shared.Exceptions;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using AuthService.Application.DTOs.Auth;
 
 namespace AuthService.Application.Services
 {
@@ -202,6 +203,60 @@ namespace AuthService.Application.Services
             {
                 _logger.LogError(ex, "Password change failed");
                 throw;
+            }
+        }
+        public async Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request)
+        {
+            try
+            {
+                // 1. Validate email uniqueness
+                if (await _credentialRepository.EmailExistsAsync(request.Email))
+                {
+                    return new RegisterResponseDto
+                    {
+                        Success = false,
+                        Message = "Email already exists"
+                    };
+                }
+
+                // 2. Validate password
+                _passwordService.ValidatePasswordStrength(request.Password);
+
+                // 3. Salt + Hash password
+                var passwordSalt = GeneratePasswordSalt();
+                var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password + passwordSalt, 12);
+
+                var userCredential = new UserCredential
+                {
+                    UserId = new Random().Next(100000, 999999), 
+                    Email = request.Email,
+                    PasswordHash = passwordHash,
+                    PasswordSalt = passwordSalt,
+                    Role = "customer",
+                    IsActive = true,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow
+                };
+
+                var created = await _credentialRepository.CreateAsync(userCredential);
+
+                _logger.LogInformation("User registered successfully with Email {Email}", request.Email);
+
+                return new RegisterResponseDto
+                {
+                    Success = true,
+                    Message = "User registered successfully",
+                    UserId = created.UserId
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "User registration failed for {Email}", request.Email);
+                return new RegisterResponseDto
+                {
+                    Success = false,
+                    Message = "Internal server error"
+                };
             }
         }
 
