@@ -1,38 +1,32 @@
-# Build stage
+# Stage 1: Build the application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy csproj files and restore dependencies
-COPY ["AuthService/AuthService.Api.csproj", "AuthService/"]
+# Copy project files and restore dependencies
+# (Using your project structure for caching)
+COPY ["AuthService.Api/AuthService.Api.csproj", "AuthService.Api/"]
 COPY ["AuthService.Application/AuthService.Application.csproj", "AuthService.Application/"]
 COPY ["AuthService.Domain/AuthService.Domain.csproj", "AuthService.Domain/"]
 COPY ["AuthService.Infrastructure/AuthService.Infrastructure.csproj", "AuthService.Infrastructure/"]
 COPY ["AuthService.Grpc/AuthService.Grpc.csproj", "AuthService.Grpc/"]
 COPY ["AuthService.Shared/AuthService.Shared.csproj", "AuthService.Shared/"]
+COPY ["Locafy-AuthService.sln", "."]
+RUN dotnet restore "Locafy-AuthService.sln"
 
-RUN dotnet restore "AuthService/AuthService.Api.csproj"
-
-# Copy everything else
+# Copy the rest of the source code
 COPY . .
 
-WORKDIR "/src/AuthService"
+# Publish the application
+WORKDIR "/src/AuthService.Api"
+RUN dotnet publish "AuthService.Api.csproj" -c Release -o /app/publish
 
-RUN dotnet build "AuthService.Api.csproj" -c Release -o /app/build /p:UseAppHost=false
-
-# Publish stage
-FROM build AS publish
-RUN dotnet publish "AuthService.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-# runtime stage
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# Stage 2: Create the final, smaller image
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
+COPY --from=build /app/publish .
 
-# Create non-root user
-RUN adduser --disabled-password --gecos "" appuser 
-RUN	chown -R appuser /app
-USER appuser
+# Expose the port Render expects
+EXPOSE 10000
 
-COPY --from=publish /app/publish .
-EXPOSE 8080
+# Set the entry point for the application
 ENTRYPOINT ["dotnet", "AuthService.Api.dll"]
-# docker-compose -f docker-compose.auth-service.yml up --build
