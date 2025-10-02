@@ -1,5 +1,4 @@
 ﻿using Grpc.Core;
-using Microsoft.Extensions.Logging;
 using AuthService.Application.Interfaces;
 using AuthService.Grpc.Protos;
 using AuthService.Application.DTOs.Auth;

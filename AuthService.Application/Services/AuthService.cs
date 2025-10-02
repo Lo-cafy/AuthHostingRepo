@@ -62,7 +62,7 @@ namespace AuthService.Application.Services
                     UserAgent = "Unknown"
                 };
 
-                var requestId = new int();
+                var requestId = Guid.NewGuid();
 
                 var deviceInfoForSP = new
                 {
@@ -112,7 +112,7 @@ namespace AuthService.Application.Services
                     var tokens = root.GetProperty("tokens");
                     var accessJti = tokens.GetProperty("access_token_jti").GetString();
                     var refreshJti = tokens.GetProperty("refresh_token_jti").GetString();
-                    var expiresIn = tokens.GetProperty("expires_in").GetInt32();
+                    var expiresIn = tokens.GetProperty("expires_in").GetDouble();
 
                     var session = root.GetProperty("session");
                    var sessionId = session.GetProperty("session_id").GetInt32();
@@ -158,7 +158,7 @@ namespace AuthService.Application.Services
                 }
 
                 var refreshJti = principal.FindFirst("jti")?.Value;
-                var requestId = new int();
+                var requestId = Guid.NewGuid();
 
                 var result = await _databaseFunctionService.RefreshJwtTokenAsync(
                     refreshJti,
@@ -212,7 +212,7 @@ namespace AuthService.Application.Services
         {
             try
             {
-                var requestId = new int();
+                var requestId = Guid.NewGuid();
                 var result = await _databaseFunctionService.LogoutSessionAsync(jti, "user_logout", requestId);
 
                 using (result)

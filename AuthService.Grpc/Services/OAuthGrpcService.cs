@@ -42,7 +42,7 @@ namespace AuthService.Grpc.Services
                     UserId = result.UserId.ToString(),
                     AccessToken = result.AccessToken,
                     RefreshToken = result.RefreshToken,
-                    ExpiresIn = result.ExpiresIn,
+                    ExpiresIn = (int)result.ExpiresIn,
                     TokenType = result.TokenType,
                     IsNewUser = result.IsNewUser
                 };
@@ -81,7 +81,7 @@ namespace AuthService.Grpc.Services
                     UserId = result.UserId.ToString(),
                     AccessToken = result.AccessToken,
                     RefreshToken = result.RefreshToken,
-                    ExpiresIn = result.ExpiresIn,
+                    ExpiresIn = (int)result.ExpiresIn,
                     TokenType = result.TokenType,
                     IsNewUser = result.IsNewUser
                 };

@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Http;
-using AuthService.Infrastructure.Extensions;
+using AuthService.Api.Extensions;
 using AuthService.Api.Middleware;
 using AuthService.Application.Options;
 using AuthService.Infrastructure.Data;
@@ -17,6 +17,8 @@ using AuthService.Infrastructure.Data.Interfaces;
 using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// ✅ Configure Serilog Logging
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -32,36 +34,21 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 builder.Host.UseSerilog();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpContextAccessor();
 
+// ✅ Register Database (EF Core + Dapper + Neon Connection)
+builder.Services.AddDatabase(builder.Configuration);
 
-builder.Services.Configure<DatabaseOptions>(
-    builder.Configuration.GetSection(DatabaseOptions.SectionName));
-builder.Services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
-builder.Services.AddScoped<IDatabaseFunctionService, DatabaseFunctionService>();
-
-builder.Services.AddScoped<IPasswordService, PasswordService>();
-builder.Services.AddScoped<IJwtService, JwtService>();
-builder.Services.AddScoped<IDigitalFingerprintService, DigitalFingerprintService>();
-
-
-builder.Services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
-builder.Services.AddScoped<IJwtSessionRepository, JwtSessionRepository>();
-builder.Services.AddScoped<ILoginAttemptRepository, LoginAttemptRepository>();
-builder.Services.AddScoped<ISecurityTokenRepository, SecurityTokenRepository>();
-builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-
-builder.Services.AddScoped<IAuthService, AuthService.Application.Services.AuthService>();
-builder.Services.AddScoped<IAccountService, AccountService>();
-
-
+// ✅ Configure JWT Options
 var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 
+// ✅ JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -79,14 +66,18 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-
+// ✅ Rate Limit Configuration
 builder.Services.Configure<RateLimitOptions>(
     builder.Configuration.GetSection("RateLimitOptions"));
 
+// ✅ Common Services
+builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<IDigitalFingerprintService, DigitalFingerprintService>();
+builder.Services.AddScoped<IAuthService, AuthService.Application.Services.AuthService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
-builder.Services.AddHttpClient();
-
-
+// ✅ CORS Policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -97,7 +88,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Health Checks
+// ✅ Health Checks (checks Neon PostgreSQL)
 builder.Services.AddHealthChecks()
     .AddNpgSql(
         builder.Configuration.GetConnectionString("AuthDb"),
@@ -106,7 +97,7 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
-
+// ✅ Swagger
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -120,10 +111,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 
-// Use Serilog request logging
+// ✅ Serilog request logging
 app.UseSerilogRequestLogging();
 
-// Custom Middleware
+// ✅ Custom Middleware
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<RateLimitingMiddleware>();
 app.UseMiddleware<DigitalFingerprintMiddleware>();
@@ -134,14 +125,24 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHealthChecks("/health");
 
+// ✅ Optional: Test Neon connection on startup
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    if (db.Database.CanConnect())
+        Log.Information("✅ Successfully connected to Neon PostgreSQL Database!");
+    else
+        Log.Error("❌ Failed to connect to Neon Database!");
+}
+
 try
 {
-    Log.Information("Starting Auth API");
+    Log.Information("🚀 Starting Auth API...");
     app.Run();
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "API terminated unexpectedly");
+    Log.Fatal(ex, "❌ API terminated unexpectedly");
 }
 finally
 {
