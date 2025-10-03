@@ -1,0 +1,67 @@
+2025-10-03 09:42:49.207 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-03 09:42:49.281 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-03 09:42:49.368 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-03 09:42:49.911 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-03 09:42:49.921 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-03 09:42:50.215 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-03 09:42:50.219 +05:30 [INF] Hosting environment: Development
+2025-10-03 09:42:50.219 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceLatest\AuthService
+2025-10-03 09:42:51.475 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-03 09:42:51.881 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 422.6092ms
+2025-10-03 09:42:51.912 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-03 09:42:51.912 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-10-03 09:42:51.927 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 14.7894ms
+2025-10-03 09:42:52.040 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 128.6327ms
+2025-10-03 09:42:52.259 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-03 09:42:52.340 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 80.1396ms
+2025-10-03 09:54:27.879 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 57
+2025-10-03 09:54:27.888 +05:30 [INF] CORS policy execution successful.
+2025-10-03 09:54:27.999 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-03 09:54:28.048 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-03 09:54:31.783 +05:30 [ERR] PostgreSQL error during authentication for email user@example.com. Code: 42883, Message: 42883: function auth.authenticate_user_enhanced(character varying, character varying, jsonb, uuid) does not exist
+
+POSITION: 8
+Npgsql.PostgresException (0x80004005): 42883: function auth.authenticate_user_enhanced(character varying, character varying, jsonb, uuid) does not exist
+
+POSITION: 8
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.AuthenticatePasswordAsync(String email, String password, Object deviceInfo, Nullable`1 requestId) in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 112
+  Exception data:
+    Severity: ERROR
+    SqlState: 42883
+    MessageText: function auth.authenticate_user_enhanced(character varying, character varying, jsonb, uuid) does not exist
+    Hint: No function matches the given name and argument types. You might need to add explicit type casts.
+    Position: 8
+    File: parse_func.c
+    Line: 629
+    Routine: ParseFuncOrColumn
+2025-10-03 09:54:31.926 +05:30 [ERR] Login failed for email: user@example.com
+AuthService.Shared.Exceptions.AuthException: Authentication failed due to database error
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceLatest\AuthService.Application\Services\AuthService.cs:line 100
+2025-10-03 09:54:32.043 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-03 09:54:32.055 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 3999.5904ms
+2025-10-03 09:54:32.060 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-03 09:54:32.066 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 4170.2093 ms
+2025-10-03 09:54:32.068 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 4188.6012ms
+2025-10-03 10:57:56.169 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-03 10:57:56.216 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-03 10:57:56.246 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-03 10:57:56.490 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-03 10:57:56.491 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-03 10:57:56.495 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-03 10:57:56.496 +05:30 [INF] Hosting environment: Development
+2025-10-03 10:57:56.500 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceLatest\AuthService
+2025-10-03 10:58:22.658 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-03 10:58:22.840 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 178.2474ms
+2025-10-03 10:58:23.193 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-03 10:58:23.325 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 131.5988ms
+2025-10-03 10:58:32.999 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-03 10:58:33.002 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 2.3651ms
+2025-10-03 10:58:33.237 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-03 10:58:33.249 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 11.2553ms
