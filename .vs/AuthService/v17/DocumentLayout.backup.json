@@ -1,0 +1,326 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\SingleProject1\\AuthServiceLatest\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{46998546-900D-4AFB-8B69-7D65E9C1D960}|AuthService\\AuthService.Api.csproj|d:\\singleproject1\\authservicelatest\\authservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46998546-900D-4AFB-8B69-7D65E9C1D960}|AuthService\\AuthService.Api.csproj|solutionrelative:authservice\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46998546-900D-4AFB-8B69-7D65E9C1D960}|AuthService\\AuthService.Api.csproj|d:\\singleproject1\\authservicelatest\\authservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{46998546-900D-4AFB-8B69-7D65E9C1D960}|AuthService\\AuthService.Api.csproj|solutionrelative:authservice\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}|Solution Items{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}|D:\\SingleProject1\\AuthServiceLatest\\Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}|Solution Items{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}|solutionrelative:Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{894C52C7-8C0E-4C9C-AD68-D584224D5F43}|AuthService.Grpc\\AuthService.Grpc.csproj|d:\\singleproject1\\authservicelatest\\authservice.grpc\\services\\oauthgrpcservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{894C52C7-8C0E-4C9C-AD68-D584224D5F43}|AuthService.Grpc\\AuthService.Grpc.csproj|solutionrelative:authservice.grpc\\services\\oauthgrpcservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|d:\\singleproject1\\authservicelatest\\authservice.application\\dtos\\auth\\authresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|solutionrelative:authservice.application\\dtos\\auth\\authresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|d:\\singleproject1\\authservicelatest\\authservice.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|solutionrelative:authservice.application\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}|AuthService.Infrastructure\\AuthService.Infrastructure.csproj|d:\\singleproject1\\authservicelatest\\authservice.infrastructure\\interfaces\\idatabasefunctionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}|AuthService.Infrastructure\\AuthService.Infrastructure.csproj|solutionrelative:authservice.infrastructure\\interfaces\\idatabasefunctionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}|AuthService.Infrastructure\\AuthService.Infrastructure.csproj|d:\\singleproject1\\authservicelatest\\authservice.infrastructure\\services\\databasefunctionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}|AuthService.Infrastructure\\AuthService.Infrastructure.csproj|solutionrelative:authservice.infrastructure\\services\\databasefunctionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|d:\\singleproject1\\authservicelatest\\authservice.application\\dtos\\auth\\loginresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|solutionrelative:authservice.application\\dtos\\auth\\loginresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46998546-900D-4AFB-8B69-7D65E9C1D960}|AuthService\\AuthService.Api.csproj|d:\\singleproject1\\authservicelatest\\authservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{46998546-900D-4AFB-8B69-7D65E9C1D960}|AuthService\\AuthService.Api.csproj|solutionrelative:authservice\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{46998546-900D-4AFB-8B69-7D65E9C1D960}|AuthService\\AuthService.Api.csproj|d:\\singleproject1\\authservicelatest\\authservice\\extensions\\databaseextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{46998546-900D-4AFB-8B69-7D65E9C1D960}|AuthService\\AuthService.Api.csproj|solutionrelative:authservice\\extensions\\databaseextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}|AuthService.Infrastructure\\AuthService.Infrastructure.csproj|d:\\singleproject1\\authservicelatest\\authservice.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}|AuthService.Infrastructure\\AuthService.Infrastructure.csproj|solutionrelative:authservice.infrastructure\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{894C52C7-8C0E-4C9C-AD68-D584224D5F43}|AuthService.Grpc\\AuthService.Grpc.csproj|d:\\singleproject1\\authservicelatest\\authservice.grpc\\services\\authgrpcservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{894C52C7-8C0E-4C9C-AD68-D584224D5F43}|AuthService.Grpc\\AuthService.Grpc.csproj|solutionrelative:authservice.grpc\\services\\authgrpcservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{894C52C7-8C0E-4C9C-AD68-D584224D5F43}|AuthService.Grpc\\AuthService.Grpc.csproj|d:\\singleproject1\\authservicelatest\\authservice.grpc\\protos\\auth.proto||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{894C52C7-8C0E-4C9C-AD68-D584224D5F43}|AuthService.Grpc\\AuthService.Grpc.csproj|solutionrelative:authservice.grpc\\protos\\auth.proto||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|d:\\singleproject1\\authservicelatest\\authservice.application\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|solutionrelative:authservice.application\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|d:\\singleproject1\\authservicelatest\\authservice.application\\dtos\\auth\\registerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|solutionrelative:authservice.application\\dtos\\auth\\registerresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|d:\\singleproject1\\authservicelatest\\authservice.application\\dtos\\auth\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|solutionrelative:authservice.application\\dtos\\auth\\registerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|d:\\singleproject1\\authservicelatest\\authservice.application\\interfaces\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D548BEFD-4732-42E1-8928-50761EAB0790}|AuthService.Application\\AuthService.Application.csproj|solutionrelative:authservice.application\\interfaces\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\obj\\Debug\\net8.0\\Protos\\Oauth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AuthService.Grpc\\obj\\Debug\\net8.0\\Protos\\Oauth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DatabaseFunctionService.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\Services\\DatabaseFunctionService.cs",
+              "RelativeDocumentMoniker": "AuthService.Infrastructure\\Services\\DatabaseFunctionService.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\Services\\DatabaseFunctionService.cs",
+              "RelativeToolTip": "AuthService.Infrastructure\\Services\\DatabaseFunctionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAsAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:40:02.187Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\appsettings.json",
+              "RelativeDocumentMoniker": "AuthService\\appsettings.json",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\appsettings.json",
+              "RelativeToolTip": "AuthService\\appsettings.json",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAswAkAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-02T03:31:26.565Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-02T18:06:00.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\Program.cs",
+              "RelativeDocumentMoniker": "AuthService\\Program.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\Program.cs",
+              "RelativeToolTip": "AuthService\\Program.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAewIwAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T10:38:14.759Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OAuthGrpcService.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\Services\\OAuthGrpcService.cs",
+              "RelativeDocumentMoniker": "AuthService.Grpc\\Services\\OAuthGrpcService.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\Services\\OAuthGrpcService.cs",
+              "RelativeToolTip": "AuthService.Grpc\\Services\\OAuthGrpcService.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAqwFYAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:43:15.823Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Oauth.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\obj\\Debug\\net8.0\\Protos\\Oauth.cs",
+              "RelativeDocumentMoniker": "AuthService.Grpc\\obj\\Debug\\net8.0\\Protos\\Oauth.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\obj\\Debug\\net8.0\\Protos\\Oauth.cs",
+              "RelativeToolTip": "AuthService.Grpc\\obj\\Debug\\net8.0\\Protos\\Oauth.cs",
+              "ViewState": "AgIAAPoNAAAAAAAAAAAAABsOAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:43:23.181Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AuthResultDto.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\DTOs\\Auth\\AuthResultDto.cs",
+              "RelativeDocumentMoniker": "AuthService.Application\\DTOs\\Auth\\AuthResultDto.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\DTOs\\Auth\\AuthResultDto.cs",
+              "RelativeToolTip": "AuthService.Application\\DTOs\\Auth\\AuthResultDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:39:28.193Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IDatabaseFunctionService.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\Interfaces\\IDatabaseFunctionService.cs",
+              "RelativeDocumentMoniker": "AuthService.Infrastructure\\Interfaces\\IDatabaseFunctionService.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\Interfaces\\IDatabaseFunctionService.cs",
+              "RelativeToolTip": "AuthService.Infrastructure\\Interfaces\\IDatabaseFunctionService.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAACGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T17:37:53.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LoginResponseDto.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\DTOs\\Auth\\LoginResponseDto.cs",
+              "RelativeDocumentMoniker": "AuthService.Application\\DTOs\\Auth\\LoginResponseDto.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\DTOs\\Auth\\LoginResponseDto.cs",
+              "RelativeToolTip": "AuthService.Application\\DTOs\\Auth\\LoginResponseDto.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAjwAoAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T14:37:59.781Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "AuthService.Application\\Services\\AuthService.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\Services\\AuthService.cs",
+              "RelativeToolTip": "AuthService.Application\\Services\\AuthService.cs",
+              "ViewState": "AgIAAJQAAAAAAAAAAAAqwKAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T14:34:23.752Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "AuthService\\Properties\\launchSettings.json",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\Properties\\launchSettings.json",
+              "RelativeToolTip": "AuthService\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-02T13:43:00.369Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "AuthService.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "AuthService.Infrastructure\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T03:49:51.852Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DatabaseExtensions.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\Extensions\\DatabaseExtensions.cs",
+              "RelativeDocumentMoniker": "AuthService\\Extensions\\DatabaseExtensions.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\Extensions\\DatabaseExtensions.cs",
+              "RelativeToolTip": "AuthService\\Extensions\\DatabaseExtensions.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAgwCsAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-02T10:36:27.815Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "AuthGrpcService.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\Services\\AuthGrpcService.cs",
+              "RelativeDocumentMoniker": "AuthService.Grpc\\Services\\AuthGrpcService.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\Services\\AuthGrpcService.cs",
+              "RelativeToolTip": "AuthService.Grpc\\Services\\AuthGrpcService.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAqwAAAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T06:04:29.615Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AccountService.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\Services\\AccountService.cs",
+              "RelativeDocumentMoniker": "AuthService.Application\\Services\\AccountService.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\Services\\AccountService.cs",
+              "RelativeToolTip": "AuthService.Application\\Services\\AccountService.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAADwv+YAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T06:03:43.977Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "RegisterResponseDto.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\DTOs\\Auth\\RegisterResponseDto.cs",
+              "RelativeDocumentMoniker": "AuthService.Application\\DTOs\\Auth\\RegisterResponseDto.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\DTOs\\Auth\\RegisterResponseDto.cs",
+              "RelativeToolTip": "AuthService.Application\\DTOs\\Auth\\RegisterResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T06:02:47.196Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "auth.proto",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\Protos\\auth.proto",
+              "RelativeDocumentMoniker": "AuthService.Grpc\\Protos\\auth.proto",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\Protos\\auth.proto",
+              "RelativeToolTip": "AuthService.Grpc\\Protos\\auth.proto",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAwwCoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003853|",
+              "WhenOpened": "2025-09-29T06:01:39.547Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "IAccountService.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\Interfaces\\IAccountService.cs",
+              "RelativeDocumentMoniker": "AuthService.Application\\Interfaces\\IAccountService.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\Interfaces\\IAccountService.cs",
+              "RelativeToolTip": "AuthService.Application\\Interfaces\\IAccountService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T06:02:13.944Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "RegisterRequestDto.cs",
+              "DocumentMoniker": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\DTOs\\Auth\\RegisterRequestDto.cs",
+              "RelativeDocumentMoniker": "AuthService.Application\\DTOs\\Auth\\RegisterRequestDto.cs",
+              "ToolTip": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\DTOs\\Auth\\RegisterRequestDto.cs",
+              "RelativeToolTip": "AuthService.Application\\DTOs\\Auth\\RegisterRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-29T05:59:26.905Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

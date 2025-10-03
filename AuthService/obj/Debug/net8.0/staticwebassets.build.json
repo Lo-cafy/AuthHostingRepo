@@ -1,0 +1,24 @@
+{
+  "Version": 1,
+  "Hash": "sYWVNKHVIas6Kk7KTqo+Upmx1LReTWixAE2lxoCtZ04=",
+  "Source": "AuthService.Api",
+  "BasePath": "_content/AuthService.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Shared\\AuthService.Shared.csproj",
+      "Version": 2,
+      "Source": "AuthService.Shared",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
