@@ -3,23 +3,24 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copy project files and restore dependencies first.
-# This takes advantage of Docker's layer caching.
-COPY ["AuthService.Api/AuthService.Api.csproj", "AuthService.Api/"]
+# Copy all .csproj files and the .sln file first for better caching
+# Correcting all file paths and the solution file name based on your GitHub repo.
+COPY ["AuthService.Api.csproj", "AuthService.Api/"]
 COPY ["AuthService.Application/AuthService.Application.csproj", "AuthService.Application/"]
 COPY ["AuthService.Domain/AuthService.Domain.csproj", "AuthService.Domain/"]
 COPY ["AuthService.Infrastructure/AuthService.Infrastructure.csproj", "AuthService.Infrastructure/"]
 COPY ["AuthService.Grpc/AuthService.Grpc.csproj", "AuthService.Grpc/"]
 COPY ["AuthService.Shared/AuthService.Shared.csproj", "AuthService.Shared/"]
-COPY ["Locafy-AuthService.sln", "."]
-RUN dotnet restore "Locafy-AuthService.sln"
+COPY ["AuthService.sln", "."]
+RUN dotnet restore "AuthService.sln"
 
 # Copy the rest of the source code
 COPY . .
 
-# Publish the application to a specific folder
+# Publish the main API project
+# Changing the working directory to the correct location before publishing
 WORKDIR "/src/AuthService.Api"
-RUN dotnet publish "AuthService.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "AuthService.Api.csproj" -c Release -o /app/publish --no-restore
 
 # Stage 2: Create the final, smaller runtime image
 # This stage creates the final image that will run your application
