@@ -1,0 +1,194 @@
+2025-09-15 16:31:33.569 +05:30 [INF] Starting Auth API
+2025-09-15 16:31:33.698 +05:30 [INF] User profile is available. Using 'C:\Users\mshah\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-15 16:31:34.149 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-15 16:31:34.149 +05:30 [INF] Now listening on: http://localhost:5179
+2025-09-15 16:31:34.386 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-15 16:31:34.387 +05:30 [INF] Hosting environment: Development
+2025-09-15 16:31:34.387 +05:30 [INF] Content root path: C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService
+2025-09-15 16:31:36.886 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-09-15 16:31:37.398 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 519.8723ms
+2025-09-15 16:31:37.424 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-09-15 16:31:37.424 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-15 16:31:37.442 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 18.3134ms
+2025-09-15 16:31:37.569 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 145.2443ms
+2025-09-15 16:31:37.682 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-09-15 16:31:37.716 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 34.7223ms
+2025-09-15 16:34:10.197 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/register - application/json 394
+2025-09-15 16:34:10.208 +05:30 [INF] CORS policy execution successful.
+2025-09-15 16:34:10.340 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Register (AuthService.Api)'
+2025-09-15 16:34:10.394 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(AuthService.Application.DTOs.Auth.RegisterRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-09-15 16:34:10.500 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-09-15 16:34:10.545 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Register (AuthService.Api) in 146.0478ms
+2025-09-15 16:34:10.547 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Register (AuthService.Api)'
+2025-09-15 16:34:10.550 +05:30 [INF] HTTP POST /api/Auth/register responded 400 in 335.9436 ms
+2025-09-15 16:34:10.551 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/register - 400 null application/problem+json; charset=utf-8 354.8154ms
+2025-09-15 16:34:32.955 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/register - application/json 400
+2025-09-15 16:34:32.974 +05:30 [INF] CORS policy execution successful.
+2025-09-15 16:34:32.980 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Register (AuthService.Api)'
+2025-09-15 16:34:32.987 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(AuthService.Application.DTOs.Auth.RegisterRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-09-15 16:34:33.434 +05:30 [ERR] Registration failed for email: lahl@example.com
+Npgsql.PostgresException (0x80004005): 28P01: password authentication failed for user "postgres"
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.Internal.NpgsqlConnector.AuthenticateSASL(List`1 mechanisms, String username, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Authenticate(String username, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService.Application\Services\AuthService.cs:line 36
+  Exception data:
+    Severity: FATAL
+    SqlState: 28P01
+    MessageText: password authentication failed for user "postgres"
+    File: auth.c
+    Line: 332
+    Routine: auth_failed
+2025-09-15 16:34:33.669 +05:30 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-15 16:34:33.673 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Register (AuthService.Api) in 656.0799ms
+2025-09-15 16:34:33.675 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Register (AuthService.Api)'
+2025-09-15 16:34:33.677 +05:30 [ERR] HTTP POST /api/Auth/register responded 500 in 702.1403 ms
+2025-09-15 16:34:33.678 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/register - 500 null application/json; charset=utf-8 723.2878ms
+2025-09-15 16:49:11.093 +05:30 [INF] Starting Auth API
+2025-09-15 16:49:11.161 +05:30 [INF] User profile is available. Using 'C:\Users\mshah\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-15 16:49:11.346 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-15 16:49:11.347 +05:30 [INF] Now listening on: http://localhost:5179
+2025-09-15 16:49:11.378 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-15 16:49:11.379 +05:30 [INF] Hosting environment: Development
+2025-09-15 16:49:11.379 +05:30 [INF] Content root path: C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService
+2025-09-15 16:49:12.697 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-09-15 16:49:13.079 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 398.4049ms
+2025-09-15 16:49:13.118 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-09-15 16:49:13.118 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-15 16:49:13.127 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 9.9192ms
+2025-09-15 16:49:13.199 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 81.5606ms
+2025-09-15 16:49:13.318 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-09-15 16:49:13.353 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 36.3634ms
+2025-09-15 18:30:27.513 +05:30 [INF] Starting Auth API
+2025-09-15 18:30:27.709 +05:30 [INF] User profile is available. Using 'C:\Users\mshah\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-15 18:30:28.242 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-15 18:30:28.242 +05:30 [INF] Now listening on: http://localhost:5179
+2025-09-15 18:30:28.444 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-15 18:30:28.445 +05:30 [INF] Hosting environment: Development
+2025-09-15 18:30:28.446 +05:30 [INF] Content root path: C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService
+2025-09-15 18:30:29.493 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-09-15 18:30:30.065 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 596.2611ms
+2025-09-15 18:30:30.112 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-15 18:30:30.112 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-09-15 18:30:30.130 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 18.8639ms
+2025-09-15 18:30:30.231 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 120.1916ms
+2025-09-15 18:30:30.530 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-09-15 18:30:30.585 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 54.5364ms
+2025-09-15 18:31:14.936 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/register - application/json 440
+2025-09-15 18:31:14.960 +05:30 [INF] CORS policy execution successful.
+2025-09-15 18:31:15.161 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Register (AuthService.Api)'
+2025-09-15 18:31:15.218 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(AuthService.Application.DTOs.Auth.RegisterRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-09-15 18:31:16.085 +05:30 [ERR] Registration failed for email: lahl@example.com
+Npgsql.PostgresException (0x80004005): 42883: function auth.register_with_password(uuid, text, text, text, text, text, uuid) does not exist
+
+POSITION: 8
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService.Application\Services\AuthService.cs:line 48
+  Exception data:
+    Severity: ERROR
+    SqlState: 42883
+    MessageText: function auth.register_with_password(uuid, text, text, text, text, text, uuid) does not exist
+    Hint: No function matches the given name and argument types. You might need to add explicit type casts.
+    Position: 8
+    File: parse_func.c
+    Line: 636
+    Routine: ParseFuncOrColumn
+2025-09-15 18:31:16.421 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Register (AuthService.Api) in 1194.3473ms
+2025-09-15 18:31:16.427 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Register (AuthService.Api)'
+2025-09-15 18:31:16.859 +05:30 [ERR] An unhandled exception occurred
+Npgsql.PostgresException (0x80004005): 42883: function auth.register_with_password(uuid, text, text, text, text, text, uuid) does not exist
+
+POSITION: 8
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService.Application\Services\AuthService.cs:line 48
+   at AuthService.Api.Controllers.AuthController.Register(RegisterRequestDto request) in C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService\Controllers\AuthController.cs:line 47
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at AuthService.Api.Middleware.DigitalFingerprintMiddleware.InvokeAsync(HttpContext context) in C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService\Middleware\DigitalFingerprintMiddleware.cs:line 31
+   at AuthService.Api.Middleware.RateLimitingMiddleware.InvokeAsync(HttpContext context) in C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService\Middleware\RateLimitingMiddleware.cs:line 51
+   at AuthService.Api.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService\Middleware\ExceptionMiddleware.cs:line 26
+  Exception data:
+    Severity: ERROR
+    SqlState: 42883
+    MessageText: function auth.register_with_password(uuid, text, text, text, text, text, uuid) does not exist
+    Hint: No function matches the given name and argument types. You might need to add explicit type casts.
+    Position: 8
+    File: parse_func.c
+    Line: 636
+    Routine: ParseFuncOrColumn
+2025-09-15 18:31:16.908 +05:30 [ERR] HTTP POST /api/Auth/register responded 500 in 1942.2711 ms
+2025-09-15 18:31:16.910 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/register - 500 null application/json 1973.9953ms
+2025-09-15 18:40:26.646 +05:30 [INF] Starting Auth API
+2025-09-15 18:40:26.748 +05:30 [INF] User profile is available. Using 'C:\Users\mshah\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-09-15 18:40:27.034 +05:30 [INF] Now listening on: https://localhost:7179
+2025-09-15 18:40:27.035 +05:30 [INF] Now listening on: http://localhost:5179
+2025-09-15 18:40:27.094 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-09-15 18:40:27.095 +05:30 [INF] Hosting environment: Development
+2025-09-15 18:40:27.096 +05:30 [INF] Content root path: C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService
+2025-09-15 18:40:28.173 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-09-15 18:40:28.594 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 438.884ms
+2025-09-15 18:40:28.629 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-09-15 18:40:28.645 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 15.6902ms
+2025-09-15 18:40:28.655 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-09-15 18:40:28.746 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 91.8645ms
+2025-09-15 18:40:28.892 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-09-15 18:40:28.940 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 49.5479ms
+2025-09-15 18:40:55.435 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/register - application/json 410
+2025-09-15 18:40:55.446 +05:30 [INF] CORS policy execution successful.
+2025-09-15 18:40:55.612 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Register (AuthService.Api)'
+2025-09-15 18:40:55.649 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(AuthService.Application.DTOs.Auth.RegisterRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-09-15 18:40:56.378 +05:30 [ERR] Registration failed for email: lahl@example.com
+System.InvalidCastException: Writing values of 'System.String' is not supported for parameters having NpgsqlDbType 'Inet'.
+   at Npgsql.Internal.AdoSerializerHelpers.<GetTypeInfoForWriting>g__ThrowWritingNotSupported|1_0(Type type, PgSerializerOptions options, Nullable`1 pgTypeId, Nullable`1 npgsqlDbType, Exception inner)
+   at Npgsql.Internal.AdoSerializerHelpers.GetTypeInfoForWriting(Type type, Nullable`1 pgTypeId, PgSerializerOptions options, Nullable`1 npgsqlDbType)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Application.Services.AuthService.RegisterAsync(RegisterRequestDto request) in C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService.Application\Services\AuthService.cs:line 56
+2025-09-15 18:40:56.478 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'AuthService.Application.DTOs.Auth.RegisterResponseDto'.
+2025-09-15 18:40:56.495 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Register (AuthService.Api) in 841.0342ms
+2025-09-15 18:40:56.498 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Register (AuthService.Api)'
+2025-09-15 18:40:56.507 +05:30 [INF] HTTP POST /api/Auth/register responded 400 in 1055.0713 ms
+2025-09-15 18:40:56.509 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/register - 400 null application/json; charset=utf-8 1073.7125ms
+2025-09-15 20:14:59.613 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 338
+2025-09-15 20:14:59.620 +05:30 [INF] CORS policy execution successful.
+2025-09-15 20:14:59.625 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-15 20:14:59.667 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-09-15 20:15:00.210 +05:30 [ERR] Login failed for email: lahl@example.com
+AuthService.Shared.Exceptions.AuthException: Authentication failed due to system error
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request) in C:\Users\mshah\Locafy\Locafy\Backend\LocafyMicroservice\services\auth-service\AuthService.Application\Services\AuthService.cs:line 126
+2025-09-15 20:15:00.270 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-09-15 20:15:00.274 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 606.6706ms
+2025-09-15 20:15:00.275 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-09-15 20:15:00.275 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 654.7436 ms
+2025-09-15 20:15:00.276 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 702.0673ms

@@ -1,0 +1,273 @@
+2025-10-02 09:02:35.679 +05:30 [INF] Starting Auth API
+2025-10-02 09:02:35.809 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-02 09:02:36.285 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-02 09:02:36.286 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-02 09:02:36.420 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-02 09:02:36.421 +05:30 [INF] Hosting environment: Development
+2025-10-02 09:02:36.424 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceLatest\AuthService
+2025-10-02 09:02:40.839 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/ - null null
+2025-10-02 09:02:41.119 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/ - 301 0 null 295.6103ms
+2025-10-02 09:02:41.133 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-02 09:02:41.316 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 182.7295ms
+2025-10-02 09:02:41.330 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger-ui-bundle.js - null null
+2025-10-02 09:02:41.332 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger-ui.css - null null
+2025-10-02 09:02:41.332 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger-ui-standalone-preset.js - null null
+2025-10-02 09:02:41.336 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-02 09:02:41.347 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-10-02 09:02:41.414 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 78.1563ms
+2025-10-02 09:02:41.453 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-10-02 09:02:41.458 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger-ui.css - 200 152034 text/css 126.6215ms
+2025-10-02 09:02:41.453 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-10-02 09:02:41.471 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger-ui-standalone-preset.js - 200 230280 text/javascript 138.9111ms
+2025-10-02 09:02:41.586 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-10-02 09:02:41.588 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger-ui-bundle.js - 200 1456926 text/javascript 258.3969ms
+2025-10-02 09:02:41.656 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 308.6655ms
+2025-10-02 09:02:41.845 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-02 09:02:41.882 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/favicon-32x32.png - null null
+2025-10-02 09:02:41.882 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 40.1672ms
+2025-10-02 09:02:41.885 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-10-02 09:02:41.889 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/favicon-32x32.png - 200 628 image/png 7.2823ms
+2025-10-02 09:07:42.205 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 57
+2025-10-02 09:07:42.216 +05:30 [INF] CORS policy execution successful.
+2025-10-02 09:07:43.918 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 09:07:43.961 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-02 09:07:55.723 +05:30 [ERR] Unexpected error during authentication for email user@example.com
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at System.Net.Dns.<GetAddrInfoWithTelemetryAsync>g__CompleteAsync|34_0[T](Task task, String hostName, Int64 startingTimestamp)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Infrastructure.Data.NpgsqlConnectionFactory.CreateConnectionAsync() in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Data\NpgsqlConnectionFactory.cs:line 27
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.GetConnectionAsync() in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 26
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.AuthenticatePasswordAsync(String email, String password, Object deviceInfo, Nullable`1 requestId) in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 140
+2025-10-02 09:07:55.827 +05:30 [ERR] Login failed for email: user@example.com
+AuthService.Shared.Exceptions.AuthException: An unexpected error occurred during authentication
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceLatest\AuthService.Application\Services\AuthService.cs:line 100
+2025-10-02 09:07:56.001 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-02 09:07:56.010 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 12043.9247ms
+2025-10-02 09:07:56.012 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 09:07:56.017 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 13792.7954 ms
+2025-10-02 09:07:56.018 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 13818.5244ms
+2025-10-02 09:08:46.652 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 57
+2025-10-02 09:08:46.669 +05:30 [INF] CORS policy execution successful.
+2025-10-02 09:08:46.673 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 09:08:46.675 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-02 09:08:58.463 +05:30 [ERR] Unexpected error during authentication for email user@example.com
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at System.Net.Dns.<GetAddrInfoWithTelemetryAsync>g__CompleteAsync|34_0[T](Task task, String hostName, Int64 startingTimestamp)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Infrastructure.Data.NpgsqlConnectionFactory.CreateConnectionAsync() in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Data\NpgsqlConnectionFactory.cs:line 27
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.GetConnectionAsync() in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 26
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.AuthenticatePasswordAsync(String email, String password, Object deviceInfo, Nullable`1 requestId) in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 140
+2025-10-02 09:08:58.607 +05:30 [ERR] Login failed for email: user@example.com
+AuthService.Shared.Exceptions.AuthException: An unexpected error occurred during authentication
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceLatest\AuthService.Application\Services\AuthService.cs:line 100
+2025-10-02 09:08:58.833 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-02 09:08:58.841 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 12164.6536ms
+2025-10-02 09:08:58.843 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 09:08:58.844 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 12174.6469 ms
+2025-10-02 09:08:58.849 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 12198.0744ms
+2025-10-02 16:11:20.304 +05:30 [INF] Starting Auth API
+2025-10-02 16:11:20.394 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-02 16:11:20.580 +05:30 [INF] Now listening on: http://localhost:5000
+2025-10-02 16:11:20.587 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-02 16:11:20.590 +05:30 [INF] Hosting environment: Production
+2025-10-02 16:11:20.592 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceLatest\AuthService
+2025-10-02 19:11:34.939 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-02 19:11:34.997 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-02 19:11:35.030 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-02 19:11:35.147 +05:30 [INF] Now listening on: http://localhost:5000
+2025-10-02 19:11:35.150 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-02 19:11:35.150 +05:30 [INF] Hosting environment: Production
+2025-10-02 19:11:35.151 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceLatest\AuthService
+2025-10-02 19:13:54.814 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-02 19:13:54.876 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-02 19:13:54.930 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-02 19:13:55.320 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-02 19:13:55.321 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-02 19:13:55.483 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-02 19:13:55.488 +05:30 [INF] Hosting environment: Development
+2025-10-02 19:13:55.490 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceLatest\AuthService
+2025-10-02 19:13:56.659 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-02 19:13:57.155 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-10-02 19:13:57.159 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-02 19:13:57.163 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 518.3758ms
+2025-10-02 19:13:57.169 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 10.6544ms
+2025-10-02 19:13:57.275 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 120.0695ms
+2025-10-02 19:13:57.481 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-02 19:13:57.513 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 32.0695ms
+2025-10-02 19:14:08.863 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 57
+2025-10-02 19:14:08.879 +05:30 [INF] CORS policy execution successful.
+2025-10-02 19:14:10.668 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 19:14:10.709 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-02 19:14:14.686 +05:30 [ERR] Unexpected error during authentication for email user@example.com
+System.InvalidCastException: Writing values of 'System.Int32' is not supported for parameters having NpgsqlDbType 'Uuid'.
+   at Npgsql.Internal.AdoSerializerHelpers.<GetTypeInfoForWriting>g__ThrowWritingNotSupported|1_0(Type type, PgSerializerOptions options, Nullable`1 pgTypeId, Nullable`1 npgsqlDbType, Exception inner)
+   at Npgsql.Internal.AdoSerializerHelpers.GetTypeInfoForWriting(Type type, Nullable`1 pgTypeId, PgSerializerOptions options, Nullable`1 npgsqlDbType)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.AuthenticatePasswordAsync(String email, String password, Object deviceInfo, Nullable`1 requestId) in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 169
+2025-10-02 19:14:14.810 +05:30 [ERR] Login failed for email: user@example.com
+AuthService.Shared.Exceptions.AuthException: An unexpected error occurred during authentication
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceLatest\AuthService.Application\Services\AuthService.cs:line 100
+2025-10-02 19:14:14.927 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-02 19:14:14.938 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 4220.9385ms
+2025-10-02 19:14:14.939 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 19:14:14.942 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 6058.7172 ms
+2025-10-02 19:14:14.943 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 6079.2275ms
+2025-10-02 19:47:51.814 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 57
+2025-10-02 19:47:51.835 +05:30 [INF] CORS policy execution successful.
+2025-10-02 19:47:51.838 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 19:47:51.850 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-02 19:47:54.386 +05:30 [ERR] Unexpected error during authentication for email user@example.com
+System.InvalidCastException: Writing values of 'System.Int32' is not supported for parameters having NpgsqlDbType 'Uuid'.
+   at Npgsql.Internal.AdoSerializerHelpers.<GetTypeInfoForWriting>g__ThrowWritingNotSupported|1_0(Type type, PgSerializerOptions options, Nullable`1 pgTypeId, Nullable`1 npgsqlDbType, Exception inner)
+   at Npgsql.Internal.AdoSerializerHelpers.GetTypeInfoForWriting(Type type, Nullable`1 pgTypeId, PgSerializerOptions options, Nullable`1 npgsqlDbType)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.AuthenticatePasswordAsync(String email, String password, Object deviceInfo, Nullable`1 requestId) in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 169
+2025-10-02 19:47:54.434 +05:30 [ERR] Login failed for email: user@example.com
+AuthService.Shared.Exceptions.AuthException: An unexpected error occurred during authentication
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceLatest\AuthService.Application\Services\AuthService.cs:line 100
+2025-10-02 19:47:54.543 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-02 19:47:54.544 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 2689.8422ms
+2025-10-02 19:47:54.548 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 19:47:54.548 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 2712.8659 ms
+2025-10-02 19:47:54.548 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 2734.4472ms
+2025-10-02 23:01:39.727 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-02 23:01:39.793 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-02 23:01:39.851 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-02 23:01:40.342 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-02 23:01:40.343 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-02 23:01:40.725 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-02 23:01:40.735 +05:30 [INF] Hosting environment: Development
+2025-10-02 23:01:40.737 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceLatest\AuthService
+2025-10-02 23:01:41.271 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-02 23:01:41.657 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-02 23:01:41.660 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 405.5249ms
+2025-10-02 23:01:41.666 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-10-02 23:01:41.678 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 20.8679ms
+2025-10-02 23:01:41.783 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 116.6863ms
+2025-10-02 23:01:41.866 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-02 23:01:41.902 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 35.4586ms
+2025-10-02 23:01:51.975 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 57
+2025-10-02 23:01:51.986 +05:30 [INF] CORS policy execution successful.
+2025-10-02 23:01:53.629 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 23:01:53.690 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-02 23:02:00.270 +05:30 [ERR] Unexpected error during authentication for email user@example.com
+System.InvalidCastException: Writing values of 'System.Int32' is not supported for parameters having NpgsqlDbType 'Uuid'.
+   at Npgsql.Internal.AdoSerializerHelpers.<GetTypeInfoForWriting>g__ThrowWritingNotSupported|1_0(Type type, PgSerializerOptions options, Nullable`1 pgTypeId, Nullable`1 npgsqlDbType, Exception inner)
+   at Npgsql.Internal.AdoSerializerHelpers.GetTypeInfoForWriting(Type type, Nullable`1 pgTypeId, PgSerializerOptions options, Nullable`1 npgsqlDbType)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.AuthenticatePasswordAsync(String email, String password, Object deviceInfo, Nullable`1 requestId) in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 169
+2025-10-02 23:02:00.406 +05:30 [ERR] Login failed for email: user@example.com
+AuthService.Shared.Exceptions.AuthException: An unexpected error occurred during authentication
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceLatest\AuthService.Application\Services\AuthService.cs:line 100
+2025-10-02 23:02:00.526 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-02 23:02:00.534 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 6839.108ms
+2025-10-02 23:02:00.538 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 23:02:00.541 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 8546.7350 ms
+2025-10-02 23:02:00.543 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 8567.5207ms
+2025-10-02 23:02:15.092 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 57
+2025-10-02 23:02:15.110 +05:30 [INF] CORS policy execution successful.
+2025-10-02 23:02:15.112 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 23:02:15.112 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-02 23:02:16.895 +05:30 [ERR] Unexpected error during authentication for email user@example.com
+System.InvalidCastException: Writing values of 'System.Int32' is not supported for parameters having NpgsqlDbType 'Uuid'.
+   at Npgsql.Internal.AdoSerializerHelpers.<GetTypeInfoForWriting>g__ThrowWritingNotSupported|1_0(Type type, PgSerializerOptions options, Nullable`1 pgTypeId, Nullable`1 npgsqlDbType, Exception inner)
+   at Npgsql.Internal.AdoSerializerHelpers.GetTypeInfoForWriting(Type type, Nullable`1 pgTypeId, PgSerializerOptions options, Nullable`1 npgsqlDbType)
+   at Npgsql.NpgsqlParameter.ResolveTypeInfo(PgSerializerOptions options)
+   at Npgsql.NpgsqlParameterCollection.ProcessParameters(PgSerializerOptions options, Boolean validateValues, CommandType commandType)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.AuthenticatePasswordAsync(String email, String password, Object deviceInfo, Nullable`1 requestId) in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 169
+2025-10-02 23:02:16.942 +05:30 [ERR] Login failed for email: user@example.com
+AuthService.Shared.Exceptions.AuthException: An unexpected error occurred during authentication
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceLatest\AuthService.Application\Services\AuthService.cs:line 100
+2025-10-02 23:02:17.036 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-02 23:02:17.037 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 1924.4054ms
+2025-10-02 23:02:17.037 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 23:02:17.038 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 1927.6572 ms
+2025-10-02 23:02:17.039 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 1948.6563ms
+2025-10-02 23:17:11.564 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-02 23:17:11.618 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-02 23:17:11.678 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-02 23:17:12.182 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-02 23:17:12.183 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-02 23:17:12.336 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-02 23:17:12.342 +05:30 [INF] Hosting environment: Development
+2025-10-02 23:17:12.342 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceLatest\AuthService
+2025-10-02 23:17:13.033 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-02 23:17:13.368 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 353.4843ms
+2025-10-02 23:17:13.387 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-02 23:17:13.400 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-10-02 23:17:13.416 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 29.4045ms
+2025-10-02 23:17:13.542 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 141.721ms
+2025-10-02 23:17:13.652 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-02 23:17:13.691 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 38.1223ms
+2025-10-02 23:17:43.802 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 57
+2025-10-02 23:17:43.810 +05:30 [INF] CORS policy execution successful.
+2025-10-02 23:17:45.401 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 23:17:45.450 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-02 23:17:49.031 +05:30 [ERR] PostgreSQL error during authentication for email user@example.com. Code: 42883, Message: 42883: function auth.authenticate_user_enhanced(character varying, character varying, jsonb, uuid) does not exist
+
+POSITION: 8
+Npgsql.PostgresException (0x80004005): 42883: function auth.authenticate_user_enhanced(character varying, character varying, jsonb, uuid) does not exist
+
+POSITION: 8
+   at Npgsql.Internal.NpgsqlConnector.ReadMessageLong(Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at System.Runtime.CompilerServices.PoolingAsyncValueTaskMethodBuilder`1.StateMachineBox`1.System.Threading.Tasks.Sources.IValueTaskSource<TResult>.GetResult(Int16 token)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(Boolean async, CommandBehavior behavior, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteScalar(Boolean async, CancellationToken cancellationToken)
+   at AuthService.Infrastructure.Services.DatabaseFunctionService.AuthenticatePasswordAsync(String email, String password, Object deviceInfo, Nullable`1 requestId) in D:\SingleProject1\AuthServiceLatest\AuthService.Infrastructure\Services\DatabaseFunctionService.cs:line 112
+  Exception data:
+    Severity: ERROR
+    SqlState: 42883
+    MessageText: function auth.authenticate_user_enhanced(character varying, character varying, jsonb, uuid) does not exist
+    Hint: No function matches the given name and argument types. You might need to add explicit type casts.
+    Position: 8
+    File: parse_func.c
+    Line: 629
+    Routine: ParseFuncOrColumn
+2025-10-02 23:17:49.176 +05:30 [ERR] Login failed for email: user@example.com
+AuthService.Shared.Exceptions.AuthException: Authentication failed due to database error
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceLatest\AuthService.Application\Services\AuthService.cs:line 100
+2025-10-02 23:17:49.303 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-02 23:17:49.313 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 3856.7821ms
+2025-10-02 23:17:49.314 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-02 23:17:49.323 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 5506.6973 ms
+2025-10-02 23:17:49.324 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 5522.4015ms
