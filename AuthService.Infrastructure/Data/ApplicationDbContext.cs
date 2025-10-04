@@ -11,6 +11,6 @@ namespace AuthService.Infrastructure.Data
 
         }
         public DbSet<User> Users { get; set; }
-  
+
     }
 }

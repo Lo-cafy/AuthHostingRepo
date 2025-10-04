@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Http;
 using AuthService.Api.Extensions;
 using AuthService.Api.Middleware;
 using AuthService.Application.Options;
@@ -13,12 +12,11 @@ using AuthService.Application.Services;
 using System.Text;
 using Serilog;
 using Serilog.Events;
-using AuthService.Infrastructure.Data.Interfaces;
 using Serilog.Sinks.SystemConsole.Themes;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ✅ Configure Serilog Logging
+ 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -38,20 +36,29 @@ builder.Host.UseSerilog();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddHttpContextAccessor();
 
-// ✅ Register Database (EF Core + Dapper + Neon Connection)
+ 
 builder.Services.AddDatabase(builder.Configuration);
 
-// ✅ Configure JWT Options
-var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
-builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
 
-// ✅ JWT Authentication
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JwtOptions"));
+var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
+
+if (jwtOptions == null || string.IsNullOrWhiteSpace(jwtOptions.Secret))
+    throw new InvalidOperationException("JWT Secret is missing from appsettings.json!");
+
+Console.WriteLine($"JWT Secret Loaded: (len={jwtOptions.Secret.Length})");
+
+
+builder.Services.AddScoped<IJwtService, JwtService>();
+
+ 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        options.RequireHttpsMetadata = true;
+        options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -60,24 +67,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             ValidIssuer = jwtOptions.Issuer,
             ValidAudience = jwtOptions.Audience,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtOptions.Secret)),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtOptions.Secret)),
             ClockSkew = TimeSpan.Zero
         };
     });
 
-// ✅ Rate Limit Configuration
-builder.Services.Configure<RateLimitOptions>(
-    builder.Configuration.GetSection("RateLimitOptions"));
+ 
+builder.Services.Configure<RateLimitOptions>(builder.Configuration.GetSection("RateLimitOptions"));
 
-// ✅ Common Services
+ 
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IDigitalFingerprintService, DigitalFingerprintService>();
 builder.Services.AddScoped<IAuthService, AuthService.Application.Services.AuthService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 
-// ✅ CORS Policy
+ 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -88,7 +93,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// ✅ Health Checks (checks Neon PostgreSQL)
+ 
 builder.Services.AddHealthChecks()
     .AddNpgSql(
         builder.Configuration.GetConnectionString("AuthDb"),
@@ -97,13 +102,13 @@ builder.Services.AddHealthChecks()
 
 var app = builder.Build();
 
-// ✅ Swagger
+ 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth Service API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Auth Service API v1");
         c.RoutePrefix = string.Empty;
     });
 }
@@ -111,10 +116,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 
-// ✅ Serilog request logging
+ 
 app.UseSerilogRequestLogging();
 
-// ✅ Custom Middleware
+ 
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<RateLimitingMiddleware>();
 app.UseMiddleware<DigitalFingerprintMiddleware>();
@@ -125,14 +130,21 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHealthChecks("/health");
 
-// ✅ Optional: Test Neon connection on startup
+ 
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    if (db.Database.CanConnect())
-        Log.Information("✅ Successfully connected to Neon PostgreSQL Database!");
-    else
-        Log.Error("❌ Failed to connect to Neon Database!");
+    try
+    {
+        if (db.Database.CanConnect())
+            Log.Information("✅ Successfully connected to Neon PostgreSQL Database!");
+        else
+            Log.Error("❌ Failed to connect to Neon Database!");
+    }
+    catch (Exception ex)
+    {
+        Log.Error(ex, "❌ Error checking Neon Database connection!");
+    }
 }
 
 try
@@ -142,7 +154,7 @@ try
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "❌ API terminated unexpectedly");
+    Log.Fatal(ex, "❌ API terminated unexpectedly!");
 }
 finally
 {

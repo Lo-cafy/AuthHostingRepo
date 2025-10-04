@@ -51,7 +51,6 @@ namespace AuthService.Application.Services
             _httpContextAccessor = httpContextAccessor;
             _logger = logger;
         }
-
         public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request, DeviceInfoDto? deviceInfo = null)
         {
             try
@@ -81,44 +80,44 @@ namespace AuthService.Application.Services
                 using (result)
                 {
                     var root = result.RootElement;
-
-                    if (!root.GetProperty("success").GetBoolean())
+                     if (!root.TryGetProperty("success", out var successElement) || !successElement.GetBoolean())
                     {
-                        var error = root.GetProperty("error").GetString();
-                        var message = root.GetProperty("message").GetString();
-                        var code = root.GetProperty("code").GetInt32();
+                        
+                        var message = root.TryGetProperty("message", out var msgElement) ? msgElement.GetString() : "Invalid credentials";
 
-                        if (code == 429)
-                            throw new RateLimitException(message);
-                        else if (code == 423)
-                            throw new AuthException(message);
-                        else if (code == 403 && error == "EMAIL_NOT_VERIFIED")
+                        if (root.TryGetProperty("code", out var codeElement) && codeElement.TryGetInt32(out int code))
                         {
-                            throw new AuthException("Please verify your email address before logging in");
+                            if (code == 429) throw new RateLimitException(message);
                         }
-                        else
-                            throw new AuthException(message);
+
+                        throw new AuthException(message ?? "Authentication failed");
                     }
 
-                    var userId = root.GetProperty("user_id").GetInt32();
-                    var email = root.GetProperty("email").GetString();
-                    var emailVerified = root.GetProperty("email_verified").GetBoolean();
-                    var accountStatus = root.GetProperty("account_status").GetString();
+               
 
-                    var roles = root.GetProperty("roles").EnumerateArray()
-                        .Select(r => r.GetString())
-                        .ToList();
+                    var userId = root.TryGetProperty("user_id", out var userIdElement) ? userIdElement.GetInt32() : 0;
+                    var email = root.TryGetProperty("email", out var emailElement) ? emailElement.GetString() : string.Empty;
+                    var emailVerified = root.TryGetProperty("email_verified", out var emailVerifiedElement) && emailVerifiedElement.GetBoolean();
 
-                    var tokens = root.GetProperty("tokens");
-                    var accessJti = tokens.GetProperty("access_token_jti").GetString();
-                    var refreshJti = tokens.GetProperty("refresh_token_jti").GetString();
-                    var expiresIn = tokens.GetProperty("expires_in").GetDouble();
+                    var roles = new List<string>();
+                    if (root.TryGetProperty("roles", out var rolesElement) && rolesElement.ValueKind == JsonValueKind.Array)
+                    {
+                        roles = rolesElement.EnumerateArray().Select(r => r.GetString() ?? string.Empty).ToList();
+                    }
 
-                    var session = root.GetProperty("session");
-                   var sessionId = session.GetProperty("session_id").GetInt32();
+                    string accessJti = string.Empty;
+                    string refreshJti = string.Empty;
+                    double expiresIn = 3600; // Default expiry
 
-                    // Generate actual JWT tokens
-                    var roleEnum = Enum.Parse<RoleTypeEnum>(roles.FirstOrDefault() ?? "Customer", true);
+                    if (root.TryGetProperty("tokens", out var tokensElement))
+                    {
+                        accessJti = tokensElement.TryGetProperty("access_token_jti", out var accessJtiElement) ? accessJtiElement.GetString() : string.Empty;
+                        refreshJti = tokensElement.TryGetProperty("refresh_token_jti", out var refreshJtiElement) ? refreshJtiElement.GetString() : string.Empty;
+                        expiresIn = tokensElement.TryGetProperty("expires_in", out var expiresInElement) ? expiresInElement.GetDouble() : 3600;
+                    }
+
+                    var roleEnum = Enum.TryParse<RoleTypeEnum>(roles.FirstOrDefault() ?? "Customer", true, out var parsedRole) ? parsedRole : RoleTypeEnum.Customer;
+
                     var accessToken = _jwtService.GenerateAccessToken(userId, email, roleEnum, accessJti);
                     var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
@@ -143,6 +142,7 @@ namespace AuthService.Application.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Login failed for email: {Email}", request.Email);
+             
                 throw;
             }
         }

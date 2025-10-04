@@ -14,13 +14,19 @@ public class JwtService : IJwtService
 
     public JwtService(IOptions<JwtOptions> jwtOptions)
     {
-        _jwtOptions = jwtOptions.Value;
+        _jwtOptions = jwtOptions?.Value ?? throw new InvalidOperationException("JWT secret is not configured. Check JwtOptions:Secret in appsettings or env vars.");
         _tokenHandler = new JwtSecurityTokenHandler();
     }
 
+
+
+
     public string GenerateAccessToken(int userId, string email, RoleTypeEnum role, string sessionJti)
     {
-        var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
+        if (string.IsNullOrWhiteSpace(_jwtOptions?.Secret))
+            throw new InvalidOperationException("JWT secret is not configured. Check JwtOptions:Secret in appsettings or env vars.");
+
+        var key = Encoding.UTF8.GetBytes(_jwtOptions.Secret);
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, userId.ToString()),

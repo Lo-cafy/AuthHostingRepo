@@ -26,7 +26,7 @@ namespace AuthService.Infrastructure.Services
         {
             var connection = (NpgsqlConnection)await _connectionFactory.CreateConnectionAsync();
 
-            // Set search path
+             
             using var schemaCommand = new NpgsqlCommand("SET search_path = auth, public;", connection);
             await schemaCommand.ExecuteNonQueryAsync();
 
@@ -40,7 +40,7 @@ namespace AuthService.Infrastructure.Services
             string role = "customer",
             string ipAddress = null,
             string userAgent = null,
-            Guid? requestId = null) // CORRECTED to Guid?
+            Guid? requestId = null)  
         {
             try
             {
@@ -61,7 +61,11 @@ namespace AuthService.Infrastructure.Services
                 command.Parameters.Add(new NpgsqlParameter("@p_device_info", NpgsqlDbType.Jsonb) { Value = JsonSerializer.Serialize(deviceInfo) });
 
                 // CORRECTED logic
-                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Uuid) { Value = (object)requestId ?? DBNull.Value });
+                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Varchar)
+                {
+                    Value = requestId?.ToString() ?? (object)DBNull.Value
+                });
+
 
                 var result = await command.ExecuteScalarAsync();
                 var jsonResult = result?.ToString();
@@ -88,26 +92,27 @@ namespace AuthService.Infrastructure.Services
         }
 
         public async Task<JsonDocument> AuthenticatePasswordAsync(
-            string email,
-            string password,
-            object deviceInfo = null,
-            Guid? requestId = null) // CORRECTED to Guid?
+      string email,
+      string password,
+      object deviceInfo = null,
+      Guid? requestId = null)
         {
             try
             {
                 using var connection = await GetConnectionAsync();
                 using var command = new NpgsqlCommand(
-                    "SELECT auth.authenticate_user_enhanced(@p_email, @p_password, @p_device_info::jsonb, @p_request_id)",
+                    "SELECT auth.authenticate_user_enhanced(" +
+                        "p_email := @p_email, " +
+                        "p_password := @p_password, " +
+                        "p_device_info := @p_device_info, " +
+                        "p_request_id := @p_request_id)",
                     connection);
 
                 command.Parameters.Add(new NpgsqlParameter("@p_email", NpgsqlDbType.Varchar) { Value = email.ToLower() });
-                command.Parameters.Add(new NpgsqlParameter("@p_password", NpgsqlDbType.Varchar) { Value = password });
-
+                command.Parameters.Add(new NpgsqlParameter("@p_password", NpgsqlDbType.Text) { Value = password });
                 var deviceInfoJson = deviceInfo != null ? JsonSerializer.Serialize(deviceInfo) : "{}";
                 command.Parameters.Add(new NpgsqlParameter("@p_device_info", NpgsqlDbType.Jsonb) { Value = deviceInfoJson });
-
-                // CORRECTED logic
-                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Uuid) { Value = (object)requestId ?? DBNull.Value });
+                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Varchar) { Value = requestId.HasValue ? (object)requestId.Value.ToString() : DBNull.Value });
 
                 var result = await command.ExecuteScalarAsync();
                 var jsonResult = result?.ToString();
@@ -117,7 +122,6 @@ namespace AuthService.Infrastructure.Services
                     _logger.LogWarning("No result returned from authenticate_user_enhanced for email: {Email}", email);
                     return JsonDocument.Parse(@"{ ""success"": false, ""error"": ""NO_RESULT"", ""message"": ""Authentication failed"", ""code"": 500 }");
                 }
-
                 return JsonDocument.Parse(jsonResult);
             }
             catch (PostgresException pgEx)
@@ -136,7 +140,7 @@ namespace AuthService.Infrastructure.Services
         public async Task<JsonDocument> RefreshJwtTokenAsync(
             string refreshJti,
             object deviceInfo = null,
-            Guid? requestId = null) // CORRECTED to Guid? for consistency
+            Guid? requestId = null)  
         {
             try
             {
@@ -150,8 +154,8 @@ namespace AuthService.Infrastructure.Services
                 var deviceInfoJson = deviceInfo != null ? JsonSerializer.Serialize(deviceInfo) : "{}";
                 command.Parameters.Add(new NpgsqlParameter("@p_device_info", NpgsqlDbType.Jsonb) { Value = deviceInfoJson });
 
-                // CORRECTED logic
-                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Uuid) { Value = (object)requestId ?? DBNull.Value });
+               
+                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Varchar) { Value = requestId?.ToString() ?? (object)DBNull.Value });
 
                 var result = await command.ExecuteScalarAsync();
                 var jsonResult = result?.ToString();
@@ -179,7 +183,7 @@ namespace AuthService.Infrastructure.Services
         public async Task<JsonDocument> LogoutSessionAsync(
             string jti,
             string reason = "user_logout",
-            Guid? requestId = null) // CORRECTED to Guid?
+            Guid? requestId = null)  
         {
             try
             {
@@ -191,8 +195,8 @@ namespace AuthService.Infrastructure.Services
                 command.Parameters.Add(new NpgsqlParameter("@p_jti", NpgsqlDbType.Varchar) { Value = jti });
                 command.Parameters.Add(new NpgsqlParameter("@p_reason", NpgsqlDbType.Varchar) { Value = reason });
 
-                // CORRECTED logic
-                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Uuid) { Value = (object)requestId ?? DBNull.Value });
+            
+                command.Parameters.Add(new NpgsqlParameter("@p_request_id", NpgsqlDbType.Varchar) { Value = requestId?.ToString() ?? (object)DBNull.Value });
 
                 var result = await command.ExecuteScalarAsync();
                 var jsonResult = result?.ToString();
