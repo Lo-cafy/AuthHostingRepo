@@ -1810,3 +1810,91 @@ DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
 2025-10-04 18:24:19.767 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
 2025-10-04 18:24:19.769 +05:30 [INF] HTTP POST /api/Auth/login responded 200 in 4169.6411 ms
 2025-10-04 18:24:19.770 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 200 null application/json; charset=utf-8 4200.6388ms
+2025-10-04 19:15:03.039 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-04 19:15:03.103 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-04 19:15:03.169 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-04 19:15:03.597 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-04 19:15:03.598 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-04 19:15:03.735 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-04 19:15:03.737 +05:30 [INF] Hosting environment: Development
+2025-10-04 19:15:03.738 +05:30 [INF] Content root path: D:\SingleProject1\AuthServiceClone2\AuthService
+2025-10-04 19:15:04.714 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-04 19:15:05.090 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 395.2776ms
+2025-10-04 19:15:05.151 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-04 19:15:05.236 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-10-04 19:15:05.249 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 97.6403ms
+2025-10-04 19:15:05.364 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 128.2214ms
+2025-10-04 19:15:05.501 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-04 19:15:05.524 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 22.3165ms
+2025-10-04 19:54:34.584 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 57
+2025-10-04 19:54:34.691 +05:30 [INF] CORS policy execution successful.
+2025-10-04 19:54:36.482 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:54:36.631 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-04 19:54:40.974 +05:30 [ERR] Login failed for email: user@example.com
+AuthService.Shared.Exceptions.AuthException: Invalid email or password
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceClone2\AuthService.Application\Services\AuthService.cs:line 93
+2025-10-04 19:54:41.211 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-04 19:54:41.229 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 4592.2509ms
+2025-10-04 19:54:41.232 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:54:41.240 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 6535.2413 ms
+2025-10-04 19:54:41.242 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 6665.506ms
+2025-10-04 19:55:41.893 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 70
+2025-10-04 19:55:41.913 +05:30 [INF] CORS policy execution successful.
+2025-10-04 19:55:41.946 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:55:41.951 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-04 19:55:42.804 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuthService.Application.DTOs.Auth.LoginResponseDto'.
+2025-10-04 19:55:42.832 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 879.732ms
+2025-10-04 19:55:42.833 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:55:42.834 +05:30 [INF] HTTP POST /api/Auth/login responded 200 in 920.2229 ms
+2025-10-04 19:55:42.835 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 200 null application/json; charset=utf-8 943.0437ms
+2025-10-04 19:57:35.595 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 71
+2025-10-04 19:57:35.645 +05:30 [INF] CORS policy execution successful.
+2025-10-04 19:57:35.649 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:57:35.650 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-04 19:57:36.204 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuthService.Application.DTOs.Auth.LoginResponseDto'.
+2025-10-04 19:57:36.205 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 555.3224ms
+2025-10-04 19:57:36.206 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:57:36.206 +05:30 [INF] HTTP POST /api/Auth/login responded 200 in 561.2696 ms
+2025-10-04 19:57:36.207 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 200 null application/json; charset=utf-8 614.7503ms
+2025-10-04 19:59:01.315 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 71
+2025-10-04 19:59:01.324 +05:30 [INF] CORS policy execution successful.
+2025-10-04 19:59:01.329 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:59:01.330 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-04 19:59:01.970 +05:30 [ERR] Login failed for email: .muhammedyasars@gmail.com
+AuthService.Shared.Exceptions.AuthException: Invalid email or password
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceClone2\AuthService.Application\Services\AuthService.cs:line 93
+2025-10-04 19:59:02.077 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-04 19:59:02.078 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 747.7033ms
+2025-10-04 19:59:02.078 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:59:02.079 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 752.4973 ms
+2025-10-04 19:59:02.079 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 764.2801ms
+2025-10-04 19:59:14.089 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 70
+2025-10-04 19:59:14.094 +05:30 [INF] CORS policy execution successful.
+2025-10-04 19:59:14.095 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:59:14.095 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-04 19:59:14.746 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuthService.Application.DTOs.Auth.LoginResponseDto'.
+2025-10-04 19:59:14.747 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 650.9453ms
+2025-10-04 19:59:14.749 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:59:14.751 +05:30 [INF] HTTP POST /api/Auth/login responded 200 in 655.9577 ms
+2025-10-04 19:59:14.751 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 200 null application/json; charset=utf-8 662.1725ms
+2025-10-04 19:59:29.438 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 70
+2025-10-04 19:59:29.441 +05:30 [INF] CORS policy execution successful.
+2025-10-04 19:59:29.441 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:59:29.442 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-04 19:59:30.031 +05:30 [INF] Executing OkObjectResult, writing value of type 'AuthService.Application.DTOs.Auth.LoginResponseDto'.
+2025-10-04 19:59:30.032 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 589.8002ms
+2025-10-04 19:59:30.034 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 19:59:30.034 +05:30 [INF] HTTP POST /api/Auth/login responded 200 in 592.8425 ms
+2025-10-04 19:59:30.035 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 200 null application/json; charset=utf-8 596.979ms
+2025-10-04 20:02:32.733 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7179/api/Auth/login - application/json 69
+2025-10-04 20:02:32.737 +05:30 [INF] CORS policy execution successful.
+2025-10-04 20:02:32.737 +05:30 [INF] Executing endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 20:02:32.738 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(AuthService.Application.DTOs.Auth.LoginRequestDto) on controller AuthService.Api.Controllers.AuthController (AuthService.Api).
+2025-10-04 20:02:35.208 +05:30 [ERR] Login failed for email: MuhammedYasar@gmail.com
+AuthService.Shared.Exceptions.AuthException: Invalid email or password
+   at AuthService.Application.Services.AuthService.LoginAsync(LoginRequestDto request, DeviceInfoDto deviceInfo) in D:\SingleProject1\AuthServiceClone2\AuthService.Application\Services\AuthService.cs:line 93
+2025-10-04 20:02:35.288 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType2`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-10-04 20:02:35.289 +05:30 [INF] Executed action AuthService.Api.Controllers.AuthController.Login (AuthService.Api) in 2550.1154ms
+2025-10-04 20:02:35.289 +05:30 [INF] Executed endpoint 'AuthService.Api.Controllers.AuthController.Login (AuthService.Api)'
+2025-10-04 20:02:35.290 +05:30 [INF] HTTP POST /api/Auth/login responded 401 in 2552.8136 ms
+2025-10-04 20:02:35.292 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7179/api/Auth/login - 401 null application/json; charset=utf-8 2561.0685ms

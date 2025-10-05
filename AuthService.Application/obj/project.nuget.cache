@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iquEoTbS0/w=",
+  "dgSpecHash": "SAs2HX7LdBk=",
   "success": true,
-  "projectFilePath": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\AuthService.Application.csproj",
+  "projectFilePath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Application\\AuthService.Application.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\muham\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",

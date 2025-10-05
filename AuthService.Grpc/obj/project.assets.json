@@ -3156,11 +3156,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\AuthService.Grpc.csproj",
+      "projectUniqueName": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Grpc\\AuthService.Grpc.csproj",
       "projectName": "AuthService.Grpc",
-      "projectPath": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\AuthService.Grpc.csproj",
+      "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Grpc\\AuthService.Grpc.csproj",
       "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-      "outputPath": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Grpc\\obj\\",
+      "outputPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Grpc\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -3181,11 +3181,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\AuthService.Application.csproj": {
-              "projectPath": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\AuthService.Application.csproj"
+            "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Application\\AuthService.Application.csproj": {
+              "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Application\\AuthService.Application.csproj"
             },
-            "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
-              "projectPath": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
+            "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
+              "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
             }
           }
         }

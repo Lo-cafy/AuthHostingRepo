@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "nhHL+wRIPQ6pXhbqO5jjwC0ronkWMcx8NQaLYg2qryo=",
+  "Hash": "43wmIHK7D+zHnH/s3PejwAwvGy6RA8l00jlrLqkfzWA=",
   "Source": "AuthService.Api",
   "BasePath": "_content/AuthService.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Shared\\AuthService.Shared.csproj",
+      "Identity": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Shared\\AuthService.Shared.csproj",
       "Version": 2,
       "Source": "AuthService.Shared",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

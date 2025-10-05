@@ -4617,11 +4617,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\AuthService.Api.csproj",
+      "projectUniqueName": "D:\\SingleProject1\\AuthServiceClone2\\AuthService\\AuthService.Api.csproj",
       "projectName": "AuthService.Api",
-      "projectPath": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\AuthService.Api.csproj",
+      "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService\\AuthService.Api.csproj",
       "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-      "outputPath": "D:\\SingleProject1\\AuthServiceLatest\\AuthService\\obj\\",
+      "outputPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4642,11 +4642,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\AuthService.Application.csproj": {
-              "projectPath": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Application\\AuthService.Application.csproj"
+            "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Application\\AuthService.Application.csproj": {
+              "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Application\\AuthService.Application.csproj"
             },
-            "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
-              "projectPath": "D:\\SingleProject1\\AuthServiceLatest\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
+            "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
+              "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
             }
           }
         }
