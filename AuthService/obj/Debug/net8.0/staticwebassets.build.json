@@ -1,34 +1,11 @@
 {
   "Version": 1,
-  "Hash": "EqzJxnaegPTtoK8XZWlSkpVGd/omRQdb51ynwGCYSbQ=",
+  "Hash": "udyar0niOzs10pILLJCtIxTy0seZ2Shbil8M05ebeS4=",
   "Source": "AuthService.Api",
   "BasePath": "_content/AuthService.Api",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [
-    {
-      "Identity": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Grpc\\AuthService.Grpc.csproj",
-      "Version": 2,
-      "Source": "AuthService.Grpc",
-      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
-      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
-    },
-    {
-      "Identity": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Shared\\AuthService.Shared.csproj",
-      "Version": 2,
-      "Source": "AuthService.Shared",
-      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
-      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
-      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
-      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
-      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
-    }
-  ],
+  "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
   "Assets": [],
   "Endpoints": []

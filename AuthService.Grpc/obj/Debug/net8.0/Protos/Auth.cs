@@ -29,16 +29,15 @@ namespace AuthService.Grpc.Protos {
             "DwoHc3VjY2VzcxgBIAEoCBINCgV0b2tlbhgCIAEoCRINCgVlcnJvchgDIAEo",
             "CSIlChRWYWxpZGF0ZVRva2VuUmVxdWVzdBINCgV0b2tlbhgBIAEoCSI1ChVW",
             "YWxpZGF0ZVRva2VuUmVzcG9uc2USDQoFdmFsaWQYASABKAgSDQoFZXJyb3IY",
-            "AiABKAkiXgoTUmVnaXN0ZXJVc2VyUmVxdWVzdBINCgVlbWFpbBgBIAEoCRIQ",
-            "CghwYXNzd29yZBgCIAEoCRIXCg9jb25maXJtUGFzc3dvcmQYAyABKAkSDQoF",
-            "cm9sZXMYBCADKAkiOAoUUmVnaXN0ZXJVc2VyUmVzcG9uc2USDwoHc3VjY2Vz",
-            "cxgBIAEoCBIPCgdtZXNzYWdlGAIgASgJMtUBCgtBdXRoU2VydmljZRI1CgxB",
-            "dXRoZW50aWNhdGUSES5hdXRoLkF1dGhSZXF1ZXN0GhIuYXV0aC5BdXRoUmVz",
-            "cG9uc2USSAoNVmFsaWRhdGVUb2tlbhIaLmF1dGguVmFsaWRhdGVUb2tlblJl",
-            "cXVlc3QaGy5hdXRoLlZhbGlkYXRlVG9rZW5SZXNwb25zZRJFCgxSZWdpc3Rl",
-            "clVzZXISGS5hdXRoLlJlZ2lzdGVyVXNlclJlcXVlc3QaGi5hdXRoLlJlZ2lz",
-            "dGVyVXNlclJlc3BvbnNlQhqqAhdBdXRoU2VydmljZS5HcnBjLlByb3Rvc2IG",
-            "cHJvdG8z"));
+            "AiABKAkiVQoTUmVnaXN0ZXJVc2VyUmVxdWVzdBIOCgZ1c2VySWQYASABKAkS",
+            "DQoFZW1haWwYAiABKAkSEAoIcGFzc3dvcmQYAyABKAkSDQoFcm9sZXMYBCAD",
+            "KAkiOAoUUmVnaXN0ZXJVc2VyUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIP",
+            "CgdtZXNzYWdlGAIgASgJMtUBCgtBdXRoU2VydmljZRI1CgxBdXRoZW50aWNh",
+            "dGUSES5hdXRoLkF1dGhSZXF1ZXN0GhIuYXV0aC5BdXRoUmVzcG9uc2USSAoN",
+            "VmFsaWRhdGVUb2tlbhIaLmF1dGguVmFsaWRhdGVUb2tlblJlcXVlc3QaGy5h",
+            "dXRoLlZhbGlkYXRlVG9rZW5SZXNwb25zZRJFCgxSZWdpc3RlclVzZXISGS5h",
+            "dXRoLlJlZ2lzdGVyVXNlclJlcXVlc3QaGi5hdXRoLlJlZ2lzdGVyVXNlclJl",
+            "c3BvbnNlQhqqAhdBdXRoU2VydmljZS5HcnBjLlByb3Rvc2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -46,7 +45,7 @@ namespace AuthService.Grpc.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.AuthResponse), global::AuthService.Grpc.Protos.AuthResponse.Parser, new[]{ "Success", "Token", "Error" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.ValidateTokenRequest), global::AuthService.Grpc.Protos.ValidateTokenRequest.Parser, new[]{ "Token" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.ValidateTokenResponse), global::AuthService.Grpc.Protos.ValidateTokenResponse.Parser, new[]{ "Valid", "Error" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.RegisterUserRequest), global::AuthService.Grpc.Protos.RegisterUserRequest.Parser, new[]{ "Email", "Password", "ConfirmPassword", "Roles" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.RegisterUserRequest), global::AuthService.Grpc.Protos.RegisterUserRequest.Parser, new[]{ "UserId", "Email", "Password", "Roles" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.RegisterUserResponse), global::AuthService.Grpc.Protos.RegisterUserResponse.Parser, new[]{ "Success", "Message" }, null, null, null, null)
           }));
     }
@@ -992,9 +991,9 @@ namespace AuthService.Grpc.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public RegisterUserRequest(RegisterUserRequest other) : this() {
+      userId_ = other.userId_;
       email_ = other.email_;
       password_ = other.password_;
-      confirmPassword_ = other.confirmPassword_;
       roles_ = other.roles_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1005,8 +1004,20 @@ namespace AuthService.Grpc.Protos {
       return new RegisterUserRequest(this);
     }
 
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 1;
+    private string userId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string UserId {
+      get { return userId_; }
+      set {
+        userId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "email" field.</summary>
-    public const int EmailFieldNumber = 1;
+    public const int EmailFieldNumber = 2;
     private string email_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1018,7 +1029,7 @@ namespace AuthService.Grpc.Protos {
     }
 
     /// <summary>Field number for the "password" field.</summary>
-    public const int PasswordFieldNumber = 2;
+    public const int PasswordFieldNumber = 3;
     private string password_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1026,18 +1037,6 @@ namespace AuthService.Grpc.Protos {
       get { return password_; }
       set {
         password_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
-    /// <summary>Field number for the "confirmPassword" field.</summary>
-    public const int ConfirmPasswordFieldNumber = 3;
-    private string confirmPassword_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public string ConfirmPassword {
-      get { return confirmPassword_; }
-      set {
-        confirmPassword_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -1067,9 +1066,9 @@ namespace AuthService.Grpc.Protos {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (UserId != other.UserId) return false;
       if (Email != other.Email) return false;
       if (Password != other.Password) return false;
-      if (ConfirmPassword != other.ConfirmPassword) return false;
       if(!roles_.Equals(other.roles_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1078,9 +1077,9 @@ namespace AuthService.Grpc.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (UserId.Length != 0) hash ^= UserId.GetHashCode();
       if (Email.Length != 0) hash ^= Email.GetHashCode();
       if (Password.Length != 0) hash ^= Password.GetHashCode();
-      if (ConfirmPassword.Length != 0) hash ^= ConfirmPassword.GetHashCode();
       hash ^= roles_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1100,17 +1099,17 @@ namespace AuthService.Grpc.Protos {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Email.Length != 0) {
+      if (UserId.Length != 0) {
         output.WriteRawTag(10);
+        output.WriteString(UserId);
+      }
+      if (Email.Length != 0) {
+        output.WriteRawTag(18);
         output.WriteString(Email);
       }
       if (Password.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Password);
-      }
-      if (ConfirmPassword.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteString(ConfirmPassword);
+        output.WriteString(Password);
       }
       roles_.WriteTo(output, _repeated_roles_codec);
       if (_unknownFields != null) {
@@ -1123,17 +1122,17 @@ namespace AuthService.Grpc.Protos {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Email.Length != 0) {
+      if (UserId.Length != 0) {
         output.WriteRawTag(10);
+        output.WriteString(UserId);
+      }
+      if (Email.Length != 0) {
+        output.WriteRawTag(18);
         output.WriteString(Email);
       }
       if (Password.Length != 0) {
-        output.WriteRawTag(18);
-        output.WriteString(Password);
-      }
-      if (ConfirmPassword.Length != 0) {
         output.WriteRawTag(26);
-        output.WriteString(ConfirmPassword);
+        output.WriteString(Password);
       }
       roles_.WriteTo(ref output, _repeated_roles_codec);
       if (_unknownFields != null) {
@@ -1146,14 +1145,14 @@ namespace AuthService.Grpc.Protos {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (UserId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserId);
+      }
       if (Email.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Email);
       }
       if (Password.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Password);
-      }
-      if (ConfirmPassword.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(ConfirmPassword);
       }
       size += roles_.CalculateSize(_repeated_roles_codec);
       if (_unknownFields != null) {
@@ -1168,14 +1167,14 @@ namespace AuthService.Grpc.Protos {
       if (other == null) {
         return;
       }
+      if (other.UserId.Length != 0) {
+        UserId = other.UserId;
+      }
       if (other.Email.Length != 0) {
         Email = other.Email;
       }
       if (other.Password.Length != 0) {
         Password = other.Password;
-      }
-      if (other.ConfirmPassword.Length != 0) {
-        ConfirmPassword = other.ConfirmPassword;
       }
       roles_.Add(other.roles_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
@@ -1194,15 +1193,15 @@ namespace AuthService.Grpc.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Email = input.ReadString();
+            UserId = input.ReadString();
             break;
           }
           case 18: {
-            Password = input.ReadString();
+            Email = input.ReadString();
             break;
           }
           case 26: {
-            ConfirmPassword = input.ReadString();
+            Password = input.ReadString();
             break;
           }
           case 34: {
@@ -1225,15 +1224,15 @@ namespace AuthService.Grpc.Protos {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            Email = input.ReadString();
+            UserId = input.ReadString();
             break;
           }
           case 18: {
-            Password = input.ReadString();
+            Email = input.ReadString();
             break;
           }
           case 26: {
-            ConfirmPassword = input.ReadString();
+            Password = input.ReadString();
             break;
           }
           case 34: {

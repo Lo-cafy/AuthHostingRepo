@@ -141,3 +141,273 @@ Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
    at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
 2025-10-09 17:08:27.470 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
 2025-10-09 17:08:39.939 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 17:57:58.470 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-09 17:57:58.517 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-09 17:57:58.547 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-09 17:57:58.780 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-09 17:57:58.781 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-09 17:57:58.782 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-09 17:57:58.783 +05:30 [INF] Hosting environment: Development
+2025-10-09 17:57:58.783 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-09 17:58:06.145 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 17:58:33.883 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 17:59:03.877 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 17:59:33.877 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:00:03.891 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:00:33.876 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:01:03.887 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:01:33.881 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:15:31.764 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-09 18:15:31.816 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-09 18:15:31.846 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-09 18:15:32.071 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-09 18:15:32.072 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-09 18:15:32.074 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-09 18:15:32.075 +05:30 [INF] Hosting environment: Development
+2025-10-09 18:15:32.075 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-09 18:15:39.598 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:16:07.206 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:16:37.208 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:17:07.200 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:17:37.203 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:18:07.211 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:18:37.206 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:19:07.224 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:19:37.302 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:20:07.211 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:20:37.203 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:21:08.869 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 18:21:37.211 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:43:37.567 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 48.1446ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:43:37.577 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:44:07.516 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 2.4824ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:44:07.521 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:44:37.513 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 2.4301ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:44:37.517 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:45:07.523 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 2.2825ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:45:07.527 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:45:37.516 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 1.7078ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:45:37.521 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:46:07.516 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 2.2795ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:46:07.521 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:46:37.521 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 2.0484ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:46:37.525 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:47:07.521 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 2.2205ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:47:07.525 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:47:37.519 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 2.0929ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:47:37.523 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:48:07.515 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 2.249ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:48:07.519 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:48:37.515 +05:30 [ERR] Health check postgres with status "Unhealthy" completed after 2.3685ms with message 'No such host is known.'
+System.Net.Sockets.SocketException (11001): No such host is known.
+   at System.Net.NameResolutionPal.ProcessResult(SocketError errorCode, GetAddrInfoExContext* context)
+   at System.Net.NameResolutionPal.GetAddressInfoExCallback(Int32 error, Int32 bytes, NativeOverlapped* overlapped)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync[TResult](Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|214_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|33_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 31
+   at HealthChecks.NpgSql.NpgSqlHealthCheck.CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken) in /_/src/HealthChecks.NpgSql/NpgSqlHealthCheck.cs:line 37
+2025-10-09 20:48:37.519 +05:30 [DBG] Service '' status updated to "NotServing". 2 health report entries evaluated.
+2025-10-09 20:49:11.084 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:49:37.856 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:50:07.845 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:50:37.889 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:51:08.046 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:51:38.126 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:52:09.170 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:52:37.887 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:53:07.867 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:53:37.863 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:54:07.827 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:54:40.889 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:55:07.895 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:55:38.047 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:56:07.862 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:56:37.882 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:57:08.061 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 20:57:38.072 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 21:01:17.183 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-09 21:01:17.236 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-09 21:01:17.267 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-09 21:01:17.476 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-09 21:01:17.476 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-09 21:01:17.479 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-09 21:01:17.479 +05:30 [INF] Hosting environment: Development
+2025-10-09 21:01:17.479 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-09 21:01:25.603 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 21:01:52.775 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 21:02:22.858 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-09 21:13:48.781 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-09 21:13:48.839 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-09 21:13:48.890 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-09 21:13:49.246 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-09 21:13:49.246 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-09 21:13:49.403 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-09 21:13:49.405 +05:30 [INF] Hosting environment: Development
+2025-10-09 21:13:49.405 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-09 21:13:50.270 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-09 21:13:50.758 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 505.4981ms
+2025-10-09 21:13:50.807 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-09 21:13:50.808 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-10-09 21:13:50.819 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 12.6967ms
+2025-10-09 21:13:50.902 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 95.0773ms
+2025-10-09 21:13:51.005 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-09 21:13:51.051 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 51.8839ms
+2025-10-09 21:13:57.414 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.

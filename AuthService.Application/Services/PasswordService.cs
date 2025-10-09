@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using AuthService.Application.Interfaces;
-using AuthService.Shared.Exceptions;
+using AuthService.Application.Exceptions;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace AuthService.Application.Services

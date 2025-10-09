@@ -2,6 +2,7 @@
 using AuthService.Application.Interfaces;
 using AuthService.Grpc.Protos;
 using AuthService.Application.DTOs.Auth;
+using Microsoft.Extensions.Logging;
 
 namespace AuthService.Grpc.Services
 {
@@ -26,7 +27,6 @@ namespace AuthService.Grpc.Services
                 {
                     Email = request.Email,
                     Password = request.Password,
-                    ConfirmPassword = request.ConfirmPassword
                 };
 
                 var result = await _accountService.RegisterAsync(registerDto);

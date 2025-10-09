@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using AuthService.Application.DTOs.Account;
 using AuthService.Application.Interfaces;
-using AuthService.Shared.Exceptions;
+using AuthService.Application.Exceptions;
 
 namespace AuthService.Api.Controllers
 {

@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Application", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Infrastructure", "AuthService.Infrastructure\AuthService.Infrastructure.csproj", "{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService.Shared", "AuthService.Shared\AuthService.Shared.csproj", "{C00E75AA-DB46-4DC7-8464-E597E84735CF}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
 	ProjectSection(SolutionItems) = preProject
 		.env = .env
@@ -94,18 +92,6 @@ Global
 		{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}.Release|x64.Build.0 = Release|Any CPU
 		{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}.Release|x86.ActiveCfg = Release|Any CPU
 		{88D4264C-DE38-4ED2-B641-E9E859DAFBCD}.Release|x86.Build.0 = Release|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Debug|x64.Build.0 = Debug|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Debug|x86.Build.0 = Debug|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Release|x64.ActiveCfg = Release|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Release|x64.Build.0 = Release|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Release|x86.ActiveCfg = Release|Any CPU
-		{C00E75AA-DB46-4DC7-8464-E597E84735CF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

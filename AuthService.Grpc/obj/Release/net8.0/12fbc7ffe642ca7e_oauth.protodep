@@ -1,3 +1,0 @@
-obj\Release\net8.0\Protos/Oauth.cs \
-obj\Release\net8.0\Protos/OauthGrpc.cs: C:/Users/muham/.nuget/packages/grpc.tools/2.59.0/build/native/include/google/protobuf/timestamp.proto\
- Protos/oauth.proto

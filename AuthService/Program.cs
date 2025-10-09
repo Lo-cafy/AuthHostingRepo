@@ -4,7 +4,7 @@ using AuthService.Api.Extensions;
 using AuthService.Api.Middleware;
 using AuthService.Application.Options;
 using AuthService.Infrastructure.Data;
-using AuthService.Infrastructure.Interfaces;
+using AuthService.Infrastructure.Data.Interfaces;
 using AuthService.Infrastructure.Services;
 using AuthService.Application.Interfaces;
 using AuthService.Application.Services;
@@ -19,7 +19,6 @@ using AuthService.Grpc.Interceptors;
 using Grpc.HealthCheck;
 using Grpc.Net.Client.Web;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using AuthService.Infrastructure.Data.Interfaces;
 using static EmailService.Grpc.EmailService;
 
 var builder = WebApplication.CreateBuilder(args);

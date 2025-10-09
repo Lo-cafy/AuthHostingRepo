@@ -453,11 +453,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Shared\\AuthService.Shared.csproj",
+      "projectUniqueName": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Shared\\AuthService.Shared.csproj",
       "projectName": "AuthService.Shared",
-      "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Shared\\AuthService.Shared.csproj",
+      "projectPath": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Shared\\AuthService.Shared.csproj",
       "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-      "outputPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Shared\\obj\\",
+      "outputPath": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Shared\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

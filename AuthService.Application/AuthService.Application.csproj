@@ -12,16 +12,20 @@
     <None Remove="Events\**" />
   </ItemGroup>
 
+  <!-- Exceptions are compiled as part of default items; no explicit includes needed -->
+
   <ItemGroup>
     <ProjectReference Include="..\AuthService.Domain\AuthService.Domain.csproj" />
     <ProjectReference Include="..\AuthService.Infrastructure\AuthService.Infrastructure.csproj" />
-    <ProjectReference Include="..\AuthService.Shared\AuthService.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4-beta1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="8.0.7" />
   </ItemGroup>
 
 </Project>

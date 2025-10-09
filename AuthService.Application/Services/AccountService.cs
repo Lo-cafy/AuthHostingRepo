@@ -6,7 +6,7 @@ using AuthService.Application.DTOs.Account;
 using AuthService.Infrastructure.Interfaces;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Enums;
-using AuthService.Shared.Exceptions;
+using AuthService.Application.Exceptions;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;

@@ -4,7 +4,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using AuthService.Shared.Exceptions;
+using AuthService.Application.Exceptions;
 
 namespace AuthService.Api.Middleware
 {

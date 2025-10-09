@@ -241,3 +241,16 @@ D:\SingleProject1\AuthServiceClone2\AuthService.Shared\obj\Debug\net8.0\refint\A
 D:\SingleProject1\AuthServiceClone2\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.pdb
 D:\SingleProject1\AuthServiceClone2\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.genruntimeconfig.cache
 D:\SingleProject1\AuthServiceClone2\AuthService.Shared\obj\Debug\net8.0\ref\AuthService.Shared.dll
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\bin\Debug\net8.0\AuthService.Shared.deps.json
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\bin\Debug\net8.0\AuthService.Shared.dll
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\bin\Debug\net8.0\AuthService.Shared.pdb
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.AssemblyInfoInputs.cache
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.AssemblyInfo.cs
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.csproj.CoreCompileInputs.cache
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.sourcelink.json
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.dll
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\refint\AuthService.Shared.dll
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.pdb
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\ref\AuthService.Shared.dll
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\AuthService.Shared.csproj.AssemblyReference.cache
