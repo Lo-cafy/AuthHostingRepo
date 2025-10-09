@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "AuthService.Api",
-    "version": "1.0"
+    "title": "Auth API (REST & gRPC)",
+    "version": "v1"
   },
   "paths": {
     "/api/Account/forgot-password": {
@@ -489,6 +489,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter JWT Bearer token **_only_** (Example: `Bearer eyJhbGci...`)",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }

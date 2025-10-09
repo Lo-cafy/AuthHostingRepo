@@ -82,6 +82,224 @@
           }
         }
       },
+      "Google.Protobuf/3.25.1": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net5.0/Google.Protobuf.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Grpc.AspNetCore/2.59.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Protobuf": "3.23.1",
+          "Grpc.AspNetCore.Server.ClientFactory": "2.59.0",
+          "Grpc.Tools": "2.59.0"
+        },
+        "compile": {
+          "lib/net8.0/_._": {}
+        },
+        "runtime": {
+          "lib/net8.0/_._": {}
+        }
+      },
+      "Grpc.AspNetCore.HealthChecks/2.59.0": {
+        "type": "package",
+        "dependencies": {
+          "Grpc.AspNetCore.Server": "2.59.0",
+          "Grpc.HealthCheck": "2.59.0"
+        },
+        "compile": {
+          "lib/net8.0/Grpc.AspNetCore.HealthChecks.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Grpc.AspNetCore.HealthChecks.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Grpc.AspNetCore.Server/2.59.0": {
+        "type": "package",
+        "dependencies": {
+          "Grpc.Net.Common": "2.59.0"
+        },
+        "compile": {
+          "lib/net8.0/Grpc.AspNetCore.Server.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Grpc.AspNetCore.Server.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Grpc.AspNetCore.Server.ClientFactory/2.59.0": {
+        "type": "package",
+        "dependencies": {
+          "Grpc.AspNetCore.Server": "2.59.0",
+          "Grpc.Net.ClientFactory": "2.59.0"
+        },
+        "compile": {
+          "lib/net8.0/Grpc.AspNetCore.Server.ClientFactory.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Grpc.AspNetCore.Server.ClientFactory.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Grpc.AspNetCore.Server.Reflection/2.59.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Protobuf": "3.23.1",
+          "Grpc.AspNetCore.Server": "2.59.0",
+          "Grpc.Reflection": "2.59.0"
+        },
+        "compile": {
+          "lib/net8.0/Grpc.AspNetCore.Server.Reflection.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Grpc.AspNetCore.Server.Reflection.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
+      "Grpc.Core.Api/2.71.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/Grpc.Core.Api.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/Grpc.Core.Api.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Grpc.HealthCheck/2.59.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Protobuf": "3.23.1",
+          "Grpc.Core.Api": "2.59.0",
+          "System.Threading.Channels": "4.6.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Grpc.HealthCheck.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Grpc.HealthCheck.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Grpc.Net.Client/2.71.0": {
+        "type": "package",
+        "dependencies": {
+          "Grpc.Net.Common": "2.71.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Grpc.Net.Client.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Grpc.Net.Client.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Grpc.Net.Client.Web/2.71.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Grpc.Net.Client.Web.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Grpc.Net.Client.Web.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Grpc.Net.ClientFactory/2.59.0": {
+        "type": "package",
+        "dependencies": {
+          "Grpc.Net.Client": "2.59.0",
+          "Microsoft.Extensions.Http": "6.0.0"
+        },
+        "compile": {
+          "lib/net8.0/Grpc.Net.ClientFactory.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Grpc.Net.ClientFactory.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Grpc.Net.Common/2.71.0": {
+        "type": "package",
+        "dependencies": {
+          "Grpc.Core.Api": "2.71.0"
+        },
+        "compile": {
+          "lib/net8.0/Grpc.Net.Common.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Grpc.Net.Common.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "Grpc.Reflection/2.59.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Protobuf": "3.23.1",
+          "Grpc.Core.Api": "2.59.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Grpc.Reflection.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Grpc.Reflection.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Humanizer.Core/2.14.1": {
         "type": "package",
         "compile": {
@@ -790,6 +1008,25 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "Microsoft.Extensions.Http/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Logging": "6.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Http.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Microsoft.Extensions.Logging/9.0.9": {
         "type": "package",
         "dependencies": {
@@ -1080,6 +1317,18 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "Serilog.Enrichers.Environment/2.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Serilog.Enrichers.Environment.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Serilog.Enrichers.Environment.dll": {}
+        }
       },
       "Serilog.Extensions.Hosting/8.0.0": {
         "type": "package",
@@ -1534,7 +1783,7 @@
       "System.Threading.Channels/7.0.0": {
         "type": "package",
         "compile": {
-          "lib/net7.0/_._": {
+          "lib/net7.0/System.Threading.Channels.dll": {
             "related": ".xml"
           }
         },
@@ -1574,6 +1823,40 @@
         "runtime": {
           "bin/placeholder/AuthService.Domain.dll": {}
         }
+      },
+      "AuthService.Grpc/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "AspNetCore.HealthChecks.NpgSql": "8.0.0",
+          "AspNetCore.HealthChecks.UI.Client": "8.0.0",
+          "AuthService.Application": "1.0.0",
+          "AuthService.Infrastructure": "1.0.0",
+          "Google.Protobuf": "3.25.1",
+          "Grpc.AspNetCore": "2.59.0",
+          "Grpc.AspNetCore.HealthChecks": "2.59.0",
+          "Grpc.AspNetCore.Server.Reflection": "2.59.0",
+          "Grpc.Net.Client": "2.71.0",
+          "Grpc.Net.Client.Web": "2.71.0",
+          "Microsoft.Extensions.Diagnostics.HealthChecks": "8.0.0",
+          "Npgsql": "9.0.1",
+          "Serilog": "3.1.1",
+          "Serilog.AspNetCore": "8.0.0",
+          "Serilog.Enrichers.Environment": "2.3.0",
+          "Serilog.Extensions.Hosting": "8.0.0",
+          "Serilog.Settings.Configuration": "8.0.0",
+          "Serilog.Sinks.Console": "5.0.1",
+          "Serilog.Sinks.File": "5.0.0"
+        },
+        "compile": {
+          "bin/placeholder/AuthService.Grpc.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AuthService.Grpc.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "AuthService.Infrastructure/1.0.0": {
         "type": "project",
@@ -1711,6 +1994,304 @@
         "lib/netstandard2.0/Dapper.dll",
         "lib/netstandard2.0/Dapper.xml",
         "readme.md"
+      ]
+    },
+    "Google.Protobuf/3.25.1": {
+      "sha512": "Sw9bq4hOD+AaS3RrnmP5IT25cyZ/T1qpM0e8+G+23Nojhv7+ScJFPEAQo1m4EFQWhXoI4FRZDrK+wjHCPw9yxg==",
+      "type": "package",
+      "path": "google.protobuf/3.25.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "google.protobuf.3.25.1.nupkg.sha512",
+        "google.protobuf.nuspec",
+        "lib/net45/Google.Protobuf.dll",
+        "lib/net45/Google.Protobuf.pdb",
+        "lib/net45/Google.Protobuf.xml",
+        "lib/net5.0/Google.Protobuf.dll",
+        "lib/net5.0/Google.Protobuf.pdb",
+        "lib/net5.0/Google.Protobuf.xml",
+        "lib/netstandard1.1/Google.Protobuf.dll",
+        "lib/netstandard1.1/Google.Protobuf.pdb",
+        "lib/netstandard1.1/Google.Protobuf.xml",
+        "lib/netstandard2.0/Google.Protobuf.dll",
+        "lib/netstandard2.0/Google.Protobuf.pdb",
+        "lib/netstandard2.0/Google.Protobuf.xml"
+      ]
+    },
+    "Grpc.AspNetCore/2.59.0": {
+      "sha512": "7QEAnzHGc+Tln4SX2kCp4zONH+59UdEgjveX0qs8aIRic3isqasTNjz+OTZCYK/bWk1I6769GlWTz7gxJ+nmDQ==",
+      "type": "package",
+      "path": "grpc.aspnetcore/2.59.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.aspnetcore.2.59.0.nupkg.sha512",
+        "grpc.aspnetcore.nuspec",
+        "lib/net6.0/_._",
+        "lib/net7.0/_._",
+        "lib/net8.0/_._",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.AspNetCore.HealthChecks/2.59.0": {
+      "sha512": "J6Sekkn1ZXukDvE2uWqkguThktM7NiYY53VfXW416KnY0hLa7kARe25j1RNIbdCJ0iMIyjiDgEeztlEmE+rgYA==",
+      "type": "package",
+      "path": "grpc.aspnetcore.healthchecks/2.59.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "grpc.aspnetcore.healthchecks.2.59.0.nupkg.sha512",
+        "grpc.aspnetcore.healthchecks.nuspec",
+        "lib/net6.0/Grpc.AspNetCore.HealthChecks.dll",
+        "lib/net6.0/Grpc.AspNetCore.HealthChecks.pdb",
+        "lib/net6.0/Grpc.AspNetCore.HealthChecks.xml",
+        "lib/net7.0/Grpc.AspNetCore.HealthChecks.dll",
+        "lib/net7.0/Grpc.AspNetCore.HealthChecks.pdb",
+        "lib/net7.0/Grpc.AspNetCore.HealthChecks.xml",
+        "lib/net8.0/Grpc.AspNetCore.HealthChecks.dll",
+        "lib/net8.0/Grpc.AspNetCore.HealthChecks.pdb",
+        "lib/net8.0/Grpc.AspNetCore.HealthChecks.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.AspNetCore.Server/2.59.0": {
+      "sha512": "Q4P1ZzygF67uJYdU4rbgxs2ISL+xCRT74WosFpCPpgj6OeMSLRwjLU1aOhIMmr9kHrFCMV9vNg6qx4RsXD+92g==",
+      "type": "package",
+      "path": "grpc.aspnetcore.server/2.59.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.aspnetcore.server.2.59.0.nupkg.sha512",
+        "grpc.aspnetcore.server.nuspec",
+        "lib/net6.0/Grpc.AspNetCore.Server.dll",
+        "lib/net6.0/Grpc.AspNetCore.Server.pdb",
+        "lib/net6.0/Grpc.AspNetCore.Server.xml",
+        "lib/net7.0/Grpc.AspNetCore.Server.dll",
+        "lib/net7.0/Grpc.AspNetCore.Server.pdb",
+        "lib/net7.0/Grpc.AspNetCore.Server.xml",
+        "lib/net8.0/Grpc.AspNetCore.Server.dll",
+        "lib/net8.0/Grpc.AspNetCore.Server.pdb",
+        "lib/net8.0/Grpc.AspNetCore.Server.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.AspNetCore.Server.ClientFactory/2.59.0": {
+      "sha512": "TbEeNpvSzcxxdxCEs2Y1ru8IuHwriBmDdvteUhVAkLv1tduccEjov8IrgcQ/NffJJwKXqDTVss6gFxZKMFPqww==",
+      "type": "package",
+      "path": "grpc.aspnetcore.server.clientfactory/2.59.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "grpc.aspnetcore.server.clientfactory.2.59.0.nupkg.sha512",
+        "grpc.aspnetcore.server.clientfactory.nuspec",
+        "lib/net6.0/Grpc.AspNetCore.Server.ClientFactory.dll",
+        "lib/net6.0/Grpc.AspNetCore.Server.ClientFactory.pdb",
+        "lib/net6.0/Grpc.AspNetCore.Server.ClientFactory.xml",
+        "lib/net7.0/Grpc.AspNetCore.Server.ClientFactory.dll",
+        "lib/net7.0/Grpc.AspNetCore.Server.ClientFactory.pdb",
+        "lib/net7.0/Grpc.AspNetCore.Server.ClientFactory.xml",
+        "lib/net8.0/Grpc.AspNetCore.Server.ClientFactory.dll",
+        "lib/net8.0/Grpc.AspNetCore.Server.ClientFactory.pdb",
+        "lib/net8.0/Grpc.AspNetCore.Server.ClientFactory.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.AspNetCore.Server.Reflection/2.59.0": {
+      "sha512": "ocsERarcNFIWWnk3Nkhgvz19r0Ns0Y8Bf70WUkow01QQkdpT9qJbn+TnOBsUFW0deP7XWSNrw5xASxVA8mJvSA==",
+      "type": "package",
+      "path": "grpc.aspnetcore.server.reflection/2.59.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "grpc.aspnetcore.server.reflection.2.59.0.nupkg.sha512",
+        "grpc.aspnetcore.server.reflection.nuspec",
+        "lib/net6.0/Grpc.AspNetCore.Server.Reflection.dll",
+        "lib/net6.0/Grpc.AspNetCore.Server.Reflection.pdb",
+        "lib/net6.0/Grpc.AspNetCore.Server.Reflection.xml",
+        "lib/net7.0/Grpc.AspNetCore.Server.Reflection.dll",
+        "lib/net7.0/Grpc.AspNetCore.Server.Reflection.pdb",
+        "lib/net7.0/Grpc.AspNetCore.Server.Reflection.xml",
+        "lib/net8.0/Grpc.AspNetCore.Server.Reflection.dll",
+        "lib/net8.0/Grpc.AspNetCore.Server.Reflection.pdb",
+        "lib/net8.0/Grpc.AspNetCore.Server.Reflection.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.Core.Api/2.71.0": {
+      "sha512": "QquqUC37yxsDzd1QaDRsH2+uuznWPTS8CVE2Yzwl3CvU4geTNkolQXoVN812M2IwT6zpv3jsZRc9ExJFNFslTg==",
+      "type": "package",
+      "path": "grpc.core.api/2.71.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.core.api.2.71.0.nupkg.sha512",
+        "grpc.core.api.nuspec",
+        "lib/net462/Grpc.Core.Api.dll",
+        "lib/net462/Grpc.Core.Api.pdb",
+        "lib/net462/Grpc.Core.Api.xml",
+        "lib/netstandard2.0/Grpc.Core.Api.dll",
+        "lib/netstandard2.0/Grpc.Core.Api.pdb",
+        "lib/netstandard2.0/Grpc.Core.Api.xml",
+        "lib/netstandard2.1/Grpc.Core.Api.dll",
+        "lib/netstandard2.1/Grpc.Core.Api.pdb",
+        "lib/netstandard2.1/Grpc.Core.Api.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.HealthCheck/2.59.0": {
+      "sha512": "6B7uyV4cbq0DJstoPk2acdsrmgBBPMNS9rXYbxuYDzktGrNXaulfCPQ0A8fz/Sbo/ncWtM6oT2uB+5rpT+Hgww==",
+      "type": "package",
+      "path": "grpc.healthcheck/2.59.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.healthcheck.2.59.0.nupkg.sha512",
+        "grpc.healthcheck.nuspec",
+        "lib/net462/Grpc.HealthCheck.dll",
+        "lib/net462/Grpc.HealthCheck.pdb",
+        "lib/net462/Grpc.HealthCheck.xml",
+        "lib/netstandard2.0/Grpc.HealthCheck.dll",
+        "lib/netstandard2.0/Grpc.HealthCheck.pdb",
+        "lib/netstandard2.0/Grpc.HealthCheck.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.Net.Client/2.71.0": {
+      "sha512": "U1vr20r5ngoT9nlb7wejF28EKN+taMhJsV9XtK9MkiepTZwnKxxiarriiMfCHuDAfPUm9XUjFMn/RIuJ4YY61w==",
+      "type": "package",
+      "path": "grpc.net.client/2.71.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.net.client.2.71.0.nupkg.sha512",
+        "grpc.net.client.nuspec",
+        "lib/net462/Grpc.Net.Client.dll",
+        "lib/net462/Grpc.Net.Client.pdb",
+        "lib/net462/Grpc.Net.Client.xml",
+        "lib/net6.0/Grpc.Net.Client.dll",
+        "lib/net6.0/Grpc.Net.Client.pdb",
+        "lib/net6.0/Grpc.Net.Client.xml",
+        "lib/net7.0/Grpc.Net.Client.dll",
+        "lib/net7.0/Grpc.Net.Client.pdb",
+        "lib/net7.0/Grpc.Net.Client.xml",
+        "lib/net8.0/Grpc.Net.Client.dll",
+        "lib/net8.0/Grpc.Net.Client.pdb",
+        "lib/net8.0/Grpc.Net.Client.xml",
+        "lib/netstandard2.0/Grpc.Net.Client.dll",
+        "lib/netstandard2.0/Grpc.Net.Client.pdb",
+        "lib/netstandard2.0/Grpc.Net.Client.xml",
+        "lib/netstandard2.1/Grpc.Net.Client.dll",
+        "lib/netstandard2.1/Grpc.Net.Client.pdb",
+        "lib/netstandard2.1/Grpc.Net.Client.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.Net.Client.Web/2.71.0": {
+      "sha512": "I+S8YkAhSwXyg2fwyHC4Bhf6QR1XFTzqsMPr6KsgsI23r/J87zLUuhv1Y93nt2Vl6b3j0mZlhknmN4fMnfvGdw==",
+      "type": "package",
+      "path": "grpc.net.client.web/2.71.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.net.client.web.2.71.0.nupkg.sha512",
+        "grpc.net.client.web.nuspec",
+        "lib/net6.0/Grpc.Net.Client.Web.dll",
+        "lib/net6.0/Grpc.Net.Client.Web.pdb",
+        "lib/net6.0/Grpc.Net.Client.Web.xml",
+        "lib/net7.0/Grpc.Net.Client.Web.dll",
+        "lib/net7.0/Grpc.Net.Client.Web.pdb",
+        "lib/net7.0/Grpc.Net.Client.Web.xml",
+        "lib/net8.0/Grpc.Net.Client.Web.dll",
+        "lib/net8.0/Grpc.Net.Client.Web.pdb",
+        "lib/net8.0/Grpc.Net.Client.Web.xml",
+        "lib/netstandard2.0/Grpc.Net.Client.Web.dll",
+        "lib/netstandard2.0/Grpc.Net.Client.Web.pdb",
+        "lib/netstandard2.0/Grpc.Net.Client.Web.xml",
+        "lib/netstandard2.1/Grpc.Net.Client.Web.dll",
+        "lib/netstandard2.1/Grpc.Net.Client.Web.pdb",
+        "lib/netstandard2.1/Grpc.Net.Client.Web.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.Net.ClientFactory/2.59.0": {
+      "sha512": "6vGLuKWpDzHbjjXgLV7cWRw+GorjUxnizzOWqiHvyz0U9lV/kzStrUE3sBqYoGv0B1Z3Yq5WfaAy2mt9o5pAlA==",
+      "type": "package",
+      "path": "grpc.net.clientfactory/2.59.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.net.clientfactory.2.59.0.nupkg.sha512",
+        "grpc.net.clientfactory.nuspec",
+        "lib/net6.0/Grpc.Net.ClientFactory.dll",
+        "lib/net6.0/Grpc.Net.ClientFactory.pdb",
+        "lib/net6.0/Grpc.Net.ClientFactory.xml",
+        "lib/net7.0/Grpc.Net.ClientFactory.dll",
+        "lib/net7.0/Grpc.Net.ClientFactory.pdb",
+        "lib/net7.0/Grpc.Net.ClientFactory.xml",
+        "lib/net8.0/Grpc.Net.ClientFactory.dll",
+        "lib/net8.0/Grpc.Net.ClientFactory.pdb",
+        "lib/net8.0/Grpc.Net.ClientFactory.xml",
+        "lib/netstandard2.0/Grpc.Net.ClientFactory.dll",
+        "lib/netstandard2.0/Grpc.Net.ClientFactory.pdb",
+        "lib/netstandard2.0/Grpc.Net.ClientFactory.xml",
+        "lib/netstandard2.1/Grpc.Net.ClientFactory.dll",
+        "lib/netstandard2.1/Grpc.Net.ClientFactory.pdb",
+        "lib/netstandard2.1/Grpc.Net.ClientFactory.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.Net.Common/2.71.0": {
+      "sha512": "v0c8R97TwRYwNXlC8GyRXwYTCNufpDfUtj9la+wUrZFzVWkFJuNAltU+c0yI3zu0jl54k7en6u2WKgZgd57r2Q==",
+      "type": "package",
+      "path": "grpc.net.common/2.71.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "grpc.net.common.2.71.0.nupkg.sha512",
+        "grpc.net.common.nuspec",
+        "lib/net6.0/Grpc.Net.Common.dll",
+        "lib/net6.0/Grpc.Net.Common.pdb",
+        "lib/net6.0/Grpc.Net.Common.xml",
+        "lib/net7.0/Grpc.Net.Common.dll",
+        "lib/net7.0/Grpc.Net.Common.pdb",
+        "lib/net7.0/Grpc.Net.Common.xml",
+        "lib/net8.0/Grpc.Net.Common.dll",
+        "lib/net8.0/Grpc.Net.Common.pdb",
+        "lib/net8.0/Grpc.Net.Common.xml",
+        "lib/netstandard2.0/Grpc.Net.Common.dll",
+        "lib/netstandard2.0/Grpc.Net.Common.pdb",
+        "lib/netstandard2.0/Grpc.Net.Common.xml",
+        "lib/netstandard2.1/Grpc.Net.Common.dll",
+        "lib/netstandard2.1/Grpc.Net.Common.pdb",
+        "lib/netstandard2.1/Grpc.Net.Common.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.Reflection/2.59.0": {
+      "sha512": "AfgIqJRbZOTTc7es2+BYMfXRdv4lqdEqOV8644ZB37nbO60RM5L2thzmUBWZ4uMa6MhDuNul/60lxyH/Mzik6A==",
+      "type": "package",
+      "path": "grpc.reflection/2.59.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.reflection.2.59.0.nupkg.sha512",
+        "grpc.reflection.nuspec",
+        "lib/net462/Grpc.Reflection.dll",
+        "lib/net462/Grpc.Reflection.pdb",
+        "lib/net462/Grpc.Reflection.xml",
+        "lib/netstandard2.0/Grpc.Reflection.dll",
+        "lib/netstandard2.0/Grpc.Reflection.pdb",
+        "lib/netstandard2.0/Grpc.Reflection.xml",
+        "packageIcon.png"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -3375,6 +3956,25 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Microsoft.Extensions.Http/6.0.0": {
+      "sha512": "15+pa2G0bAMHbHewaQIdr/y6ag2H3yh4rd9hTXavtWDzQBkvpe2RMqFg8BxDpcQWssmjmBApGPcw93QRz6YcMg==",
+      "type": "package",
+      "path": "microsoft.extensions.http/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Extensions.Http.dll",
+        "lib/net461/Microsoft.Extensions.Http.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Http.xml",
+        "microsoft.extensions.http.6.0.0.nupkg.sha512",
+        "microsoft.extensions.http.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "Microsoft.Extensions.Logging/9.0.9": {
       "sha512": "MaCB0Y9hNDs4YLu3HCJbo199WnJT8xSgajG1JYGANz9FkseQ5f3v/llu3HxLI6mjDlu7pa7ps9BLPWjKzsAAzQ==",
       "type": "package",
@@ -3828,6 +4428,21 @@
         "lib/netstandard2.0/Serilog.AspNetCore.xml",
         "serilog.aspnetcore.8.0.0.nupkg.sha512",
         "serilog.aspnetcore.nuspec"
+      ]
+    },
+    "Serilog.Enrichers.Environment/2.3.0": {
+      "sha512": "AdZXURQ0dQCCjst3Jn3lwFtGicWjGE4wov9E5BPc4N5cruGmd2y9wprCYEjFteU84QMbxk35fpeTuHs6M4VGYw==",
+      "type": "package",
+      "path": "serilog.enrichers.environment/2.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Serilog.Enrichers.Environment.dll",
+        "lib/netstandard1.3/Serilog.Enrichers.Environment.dll",
+        "lib/netstandard1.5/Serilog.Enrichers.Environment.dll",
+        "lib/netstandard2.0/Serilog.Enrichers.Environment.dll",
+        "serilog.enrichers.environment.2.3.0.nupkg.sha512",
+        "serilog.enrichers.environment.nuspec"
       ]
     },
     "Serilog.Extensions.Hosting/8.0.0": {
@@ -4581,6 +5196,11 @@
       "path": "../AuthService.Domain/AuthService.Domain.csproj",
       "msbuildProject": "../AuthService.Domain/AuthService.Domain.csproj"
     },
+    "AuthService.Grpc/1.0.0": {
+      "type": "project",
+      "path": "../AuthService.Grpc/AuthService.Grpc.csproj",
+      "msbuildProject": "../AuthService.Grpc/AuthService.Grpc.csproj"
+    },
     "AuthService.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../AuthService.Infrastructure/AuthService.Infrastructure.csproj",
@@ -4597,7 +5217,9 @@
       "AspNetCore.HealthChecks.NpgSql >= 8.0.0",
       "AspNetCore.HealthChecks.UI.Client >= 8.0.0",
       "AuthService.Application >= 1.0.0",
+      "AuthService.Grpc >= 1.0.0",
       "AuthService.Infrastructure >= 1.0.0",
+      "Grpc.Net.Client.Web >= 2.71.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.1",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.9",
       "Microsoft.Extensions.Diagnostics.HealthChecks >= 8.0.0",
@@ -4617,11 +5239,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SingleProject1\\AuthServiceClone2\\AuthService\\AuthService.Api.csproj",
+      "projectUniqueName": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService\\AuthService.Api.csproj",
       "projectName": "AuthService.Api",
-      "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService\\AuthService.Api.csproj",
+      "projectPath": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService\\AuthService.Api.csproj",
       "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
-      "outputPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService\\obj\\",
+      "outputPath": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4642,11 +5264,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Application\\AuthService.Application.csproj": {
-              "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Application\\AuthService.Application.csproj"
+            "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Application\\AuthService.Application.csproj": {
+              "projectPath": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Application\\AuthService.Application.csproj"
             },
-            "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
-              "projectPath": "D:\\SingleProject1\\AuthServiceClone2\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
+            "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Grpc\\AuthService.Grpc.csproj": {
+              "projectPath": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Grpc\\AuthService.Grpc.csproj"
+            },
+            "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
+              "projectPath": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
             }
           }
         }
@@ -4674,6 +5299,10 @@
           "AspNetCore.HealthChecks.UI.Client": {
             "target": "Package",
             "version": "[8.0.0, )"
+          },
+          "Grpc.Net.Client.Web": {
+            "target": "Package",
+            "version": "[2.71.0, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
