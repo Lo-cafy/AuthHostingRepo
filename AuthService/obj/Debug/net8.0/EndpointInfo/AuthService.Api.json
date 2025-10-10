@@ -214,6 +214,18 @@
         }
       }
     },
+    "/api/grpc-test/ping": {
+      "get": {
+        "tags": [
+          "GrpcTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/OAuth/{provider}/authorize": {
       "get": {
         "tags": [

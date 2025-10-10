@@ -149,6 +149,8 @@ builder.Services.AddScoped<IDigitalFingerprintService, DigitalFingerprintService
 builder.Services.AddScoped<IAuthService, AuthService.Application.Services.AuthService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>

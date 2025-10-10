@@ -75,3 +75,15 @@
 2025-10-10 15:49:23.471 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
 2025-10-10 15:49:53.476 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
 2025-10-10 15:50:23.469 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 16:20:25.892 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-10 16:20:25.966 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-10 16:20:26.031 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 16:20:26.340 +05:30 [WRN] Overriding address(es) 'https://localhost:7179, http://localhost:5179'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2025-10-10 16:20:26.354 +05:30 [WRN] HTTP/2 is not enabled for [::]:8080. The endpoint is configured to use HTTP/1.1 and HTTP/2, but TLS is not enabled. HTTP/2 requires TLS application protocol negotiation. Connections to this endpoint will use HTTP/1.1.
+2025-10-10 16:20:26.393 +05:30 [INF] Now listening on: http://[::]:8080
+2025-10-10 16:20:26.600 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 16:20:26.601 +05:30 [INF] Hosting environment: Development
+2025-10-10 16:20:26.601 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-10 16:20:33.703 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 16:21:01.390 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 16:21:31.380 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.

@@ -124,6 +124,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "AuthService.Api.Controllers.GrpcTestController",
+    "Method": "Ping",
+    "RelativePath": "api/grpc-test/ping",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AuthService.Api.Controllers.OAuthController",
     "Method": "Authorize",
     "RelativePath": "api/OAuth/{provider}/authorize",
