@@ -108,16 +108,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ClockSkew = TimeSpan.Zero
         };
     });
-	var emailServiceUrl = builder.Configuration["GrpcClients:EmailService"]
-		?? throw new InvalidOperationException("GrpcClients:EmailService is missing or empty.");
+	var emailServiceUrl = builder.Configuration["GrpcClients:EmailService"];
+	if (string.IsNullOrWhiteSpace(emailServiceUrl))
+	{
+		Log.Warning("GrpcClients:EmailService is not configured. Registering a placeholder client; email sending will fail if invoked.");
+		emailServiceUrl = "http://localhost:5001"; // placeholder to satisfy DI
+	}
+
 	builder.Services.AddGrpcClient<EmailServiceClient>(o =>
 	{
 		o.Address = new Uri(emailServiceUrl);
 	})
-            .ConfigurePrimaryHttpMessageHandler(() =>
-            {
-                return new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
-            });
+			.ConfigurePrimaryHttpMessageHandler(() =>
+			{
+				return new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+			});
 builder.Services.Configure<DatabaseOptions>(
     builder.Configuration.GetSection(DatabaseOptions.SectionName));
 builder.Services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
