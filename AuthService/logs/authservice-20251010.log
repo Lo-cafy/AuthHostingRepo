@@ -1,0 +1,77 @@
+2025-10-10 15:22:14.431 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-10 15:22:14.492 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-10 15:22:14.555 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 15:22:15.153 +05:30 [INF] Now listening on: https://localhost:7179
+2025-10-10 15:22:15.160 +05:30 [INF] Now listening on: http://localhost:5179
+2025-10-10 15:22:15.364 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 15:22:15.370 +05:30 [INF] Hosting environment: Development
+2025-10-10 15:22:15.384 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-10 15:22:16.665 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/index.html - null null
+2025-10-10 15:22:17.066 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/index.html - 200 null text/html;charset=utf-8 413.0062ms
+2025-10-10 15:22:17.083 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - null null
+2025-10-10 15:22:17.099 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/_vs/browserLink - null null
+2025-10-10 15:22:17.118 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_framework/aspnetcore-browser-refresh.js - 200 16515 application/javascript; charset=utf-8 35.2835ms
+2025-10-10 15:22:17.206 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/_vs/browserLink - 200 null text/javascript; charset=UTF-8 106.9056ms
+2025-10-10 15:22:17.292 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - null null
+2025-10-10 15:22:17.322 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7179/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 30.4856ms
+2025-10-10 15:41:21.065 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-10 15:41:21.156 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-10 15:41:21.249 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 15:41:21.671 +05:30 [WRN] Overriding address(es) 'https://localhost:7179, http://localhost:5179'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2025-10-10 15:41:21.685 +05:30 [WRN] HTTP/2 is not enabled for [::]:8080. The endpoint is configured to use HTTP/1.1 and HTTP/2, but TLS is not enabled. HTTP/2 requires TLS application protocol negotiation. Connections to this endpoint will use HTTP/1.1.
+2025-10-10 15:41:21.723 +05:30 [INF] Now listening on: http://[::]:8080
+2025-10-10 15:41:21.992 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 15:41:21.996 +05:30 [INF] Hosting environment: Development
+2025-10-10 15:41:21.996 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-10 15:41:30.158 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:41:56.656 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:42:26.534 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-10 15:42:26.598 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-10 15:42:26.654 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 15:42:27.036 +05:30 [WRN] Overriding address(es) 'https://localhost:7179, http://localhost:5179'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2025-10-10 15:42:27.059 +05:30 [WRN] HTTP/2 is not enabled for [::]:8080. The endpoint is configured to use HTTP/1.1 and HTTP/2, but TLS is not enabled. HTTP/2 requires TLS application protocol negotiation. Connections to this endpoint will use HTTP/1.1.
+2025-10-10 15:42:27.120 +05:30 [INF] Now listening on: http://[::]:8080
+2025-10-10 15:42:27.474 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 15:42:27.481 +05:30 [INF] Hosting environment: Development
+2025-10-10 15:42:27.491 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-10 15:42:34.359 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:43:39.987 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-10 15:43:40.239 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-10 15:43:40.373 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 15:43:40.953 +05:30 [WRN] Overriding address(es) 'https://localhost:7179, http://localhost:5179'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2025-10-10 15:43:40.968 +05:30 [WRN] HTTP/2 is not enabled for [::]:8080. The endpoint is configured to use HTTP/1.1 and HTTP/2, but TLS is not enabled. HTTP/2 requires TLS application protocol negotiation. Connections to this endpoint will use HTTP/1.1.
+2025-10-10 15:43:41.020 +05:30 [INF] Now listening on: http://[::]:8080
+2025-10-10 15:43:43.653 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 15:43:43.666 +05:30 [INF] Hosting environment: Development
+2025-10-10 15:43:43.668 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-10 15:43:49.365 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:44:31.096 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-10 15:44:31.148 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-10 15:44:31.194 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 15:44:31.392 +05:30 [WRN] Overriding address(es) 'https://localhost:7179, http://localhost:5179'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2025-10-10 15:44:31.404 +05:30 [WRN] HTTP/2 is not enabled for [::]:8080. The endpoint is configured to use HTTP/1.1 and HTTP/2, but TLS is not enabled. HTTP/2 requires TLS application protocol negotiation. Connections to this endpoint will use HTTP/1.1.
+2025-10-10 15:44:31.425 +05:30 [INF] Now listening on: http://[::]:8080
+2025-10-10 15:44:31.628 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 15:44:31.630 +05:30 [INF] Hosting environment: Development
+2025-10-10 15:44:31.662 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-10 15:44:38.818 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:45:06.504 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:45:36.514 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:46:06.502 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:46:48.043 +05:30 [INF] ✅ Successfully connected to Neon PostgreSQL Database!
+2025-10-10 15:46:48.101 +05:30 [INF] 🚀 Starting Auth API...
+2025-10-10 15:46:48.145 +05:30 [INF] User profile is available. Using 'C:\Users\muham\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-10-10 15:46:48.370 +05:30 [WRN] Overriding address(es) 'https://localhost:7179, http://localhost:5179'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+2025-10-10 15:46:48.380 +05:30 [WRN] HTTP/2 is not enabled for [::]:8080. The endpoint is configured to use HTTP/1.1 and HTTP/2, but TLS is not enabled. HTTP/2 requires TLS application protocol negotiation. Connections to this endpoint will use HTTP/1.1.
+2025-10-10 15:46:48.401 +05:30 [INF] Now listening on: http://[::]:8080
+2025-10-10 15:46:48.683 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-10-10 15:46:48.684 +05:30 [INF] Hosting environment: Development
+2025-10-10 15:46:48.685 +05:30 [INF] Content root path: D:\SingleProject1\BACKEND\AuthServiceClone\AuthService
+2025-10-10 15:46:56.351 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:47:23.481 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:47:53.468 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:48:23.471 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:48:53.471 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:49:23.471 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:49:53.476 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.
+2025-10-10 15:50:23.469 +05:30 [DBG] Service '' status updated to "Serving". 2 health report entries evaluated.

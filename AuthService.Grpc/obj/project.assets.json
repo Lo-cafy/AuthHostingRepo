@@ -189,6 +189,22 @@
           "Microsoft.AspNetCore.App"
         ]
       },
+      "Grpc.AspNetCore.Web/2.71.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Grpc.AspNetCore.Web.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Grpc.AspNetCore.Web.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Grpc.Core.Api/2.71.0": {
         "type": "package",
         "compile": {
@@ -1515,6 +1531,31 @@
         "lib/net8.0/Grpc.AspNetCore.Server.Reflection.dll",
         "lib/net8.0/Grpc.AspNetCore.Server.Reflection.pdb",
         "lib/net8.0/Grpc.AspNetCore.Server.Reflection.xml",
+        "packageIcon.png"
+      ]
+    },
+    "Grpc.AspNetCore.Web/2.71.0": {
+      "sha512": "qaLqHTnznXry7btpZaAAIiJJyNcs2V0u5XncXT1zBfPu83YtdvWbM2pam8ejj/4UNdHE85s+LzTAJaP8JhJjpw==",
+      "type": "package",
+      "path": "grpc.aspnetcore.web/2.71.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "grpc.aspnetcore.web.2.71.0.nupkg.sha512",
+        "grpc.aspnetcore.web.nuspec",
+        "lib/net6.0/Grpc.AspNetCore.Web.dll",
+        "lib/net6.0/Grpc.AspNetCore.Web.pdb",
+        "lib/net6.0/Grpc.AspNetCore.Web.xml",
+        "lib/net7.0/Grpc.AspNetCore.Web.dll",
+        "lib/net7.0/Grpc.AspNetCore.Web.pdb",
+        "lib/net7.0/Grpc.AspNetCore.Web.xml",
+        "lib/net8.0/Grpc.AspNetCore.Web.dll",
+        "lib/net8.0/Grpc.AspNetCore.Web.pdb",
+        "lib/net8.0/Grpc.AspNetCore.Web.xml",
+        "lib/net9.0/Grpc.AspNetCore.Web.dll",
+        "lib/net9.0/Grpc.AspNetCore.Web.pdb",
+        "lib/net9.0/Grpc.AspNetCore.Web.xml",
         "packageIcon.png"
       ]
     },
@@ -3138,6 +3179,7 @@
       "Grpc.AspNetCore >= 2.59.0",
       "Grpc.AspNetCore.HealthChecks >= 2.59.0",
       "Grpc.AspNetCore.Server.Reflection >= 2.59.0",
+      "Grpc.AspNetCore.Web >= 2.71.0",
       "Grpc.Net.Client >= 2.71.0",
       "Grpc.Net.Client.Web >= 2.71.0",
       "Grpc.Tools >= 2.59.0",
@@ -3234,6 +3276,10 @@
           "Grpc.AspNetCore.Server.Reflection": {
             "target": "Package",
             "version": "[2.59.0, )"
+          },
+          "Grpc.AspNetCore.Web": {
+            "target": "Package",
+            "version": "[2.71.0, )"
           },
           "Grpc.Net.Client": {
             "target": "Package",

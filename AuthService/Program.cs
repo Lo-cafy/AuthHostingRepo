@@ -8,6 +8,8 @@ using AuthService.Infrastructure.Data.Interfaces;
 using AuthService.Infrastructure.Services;
 using AuthService.Application.Interfaces;
 using AuthService.Application.Services;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+
 using System.Text;
 using Serilog;
 using Serilog.Events;
@@ -36,6 +38,17 @@ Log.Logger = new LoggerConfiguration()
         shared: true,
         flushToDiskInterval: TimeSpan.FromSeconds(1))
     .CreateLogger();
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    options.ListenAnyIP(int.Parse(port), listenOptions =>
+    {
+        
+        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+    });
+});
+
 
 builder.Host.UseSerilog();
 
@@ -112,7 +125,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	if (string.IsNullOrWhiteSpace(emailServiceUrl))
 	{
 		Log.Warning("GrpcClients:EmailService is not configured. Registering a placeholder client; email sending will fail if invoked.");
-		emailServiceUrl = "http://localhost:5001"; // placeholder to satisfy DI
+		emailServiceUrl = "http://localhost:5001"; 
 	}
 
 	builder.Services.AddGrpcClient<EmailServiceClient>(o =>
@@ -181,8 +194,12 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHealthChecks("/health");
 
-app.MapGrpcService<AuthGrpcService>();
+app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
+
+// Map gRPC and HTTP endpoints (top-level mapping)
+app.MapGrpcService<AuthGrpcService>().EnableGrpcWeb();
 app.MapGrpcHealthChecksService();
+app.MapGet("/", () => "gRPC Server running...");
 
 
 using (var scope = app.Services.CreateScope())

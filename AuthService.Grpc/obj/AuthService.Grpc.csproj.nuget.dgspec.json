@@ -340,6 +340,10 @@
               "target": "Package",
               "version": "[2.59.0, )"
             },
+            "Grpc.AspNetCore.Web": {
+              "target": "Package",
+              "version": "[2.71.0, )"
+            },
             "Grpc.Net.Client": {
               "target": "Package",
               "version": "[2.71.0, )"

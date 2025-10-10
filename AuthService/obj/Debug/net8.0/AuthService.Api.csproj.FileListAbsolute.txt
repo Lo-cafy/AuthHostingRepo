@@ -535,4 +535,5 @@ D:\SingleProject1\BACKEND\AuthServiceClone\AuthService\bin\Debug\net8.0\MediatR.
 D:\SingleProject1\BACKEND\AuthServiceClone\AuthService\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 D:\SingleProject1\BACKEND\AuthServiceClone\AuthService\bin\Debug\net8.0\AuthService.Grpc.Client.dll
 D:\SingleProject1\BACKEND\AuthServiceClone\AuthService\bin\Debug\net8.0\AuthService.Grpc.Client.pdb
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService\bin\Debug\net8.0\Grpc.AspNetCore.Web.dll
 D:\SingleProject1\BACKEND\AuthServiceClone\AuthService\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

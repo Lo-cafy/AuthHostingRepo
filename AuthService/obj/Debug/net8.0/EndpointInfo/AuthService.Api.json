@@ -195,6 +195,25 @@
         }
       }
     },
+    "/": {
+      "get": {
+        "tags": [
+          "AuthService.Api"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/OAuth/{provider}/authorize": {
       "get": {
         "tags": [

@@ -33,3 +33,7 @@ D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Grpc\obj\Debug\net8.0\sta
 D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\staticwebassets.build.json
 D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Grpc\obj\Debug\net8.0\staticwebassets.build.json
 D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Shared\obj\Debug\net8.0\staticwebassets.build.json
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Grpc\obj\Debug\net8.0\staticwebassets.build.json
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Grpc\obj\Debug\net8.0\staticwebassets.build.json
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Grpc\obj\Debug\net8.0\staticwebassets.build.json
+D:\SingleProject1\BACKEND\AuthServiceClone\AuthService.Grpc\obj\Debug\net8.0\staticwebassets.build.json

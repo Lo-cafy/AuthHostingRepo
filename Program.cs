@@ -15,8 +15,21 @@ using Serilog;
 using Serilog.Events;
 using AuthService.Infrastructure.Data.Interfaces;
 using Serilog.Sinks.SystemConsole.Themes;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Grpc.AspNetCore.Web;
+using AuthService.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Kestrel: allow HTTP/1.1 + HTTP/2 for gRPC-Web
+builder.WebHost.ConfigureKestrel(options =>
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    options.ListenAnyIP(int.Parse(port), listenOptions =>
+    {
+        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+    });
+});
 
 // ✅ Configure Serilog Logging
 Log.Logger = new LoggerConfiguration()
@@ -38,6 +51,9 @@ builder.Host.UseSerilog();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// gRPC server
+builder.Services.AddGrpc();
 
 builder.Services.AddHttpContextAccessor();
 
@@ -124,6 +140,13 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHealthChecks("/health");
+
+// Enable gRPC-Web (must be before mapping gRPC endpoints)
+app.UseGrpcWeb(new GrpcWebOptions { DefaultEnabled = true });
+
+// Map gRPC service from AuthService.Grpc project
+app.MapGrpcService<AuthGrpcService>().EnableGrpcWeb();
+app.MapGet("/", () => "gRPC Server running...");
 
 // ✅ Optional: Test Neon connection on startup
 using (var scope = app.Services.CreateScope())

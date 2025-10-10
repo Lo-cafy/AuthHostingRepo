@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "nN49jkAPMnA=",
+  "dgSpecHash": "yUYONem4KjA=",
   "success": true,
   "projectFilePath": "D:\\SingleProject1\\BACKEND\\AuthServiceClone\\AuthService.Grpc\\AuthService.Grpc.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "C:\\Users\\muham\\.nuget\\packages\\grpc.aspnetcore.server\\2.59.0\\grpc.aspnetcore.server.2.59.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\grpc.aspnetcore.server.clientfactory\\2.59.0\\grpc.aspnetcore.server.clientfactory.2.59.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\grpc.aspnetcore.server.reflection\\2.59.0\\grpc.aspnetcore.server.reflection.2.59.0.nupkg.sha512",
+    "C:\\Users\\muham\\.nuget\\packages\\grpc.aspnetcore.web\\2.71.0\\grpc.aspnetcore.web.2.71.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\grpc.core.api\\2.71.0\\grpc.core.api.2.71.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\grpc.healthcheck\\2.59.0\\grpc.healthcheck.2.59.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\grpc.net.client\\2.71.0\\grpc.net.client.2.71.0.nupkg.sha512",
