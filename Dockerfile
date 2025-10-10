@@ -9,6 +9,7 @@ COPY ["AuthService.Domain/", "AuthService.Domain/"]
 COPY ["AuthService.Grpc/", "AuthService.Grpc/"]
 COPY ["AuthService.Infrastructure/", "AuthService.Infrastructure/"]
 COPY ["AuthService.Shared/", "AuthService.Shared/"]
+COPY ["AuthService.Grpc.Client/", "AuthService.Grpc.Client/"]
 COPY ["AuthService/", "AuthService/"]
 
 # Restore dependencies

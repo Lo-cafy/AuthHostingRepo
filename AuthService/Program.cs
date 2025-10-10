@@ -52,7 +52,8 @@ builder.Services.AddGrpc(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 
-// Swagger configuration
+
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Auth API (REST & gRPC)", Version = "v1" });
