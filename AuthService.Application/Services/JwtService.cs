@@ -21,7 +21,7 @@ public class JwtService : IJwtService
 
 
 
-    public string GenerateAccessToken(int userId, string email, RoleTypeEnum role, string sessionJti)
+    public string GenerateAccessToken(int userId, string email, RoleType role, string sessionJti)
     {
         if (string.IsNullOrWhiteSpace(_jwtOptions?.Secret))
             throw new InvalidOperationException("JWT secret is not configured. Check JwtOptions:Secret in appsettings or env vars.");

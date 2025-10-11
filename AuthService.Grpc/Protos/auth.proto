@@ -4,7 +4,7 @@ option csharp_namespace = "AuthService.Grpc.Protos";
 
 package auth;
 
-service AuthService {
+service AuthService {  
     rpc Authenticate (AuthRequest) returns (AuthResponse);
     rpc ValidateToken (ValidateTokenRequest) returns (ValidateTokenResponse);
     rpc RegisterUser (RegisterUserRequest) returns (RegisterUserResponse);
@@ -31,13 +31,16 @@ message ValidateTokenResponse {
 }
 
 message RegisterUserRequest {
-    string userId = 1; 
+    string userId = 1;                
     string email = 2;
     string password = 3;
-    repeated string roles = 4;
+    string phoneNumber = 4;           
+    string clientIp = 5;              
 }
 
 message RegisterUserResponse {
     bool success = 1;
     string message = 2;
+    string userId = 3;
+    string credentialId = 4;
 }

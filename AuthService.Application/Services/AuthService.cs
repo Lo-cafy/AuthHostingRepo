@@ -116,9 +116,9 @@ namespace AuthService.Application.Services
                         expiresIn = tokensElement.TryGetProperty("expires_in", out var expiresInElement) ? expiresInElement.GetDouble() : 3600;
                     }
 
-                    var roleEnum = Enum.TryParse<RoleTypeEnum>(roles.FirstOrDefault() ?? "Customer", true, out var parsedRole) ? parsedRole : RoleTypeEnum.Customer;
+                    var roleEnum = Enum.TryParse<RoleType>(roles.FirstOrDefault() ?? "Customer", true, out var parsedRole) ? parsedRole : RoleType.Customer;
 
-                    var accessToken = _jwtService.GenerateAccessToken(userId, email, roleEnum, accessJti);
+                    var accessToken = _jwtService.GenerateAccessToken(userId, email, roleEnum, accessJti);  
                     var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
                     return new LoginResponseDto
@@ -190,7 +190,7 @@ namespace AuthService.Application.Services
                     var email = principal.FindFirst("email")?.Value ?? "";
 
                   
-                    var roleEnum = Enum.Parse<RoleTypeEnum>(roles.FirstOrDefault() ?? "Customer", true);
+                    var roleEnum = Enum.Parse<RoleType>(roles.FirstOrDefault() ?? "Customer", true);
                     var accessToken = _jwtService.GenerateAccessToken(userId, email, roleEnum, newAccessJti);
 
                     return new RefreshTokenResponseDto

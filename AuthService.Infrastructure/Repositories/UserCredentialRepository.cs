@@ -1,7 +1,9 @@
-﻿using Dapper;
-using AuthService.Domain.Entities;
+﻿using AuthService.Domain.Entities;
 using AuthService.Infrastructure.Data.Interfaces;
 using AuthService.Infrastructure.Interfaces;
+using Dapper;
+using Npgsql;
+
 
 namespace AuthService.Infrastructure.Repositories
 {
@@ -66,40 +68,74 @@ namespace AuthService.Infrastructure.Repositories
             using var connection = await _connectionFactory.CreateConnectionAsync();
 
             var sql = @"
-            INSERT INTO auth.user_credentials (
-                user_id,
-                email,
-                password_hash,
-                password_salt,
-                password_algorithm,
-                password_iterations,
-                password_memory,
-                password_parallelism,
-                role,
-                created_at,
-                updated_at,
-                is_active
-            ) VALUES (
-                @UserId,
-                @Email,
-                @PasswordHash,
-                @PasswordSalt,
-                'argon2id',
-                3,
-                65536,
-                1,
-                @Role,
-                CURRENT_TIMESTAMP,
-                CURRENT_TIMESTAMP,
-                true
-            ) RETURNING credential_id";
-
+                INSERT INTO auth.user_credentials (
+                    user_id,
+                    email,
+                    password_hash,
+                    password_salt,
+                    password_algorithm,
+                    password_iterations,
+                    password_memory,
+                    password_parallelism,
+                    role,
+                    created_at,
+                    updated_at,
+                    is_active
+                 ) VALUES (
+                    @UserId,
+                    @Email,
+                    @PasswordHash,
+                    @PasswordSalt,
+                    'argon2id',
+                    3,
+                    65536,
+                    1,
+                    @Role::auth.role_type_enum,
+                    CURRENT_TIMESTAMP,
+                    CURRENT_TIMESTAMP,
+                    true
+                ) RETURNING credential_id";
+                
+                
             var credentialId = await connection.ExecuteScalarAsync<int>(sql, credential);
             credential.CredentialId = credentialId;
 
             return credential;
         }
 
+        public async Task<(int UserId, int CredentialId)> RegisterUserEnhancedAsync( int userId, string email,string passwordHash, string passwordSalt,
+                                                                                      string role,string? phoneNumber, int? referredBy, string createdIp)
+        {
+            using var connection = await _connectionFactory.CreateConnectionAsync();
+
+            var sql = @"
+                    SELECT * FROM auth.register_user_enhanced(
+                       p_user_id        => @UserId,
+               p_email          => @Email,
+               p_password_hash  => @PasswordHash,
+               p_password_salt  => @PasswordSalt,
+               p_role           => @Role,
+               p_phone_number   => @PhoneNumber,
+               p_referred_by    => @ReferredBy,
+               p_created_ip     => @CreatedIp::inet
+                        );
+                           ";
+
+            var parameters = new
+            {
+                UserId = userId,
+                Email = email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Role = role,
+                PhoneNumber = phoneNumber,
+                ReferredBy = referredBy,
+                CreatedIp = createdIp // string like "192.168.1.1"
+            };
+
+            var result = await connection.QueryFirstAsync<(int UserId, int CredentialId)>(sql, parameters);
+            return result;
+        }
         public async Task UpdateAsync(UserCredential credential)
         {
             using var connection = await _connectionFactory.CreateConnectionAsync();

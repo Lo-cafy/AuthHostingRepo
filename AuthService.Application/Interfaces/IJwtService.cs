@@ -6,7 +6,7 @@ namespace AuthService.Application.Interfaces
 {
     public interface IJwtService
     {
-        string GenerateAccessToken(int userId, string email, RoleTypeEnum role, string jti);
+        string GenerateAccessToken(int userId, string email, RoleType role, string jti);
         string GenerateRefreshToken(int userId, string refreshJti);
         ClaimsPrincipal ValidateToken(string token);
         ClaimsPrincipal ValidateRefreshToken(string token);

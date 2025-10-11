@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AuthService.Domain.Enums
 {
-    public enum RoleTypeEnum
+    public enum RoleType
     {
         Customer,
         Provider,

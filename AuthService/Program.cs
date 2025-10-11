@@ -1,29 +1,29 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using AuthService.Api.Extensions;
+﻿using AuthService.Api.Extensions;
 using AuthService.Api.Middleware;
+using AuthService.Application.Interfaces;
 using AuthService.Application.Options;
+using AuthService.Application.Services;
+using AuthService.Domain.Enums;
+using AuthService.Grpc.Interceptors;
+using AuthService.Grpc.Services;
 using AuthService.Infrastructure.Data;
 using AuthService.Infrastructure.Data.Interfaces;
-using AuthService.Infrastructure.Services;
-using AuthService.Application.Interfaces;
-using AuthService.Application.Services;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-
-using System.Text;
+using Grpc.Net.Client.Web;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Npgsql;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
-using Microsoft.OpenApi.Models;
-using AuthService.Infrastructure.Repositories;
-using AuthService.Grpc.Services;
-using AuthService.Grpc.Interceptors;
-using Grpc.HealthCheck;
-using Grpc.Net.Client.Web;
-using Microsoft.Extensions.Diagnostics.HealthChecks;
+using System.Text;
 using static EmailService.Grpc.EmailService;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
@@ -39,15 +39,15 @@ Log.Logger = new LoggerConfiguration()
         flushToDiskInterval: TimeSpan.FromSeconds(1))
     .CreateLogger();
 
-builder.WebHost.ConfigureKestrel(options =>
-{
-    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-    options.ListenAnyIP(int.Parse(port), listenOptions =>
-    {
+//builder.WebHost.ConfigureKestrel(options =>
+//{
+//    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+//    options.ListenAnyIP(int.Parse(port), listenOptions =>
+//    {
         
-        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-    });
-});
+//        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+//    });
+//});
 
 
 builder.Host.UseSerilog();
@@ -128,18 +128,33 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 		emailServiceUrl = "http://localhost:5001"; 
 	}
 
-	builder.Services.AddGrpcClient<EmailServiceClient>(o =>
-	{
-		o.Address = new Uri(emailServiceUrl);
-	})
-			.ConfigurePrimaryHttpMessageHandler(() =>
-			{
-				return new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
-			});
+	
+            
+    builder.Services.AddGrpcClient<EmailServiceClient>(o =>
+    {
+        o.Address = new Uri(emailServiceUrl);
+    })
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        return new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler());
+    });
+
+
+var connectionString = builder.Configuration.GetConnectionString("AuthDb");
+
+if (string.IsNullOrEmpty(connectionString))
+{
+    throw new InvalidOperationException("Connection string 'AuthDb' not found.");
+}
+
+// This part is PERFECT. It creates the correctly configured data source.
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
+dataSourceBuilder.MapEnum<RoleType>("auth.role_type_enum");
+var dataSource = dataSourceBuilder.Build();
+builder.Services.AddSingleton(dataSource);
 builder.Services.Configure<DatabaseOptions>(
     builder.Configuration.GetSection(DatabaseOptions.SectionName));
 builder.Services.AddSingleton<IDbConnectionFactory, NpgsqlConnectionFactory>();
-
 
 builder.Services.Configure<RateLimitOptions>(builder.Configuration.GetSection("RateLimitOptions"));
 

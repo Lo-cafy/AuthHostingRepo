@@ -11,6 +11,6 @@ namespace AuthService.Application.DTOs.Auth
         public Double ExpiresIn { get; set; }
         public DateTime ExpiresAt { get; set; }
         public UserInfoDto User { get; set; } = new();
-        public RoleTypeEnum Role { get; set; }
+        public RoleType Role { get; set; }
     }
 }

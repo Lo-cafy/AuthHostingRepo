@@ -1,31 +1,26 @@
-﻿using Microsoft.Extensions.Configuration; // <-- Add this using statement
+﻿//
+// ✅ THIS IS THE FIX
+//
 using Npgsql;
 using AuthService.Infrastructure.Data.Interfaces;
+using System.Data; // Required for the IDbConnection interface
 
 namespace AuthService.Infrastructure.Data
 {
     public class NpgsqlConnectionFactory : IDbConnectionFactory
     {
-        private readonly string _connectionString;
+        private readonly NpgsqlDataSource _dataSource;
 
-        // Inject IConfiguration instead of IOptions
-        public NpgsqlConnectionFactory(IConfiguration configuration)
+        // It MUST take the pre-configured NpgsqlDataSource in its constructor
+        public NpgsqlConnectionFactory(NpgsqlDataSource dataSource)
         {
-            // Get the connection string from the "ConnectionStrings" section
-            _connectionString = configuration.GetConnectionString("AuthDb");
+            _dataSource = dataSource;
         }
 
-        public NpgsqlConnection CreateConnection()
+        public async Task<IDbConnection> CreateConnectionAsync()
         {
-            // Use the connection string retrieved from IConfiguration
-            return new NpgsqlConnection(_connectionString);
-        }
-
-        public async Task<NpgsqlConnection> CreateConnectionAsync()
-        {
-            var connection = new NpgsqlConnection(_connectionString);
-            await connection.OpenAsync();
-            return connection;
+            // This connection already knows about your enum mapping!
+            return await _dataSource.OpenConnectionAsync();
         }
     }
 }

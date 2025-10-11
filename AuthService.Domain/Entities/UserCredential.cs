@@ -1,4 +1,6 @@
-﻿namespace AuthService.Domain.Entities
+﻿using AuthService.Domain.Enums;
+
+namespace AuthService.Domain.Entities
 {
     public class UserCredential
     {
@@ -7,7 +9,7 @@
         public string Email { get; set; } = string.Empty;
         public string PasswordHash { get; set; } = string.Empty;
         public string PasswordSalt { get; set; } = string.Empty;
-        public string Role { get; set; } = "customer";
+        public RoleType Role { get; set; } 
         public bool IsActive { get; set; } = true;
         public int FailedAttempts { get; set; } = 0;
         public DateTime? LockedUntil { get; set; }

@@ -14,7 +14,7 @@ namespace AuthService.Application.DTOs.Auth
         public bool IsNewUser { get; set; }
         public string Error { get; set; }
         public string Message { get; set; }
-        public List<RoleTypeEnum> Roles { get; set; }
+        public List<RoleType> Roles { get; set; }
         public object Email { get; internal set; }
     }
 }

@@ -12,6 +12,6 @@ namespace AuthService.Application.DTOs.Auth
         public int UserId { get; set; }
         public string Email { get; set; } = string.Empty;
         public bool IsEmailVerified { get; set; }
-        public RoleTypeEnum Role { get; set; }
+        public RoleType Role { get; set; }
     }
 }

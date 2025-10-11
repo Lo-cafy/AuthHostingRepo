@@ -29,15 +29,17 @@ namespace AuthService.Grpc.Protos {
             "DwoHc3VjY2VzcxgBIAEoCBINCgV0b2tlbhgCIAEoCRINCgVlcnJvchgDIAEo",
             "CSIlChRWYWxpZGF0ZVRva2VuUmVxdWVzdBINCgV0b2tlbhgBIAEoCSI1ChVW",
             "YWxpZGF0ZVRva2VuUmVzcG9uc2USDQoFdmFsaWQYASABKAgSDQoFZXJyb3IY",
-            "AiABKAkiVQoTUmVnaXN0ZXJVc2VyUmVxdWVzdBIOCgZ1c2VySWQYASABKAkS",
-            "DQoFZW1haWwYAiABKAkSEAoIcGFzc3dvcmQYAyABKAkSDQoFcm9sZXMYBCAD",
-            "KAkiOAoUUmVnaXN0ZXJVc2VyUmVzcG9uc2USDwoHc3VjY2VzcxgBIAEoCBIP",
-            "CgdtZXNzYWdlGAIgASgJMtUBCgtBdXRoU2VydmljZRI1CgxBdXRoZW50aWNh",
-            "dGUSES5hdXRoLkF1dGhSZXF1ZXN0GhIuYXV0aC5BdXRoUmVzcG9uc2USSAoN",
-            "VmFsaWRhdGVUb2tlbhIaLmF1dGguVmFsaWRhdGVUb2tlblJlcXVlc3QaGy5h",
-            "dXRoLlZhbGlkYXRlVG9rZW5SZXNwb25zZRJFCgxSZWdpc3RlclVzZXISGS5h",
-            "dXRoLlJlZ2lzdGVyVXNlclJlcXVlc3QaGi5hdXRoLlJlZ2lzdGVyVXNlclJl",
-            "c3BvbnNlQhqqAhdBdXRoU2VydmljZS5HcnBjLlByb3Rvc2IGcHJvdG8z"));
+            "AiABKAkibQoTUmVnaXN0ZXJVc2VyUmVxdWVzdBIOCgZ1c2VySWQYASABKAkS",
+            "DQoFZW1haWwYAiABKAkSEAoIcGFzc3dvcmQYAyABKAkSEwoLcGhvbmVOdW1i",
+            "ZXIYBCABKAkSEAoIY2xpZW50SXAYBSABKAkiXgoUUmVnaXN0ZXJVc2VyUmVz",
+            "cG9uc2USDwoHc3VjY2VzcxgBIAEoCBIPCgdtZXNzYWdlGAIgASgJEg4KBnVz",
+            "ZXJJZBgDIAEoCRIUCgxjcmVkZW50aWFsSWQYBCABKAky1QEKC0F1dGhTZXJ2",
+            "aWNlEjUKDEF1dGhlbnRpY2F0ZRIRLmF1dGguQXV0aFJlcXVlc3QaEi5hdXRo",
+            "LkF1dGhSZXNwb25zZRJICg1WYWxpZGF0ZVRva2VuEhouYXV0aC5WYWxpZGF0",
+            "ZVRva2VuUmVxdWVzdBobLmF1dGguVmFsaWRhdGVUb2tlblJlc3BvbnNlEkUK",
+            "DFJlZ2lzdGVyVXNlchIZLmF1dGguUmVnaXN0ZXJVc2VyUmVxdWVzdBoaLmF1",
+            "dGguUmVnaXN0ZXJVc2VyUmVzcG9uc2VCGqoCF0F1dGhTZXJ2aWNlLkdycGMu",
+            "UHJvdG9zYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -45,8 +47,8 @@ namespace AuthService.Grpc.Protos {
             new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.AuthResponse), global::AuthService.Grpc.Protos.AuthResponse.Parser, new[]{ "Success", "Token", "Error" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.ValidateTokenRequest), global::AuthService.Grpc.Protos.ValidateTokenRequest.Parser, new[]{ "Token" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.ValidateTokenResponse), global::AuthService.Grpc.Protos.ValidateTokenResponse.Parser, new[]{ "Valid", "Error" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.RegisterUserRequest), global::AuthService.Grpc.Protos.RegisterUserRequest.Parser, new[]{ "UserId", "Email", "Password", "Roles" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.RegisterUserResponse), global::AuthService.Grpc.Protos.RegisterUserResponse.Parser, new[]{ "Success", "Message" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.RegisterUserRequest), global::AuthService.Grpc.Protos.RegisterUserRequest.Parser, new[]{ "UserId", "Email", "Password", "PhoneNumber", "ClientIp" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::AuthService.Grpc.Protos.RegisterUserResponse), global::AuthService.Grpc.Protos.RegisterUserResponse.Parser, new[]{ "Success", "Message", "UserId", "CredentialId" }, null, null, null, null)
           }));
     }
     #endregion
@@ -994,7 +996,8 @@ namespace AuthService.Grpc.Protos {
       userId_ = other.userId_;
       email_ = other.email_;
       password_ = other.password_;
-      roles_ = other.roles_.Clone();
+      phoneNumber_ = other.phoneNumber_;
+      clientIp_ = other.clientIp_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1040,15 +1043,28 @@ namespace AuthService.Grpc.Protos {
       }
     }
 
-    /// <summary>Field number for the "roles" field.</summary>
-    public const int RolesFieldNumber = 4;
-    private static readonly pb::FieldCodec<string> _repeated_roles_codec
-        = pb::FieldCodec.ForString(34);
-    private readonly pbc::RepeatedField<string> roles_ = new pbc::RepeatedField<string>();
+    /// <summary>Field number for the "phoneNumber" field.</summary>
+    public const int PhoneNumberFieldNumber = 4;
+    private string phoneNumber_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::RepeatedField<string> Roles {
-      get { return roles_; }
+    public string PhoneNumber {
+      get { return phoneNumber_; }
+      set {
+        phoneNumber_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "clientIp" field.</summary>
+    public const int ClientIpFieldNumber = 5;
+    private string clientIp_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string ClientIp {
+      get { return clientIp_; }
+      set {
+        clientIp_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1069,7 +1085,8 @@ namespace AuthService.Grpc.Protos {
       if (UserId != other.UserId) return false;
       if (Email != other.Email) return false;
       if (Password != other.Password) return false;
-      if(!roles_.Equals(other.roles_)) return false;
+      if (PhoneNumber != other.PhoneNumber) return false;
+      if (ClientIp != other.ClientIp) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1080,7 +1097,8 @@ namespace AuthService.Grpc.Protos {
       if (UserId.Length != 0) hash ^= UserId.GetHashCode();
       if (Email.Length != 0) hash ^= Email.GetHashCode();
       if (Password.Length != 0) hash ^= Password.GetHashCode();
-      hash ^= roles_.GetHashCode();
+      if (PhoneNumber.Length != 0) hash ^= PhoneNumber.GetHashCode();
+      if (ClientIp.Length != 0) hash ^= ClientIp.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1111,7 +1129,14 @@ namespace AuthService.Grpc.Protos {
         output.WriteRawTag(26);
         output.WriteString(Password);
       }
-      roles_.WriteTo(output, _repeated_roles_codec);
+      if (PhoneNumber.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(PhoneNumber);
+      }
+      if (ClientIp.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(ClientIp);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1134,7 +1159,14 @@ namespace AuthService.Grpc.Protos {
         output.WriteRawTag(26);
         output.WriteString(Password);
       }
-      roles_.WriteTo(ref output, _repeated_roles_codec);
+      if (PhoneNumber.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(PhoneNumber);
+      }
+      if (ClientIp.Length != 0) {
+        output.WriteRawTag(42);
+        output.WriteString(ClientIp);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1154,7 +1186,12 @@ namespace AuthService.Grpc.Protos {
       if (Password.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Password);
       }
-      size += roles_.CalculateSize(_repeated_roles_codec);
+      if (PhoneNumber.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(PhoneNumber);
+      }
+      if (ClientIp.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(ClientIp);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1176,7 +1213,12 @@ namespace AuthService.Grpc.Protos {
       if (other.Password.Length != 0) {
         Password = other.Password;
       }
-      roles_.Add(other.roles_);
+      if (other.PhoneNumber.Length != 0) {
+        PhoneNumber = other.PhoneNumber;
+      }
+      if (other.ClientIp.Length != 0) {
+        ClientIp = other.ClientIp;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1205,7 +1247,11 @@ namespace AuthService.Grpc.Protos {
             break;
           }
           case 34: {
-            roles_.AddEntriesFrom(input, _repeated_roles_codec);
+            PhoneNumber = input.ReadString();
+            break;
+          }
+          case 42: {
+            ClientIp = input.ReadString();
             break;
           }
         }
@@ -1236,7 +1282,11 @@ namespace AuthService.Grpc.Protos {
             break;
           }
           case 34: {
-            roles_.AddEntriesFrom(ref input, _repeated_roles_codec);
+            PhoneNumber = input.ReadString();
+            break;
+          }
+          case 42: {
+            ClientIp = input.ReadString();
             break;
           }
         }
@@ -1282,6 +1332,8 @@ namespace AuthService.Grpc.Protos {
     public RegisterUserResponse(RegisterUserResponse other) : this() {
       success_ = other.success_;
       message_ = other.message_;
+      userId_ = other.userId_;
+      credentialId_ = other.credentialId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1315,6 +1367,30 @@ namespace AuthService.Grpc.Protos {
       }
     }
 
+    /// <summary>Field number for the "userId" field.</summary>
+    public const int UserIdFieldNumber = 3;
+    private string userId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string UserId {
+      get { return userId_; }
+      set {
+        userId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "credentialId" field.</summary>
+    public const int CredentialIdFieldNumber = 4;
+    private string credentialId_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string CredentialId {
+      get { return credentialId_; }
+      set {
+        credentialId_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -1332,6 +1408,8 @@ namespace AuthService.Grpc.Protos {
       }
       if (Success != other.Success) return false;
       if (Message != other.Message) return false;
+      if (UserId != other.UserId) return false;
+      if (CredentialId != other.CredentialId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1341,6 +1419,8 @@ namespace AuthService.Grpc.Protos {
       int hash = 1;
       if (Success != false) hash ^= Success.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
+      if (UserId.Length != 0) hash ^= UserId.GetHashCode();
+      if (CredentialId.Length != 0) hash ^= CredentialId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1367,6 +1447,14 @@ namespace AuthService.Grpc.Protos {
         output.WriteRawTag(18);
         output.WriteString(Message);
       }
+      if (UserId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(UserId);
+      }
+      if (CredentialId.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(CredentialId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1385,6 +1473,14 @@ namespace AuthService.Grpc.Protos {
         output.WriteRawTag(18);
         output.WriteString(Message);
       }
+      if (UserId.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(UserId);
+      }
+      if (CredentialId.Length != 0) {
+        output.WriteRawTag(34);
+        output.WriteString(CredentialId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -1400,6 +1496,12 @@ namespace AuthService.Grpc.Protos {
       }
       if (Message.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Message);
+      }
+      if (UserId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(UserId);
+      }
+      if (CredentialId.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(CredentialId);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -1418,6 +1520,12 @@ namespace AuthService.Grpc.Protos {
       }
       if (other.Message.Length != 0) {
         Message = other.Message;
+      }
+      if (other.UserId.Length != 0) {
+        UserId = other.UserId;
+      }
+      if (other.CredentialId.Length != 0) {
+        CredentialId = other.CredentialId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1442,6 +1550,14 @@ namespace AuthService.Grpc.Protos {
             Message = input.ReadString();
             break;
           }
+          case 26: {
+            UserId = input.ReadString();
+            break;
+          }
+          case 34: {
+            CredentialId = input.ReadString();
+            break;
+          }
         }
       }
     #endif
@@ -1463,6 +1579,14 @@ namespace AuthService.Grpc.Protos {
           }
           case 18: {
             Message = input.ReadString();
+            break;
+          }
+          case 26: {
+            UserId = input.ReadString();
+            break;
+          }
+          case 34: {
+            CredentialId = input.ReadString();
             break;
           }
         }

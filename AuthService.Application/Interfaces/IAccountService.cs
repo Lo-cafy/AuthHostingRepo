@@ -11,5 +11,7 @@ namespace AuthService.Application.Interfaces
         Task<bool> ResetPasswordAsync(ResetPasswordDto request);
         Task<bool> ChangePasswordAsync(ChangePasswordDto request);
         Task<RegisterResponseDto> RegisterAsync(RegisterRequestDto request);
+        Task<RegisterResponseDto> RegisterGrpcAsync(RegisterRequestDto request);
+
     }
 }

@@ -1,12 +1,14 @@
 ﻿using Grpc.Core;
 using AuthService.Application.Interfaces;
 using AuthService.Grpc.Protos;
+using static AuthService.Grpc.Protos.AuthService;
 using AuthService.Application.DTOs.Auth;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace AuthService.Grpc.Services
 {
-    public class AuthGrpcService : Protos.AuthService.AuthServiceBase
+    public class AuthGrpcService : AuthServiceBase
     {
         private readonly IAuthService _authService;
         private readonly IAccountService _accountService;
@@ -25,16 +27,23 @@ namespace AuthService.Grpc.Services
             {
                 var registerDto = new RegisterRequestDto
                 {
+                    UserId = int.Parse(request.UserId),
                     Email = request.Email,
                     Password = request.Password,
+                    PhoneNumber = request.PhoneNumber,
+                    ReferredBy = null, 
+                    ClientIp = string.IsNullOrEmpty(request.ClientIp) ? null : request.ClientIp
+
                 };
 
-                var result = await _accountService.RegisterAsync(registerDto);
+                var result = await _accountService.RegisterGrpcAsync(registerDto);
 
                 return new RegisterUserResponse
                 {
                     Success = result.Success,
-                    Message = result.Message
+                    Message = result.Message,
+                    UserId = result.UserId.ToString(),
+                    CredentialId = result.CredentialId.ToString()   
                 };
             }
             catch (Exception ex)
@@ -48,14 +57,14 @@ namespace AuthService.Grpc.Services
             }
         }
 
-        public override async Task<Protos.ValidateTokenResponse> ValidateToken(
+        public override async Task<ValidateTokenResponse> ValidateToken(
             Protos.ValidateTokenRequest request, ServerCallContext context)
         {
             try
             {
                 var isValid = await _authService.ValidateTokenAsync(request.Token);
 
-                return new Protos.ValidateTokenResponse
+                return new ValidateTokenResponse
                 {
                     Valid = isValid,
                     Error = isValid ? string.Empty : "Invalid token"
@@ -64,7 +73,7 @@ namespace AuthService.Grpc.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error during token validation");
-                return new Protos.ValidateTokenResponse
+                return new ValidateTokenResponse
                 {
                     Valid = false,
                     Error = "Internal server error"

@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using AuthService.Application.DTOs.Account;
+﻿using AuthService.Application.DTOs.Account;
 using AuthService.Application.DTOs.Auth;
 using AuthService.Application.Exceptions;
 using AuthService.Application.Interfaces;
 using AuthService.Domain.Entities;
 using AuthService.Domain.Enums;
 using AuthService.Infrastructure.Interfaces;
+using AuthService.Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 using static EmailService.Grpc.EmailService;
 
 namespace AuthService.Application.Services
@@ -206,18 +207,16 @@ namespace AuthService.Application.Services
                     return new RegisterResponseDto { Success = false, Message = "Email already exists" };
                 }
 
-                _passwordService.ValidatePasswordStrength(request.Password);
-
                 var passwordSalt = GeneratePasswordSalt();
                 var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password + passwordSalt, 12);
 
                 var userCredential = new UserCredential
                 {
-                    UserId = new Random().Next(100000, 999999),
+                    UserId = request.UserId,
                     Email = request.Email,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
-                    Role = "customer",
+                    Role = RoleType.Customer,
                     IsActive = true,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow
@@ -240,6 +239,49 @@ namespace AuthService.Application.Services
                 return new RegisterResponseDto { Success = false, Message = "Internal server error" };
             }
         }
+
+        public async Task<RegisterResponseDto> RegisterGrpcAsync(RegisterRequestDto request)
+        {
+            try
+            {
+                // Check if email already exists (optional)
+                // if (await _userRepository.EmailExistsAsync(request.Email)) 
+                //     return new RegisterResponseDto { Success = false, Message = "Email already exists" };
+
+                var passwordSalt = GeneratePasswordSalt();
+                var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password + passwordSalt, 12);
+
+                var result = await _credentialRepository.RegisterUserEnhancedAsync(
+                    userId: request.UserId,
+                    email: request.Email,
+                    passwordHash: passwordHash,
+                    passwordSalt: passwordSalt,
+                    role: "customer",
+                    phoneNumber: request.PhoneNumber,
+                    referredBy: request.ReferredBy,
+                    createdIp: request.ClientIp
+                );
+
+                _logger.LogInformation("User registered successfully with Email {Email}", request.Email);
+
+                return new RegisterResponseDto
+                {
+                    Success = true,
+                    Message = "User registered successfully",
+                    UserId = result.UserId,
+                    CredentialId = result.CredentialId  
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "User registration failed for {Email}", request.Email);
+                return new RegisterResponseDto { Success = false, Message = "Internal server error" };
+            }
+        }
+
+
+
+
 
         private string GenerateSecureToken()
         {

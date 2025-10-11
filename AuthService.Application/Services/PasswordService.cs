@@ -72,8 +72,8 @@ namespace AuthService.Application.Services
             if (string.IsNullOrWhiteSpace(password))
                 throw new ValidationException("Password cannot be empty");
 
-            if (password.Length < 12)
-                throw new ValidationException("Password must be at least 12 characters long");
+            if (password.Length < 8)
+                throw new ValidationException("Password must be at least 8 characters long");
 
             if (!Regex.IsMatch(password, @"[A-Z]"))
                 throw new ValidationException("Password must contain at least one uppercase letter");

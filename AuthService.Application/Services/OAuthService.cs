@@ -234,7 +234,7 @@ namespace AuthService.Application.Services
                         UserId = userId,
                         Email = userInfo.Email,
                         PasswordHash = "OAUTH_USER",
-                        Role = "customer",
+                        Role =RoleType.Customer,
                         IsActive = true,
                         CreatedAt = DateTime.UtcNow,
                         UpdatedAt = DateTime.UtcNow
@@ -277,7 +277,7 @@ namespace AuthService.Application.Services
             var refreshJti = new int().ToString();
 
             var accessToken = _jwtService.GenerateAccessToken(
-            userId, userInfo.Email, RoleTypeEnum.Customer, jti);
+            userId, userInfo.Email, RoleType.Customer, jti);
 
             var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
@@ -353,7 +353,7 @@ namespace AuthService.Application.Services
                             UserId = userId,
                             Email = email,
                             PasswordHash = "OAUTH_USER",
-                            Role = "customer",
+                            Role = RoleType.Customer,
                             IsActive = true,
                             CreatedAt = DateTime.UtcNow,
                             UpdatedAt = DateTime.UtcNow
@@ -405,7 +405,7 @@ namespace AuthService.Application.Services
                 var jti = new int().ToString();
                 var refreshJti = new int().ToString();
                 var accessToken = _jwtService.GenerateAccessToken(
-                   userId, userInfo.Email, RoleTypeEnum.Customer, jti);
+                   userId, userInfo.Email, RoleType.Customer, jti);
 
                 var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
 
