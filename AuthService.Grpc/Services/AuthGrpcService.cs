@@ -32,7 +32,7 @@ namespace AuthService.Grpc.Services
                     Password = request.Password,
                     PhoneNumber = request.PhoneNumber,
                     ReferredBy = null, 
-                    ClientIp = string.IsNullOrEmpty(request.ClientIp) ? null : request.ClientIp
+                    ClientIp = request.ClientIp
 
                 };
 
