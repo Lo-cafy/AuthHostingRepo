@@ -187,3 +187,4 @@ D:\AuthHostingRepos\AuthService\obj\Debug\net8.0\refint\AuthService.Api.dll
 D:\AuthHostingRepos\AuthService\obj\Debug\net8.0\AuthService.Api.pdb
 D:\AuthHostingRepos\AuthService\obj\Debug\net8.0\AuthService.Api.genruntimeconfig.cache
 D:\AuthHostingRepos\AuthService\obj\Debug\net8.0\ref\AuthService.Api.dll
+D:\AuthHostingRepos\AuthService\obj\Debug\net8.0\AuthService.Api.MvcApplicationPartsAssemblyInfo.cs

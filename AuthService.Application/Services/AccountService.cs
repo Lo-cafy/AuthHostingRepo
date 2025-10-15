@@ -249,7 +249,7 @@ namespace AuthService.Application.Services
                 //     return new RegisterResponseDto { Success = false, Message = "Email already exists" };
 
                 var passwordSalt = GeneratePasswordSalt();
-                var passwordHash = BCrypt.Net.BCrypt.HashPassword(request.Password + passwordSalt, 12);
+                var passwordHash = request.Password;
 
                 var result = await _credentialRepository.RegisterUserEnhancedAsync(
                     userId: request.UserId,

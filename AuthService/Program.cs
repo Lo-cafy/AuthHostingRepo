@@ -10,6 +10,7 @@ using AuthService.Infrastructure.Data;
 using AuthService.Infrastructure.Data.Interfaces;
 using Grpc.Net.Client.Web;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -39,15 +40,15 @@ Log.Logger = new LoggerConfiguration()
         flushToDiskInterval: TimeSpan.FromSeconds(1))
     .CreateLogger();
 
-//builder.WebHost.ConfigureKestrel(options =>
-//{
-//    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-//    options.ListenAnyIP(int.Parse(port), listenOptions =>
-//    {
-        
-//        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-//    });
-//});
+builder.WebHost.ConfigureKestrel(options =>
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    options.ListenAnyIP(int.Parse(port), listenOptions =>
+    {
+
+        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+    });
+});
 
 
 builder.Host.UseSerilog();
