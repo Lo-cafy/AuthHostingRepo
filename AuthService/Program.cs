@@ -40,15 +40,15 @@ Log.Logger = new LoggerConfiguration()
         flushToDiskInterval: TimeSpan.FromSeconds(1))
     .CreateLogger();
 
-//builder.WebHost.ConfigureKestrel(options =>
-//{
-//    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-//    options.ListenAnyIP(int.Parse(port), listenOptions =>
-//    {
+builder.WebHost.ConfigureKestrel(options =>
+{
+    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+    options.ListenAnyIP(int.Parse(port), listenOptions =>
+    {
 
-//        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-//    });
-//});
+        listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+    });
+});
 
 
 builder.Host.UseSerilog();
