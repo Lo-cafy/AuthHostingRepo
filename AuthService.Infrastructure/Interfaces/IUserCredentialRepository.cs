@@ -9,6 +9,7 @@ namespace AuthService.Infrastructure.Interfaces
         Task<UserCredential> CreateAsync(UserCredential credential);
         Task<(int UserId, int CredentialId)> RegisterUserEnhancedAsync( int userId, string email,string passwordHash,string passwordSalt,
                                                                          string role, string? phoneNumber, int? referredBy,string createdIp);
+        Task<LoginResult?> AuthenticateUserAsync(string email, string password);
         Task UpdateAsync(UserCredential credential);
         Task<bool> EmailExistsAsync(string email);
     }

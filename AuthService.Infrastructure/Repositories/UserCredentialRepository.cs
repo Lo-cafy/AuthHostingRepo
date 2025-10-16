@@ -2,8 +2,9 @@
 using AuthService.Infrastructure.Data.Interfaces;
 using AuthService.Infrastructure.Interfaces;
 using Dapper;
-using Npgsql;
-
+using System.Data;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AuthService.Infrastructure.Repositories
 {
@@ -136,6 +137,35 @@ namespace AuthService.Infrastructure.Repositories
             var result = await connection.QueryFirstAsync<(int UserId, int CredentialId)>(sql, parameters);
             return result;
         }
+
+        public async Task<LoginResult?> AuthenticateUserAsync(string email, string password)
+        {
+            using var connection = await _connectionFactory.CreateConnectionAsync();
+
+            var sql = "SELECT auth.authenticate_user_secure(@Email, @Password)::jsonb";
+
+            var parameters = new
+            {
+                Email = email.ToLower(),
+                Password = password
+            };
+
+            // Get result as string
+            var result = await connection.QueryFirstOrDefaultAsync<string>(sql, parameters);
+
+            if (string.IsNullOrEmpty(result))
+            {
+                return null;
+            }
+
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+            return JsonSerializer.Deserialize<LoginResult>(result, options);
+        }
+
+
+
+
         public async Task UpdateAsync(UserCredential credential)
         {
             using var connection = await _connectionFactory.CreateConnectionAsync();

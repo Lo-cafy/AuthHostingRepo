@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AuthService.Grpc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+088c0d98cc1eb94bf556c5386ad6309abb996f98")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a9185ab43af744236ea7749b92a146c77692abbc")]
 [assembly: System.Reflection.AssemblyProductAttribute("AuthService.Grpc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AuthService.Grpc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

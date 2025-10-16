@@ -92,11 +92,11 @@ namespace AuthService.Infrastructure.Services
         }
 
         public async Task<JsonDocument> AuthenticatePasswordAsync(
-      string email,
-      string password,
-      object deviceInfo = null,
-      Guid? requestId = null)
-        {
+                 string email,
+                  string password,
+                    object deviceInfo = null,
+                       Guid? requestId = null)
+        {   
             try
             {
                 using var connection = await GetConnectionAsync();

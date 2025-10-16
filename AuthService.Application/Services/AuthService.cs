@@ -51,99 +51,53 @@ namespace AuthService.Application.Services
             _httpContextAccessor = httpContextAccessor;
             _logger = logger;
         }
-        public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request, DeviceInfoDto? deviceInfo = null)
+        public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request)
         {
             try
             {
-                deviceInfo ??= new DeviceInfoDto
+                var authResult = await _credentialRepository.AuthenticateUserAsync(request.Email, request.Password);
+
+                if (authResult is null || !authResult.Success)
                 {
-                    IpAddress = "127.0.0.1",
-                    UserAgent = "Unknown"
-                };
+                    var message = authResult?.Message ?? "Invalid credentials or unknown error.";
+                    if (authResult?.Code == 429) throw new RateLimitException(message);
 
-                var requestId = Guid.NewGuid();
-
-                var deviceInfoForSP = new
-                {
-                    ip_address = deviceInfo.IpAddress,
-                    user_agent = deviceInfo.UserAgent,
-                    location = deviceInfo.Location
-                };
-
-                var result = await _databaseFunctionService.AuthenticatePasswordAsync(
-                    request.Email,
-                    request.Password,
-                    deviceInfoForSP,
-                    requestId
-                );
-
-                using (result)
-                {
-                    var root = result.RootElement;
-                     if (!root.TryGetProperty("success", out var successElement) || !successElement.GetBoolean())
-                    {
-                        
-                        var message = root.TryGetProperty("message", out var msgElement) ? msgElement.GetString() : "Invalid credentials";
-
-                        if (root.TryGetProperty("code", out var codeElement) && codeElement.TryGetInt32(out int code))
-                        {
-                            if (code == 429) throw new RateLimitException(message);
-                        }
-
-                        throw new AuthException(message ?? "Authentication failed");
-                    }
-
-               
-
-                    var userId = root.TryGetProperty("user_id", out var userIdElement) ? userIdElement.GetInt32() : 0;
-                    var email = root.TryGetProperty("email", out var emailElement) ? emailElement.GetString() : string.Empty;
-                    var emailVerified = root.TryGetProperty("email_verified", out var emailVerifiedElement) && emailVerifiedElement.GetBoolean();
-
-                    var roles = new List<string>();
-                    if (root.TryGetProperty("roles", out var rolesElement) && rolesElement.ValueKind == JsonValueKind.Array)
-                    {
-                        roles = rolesElement.EnumerateArray().Select(r => r.GetString() ?? string.Empty).ToList();
-                    }
-
-                    string accessJti = string.Empty;
-                    string refreshJti = string.Empty;
-                    double expiresIn = 3600; // Default expiry
-
-                    if (root.TryGetProperty("tokens", out var tokensElement))
-                    {
-                        accessJti = tokensElement.TryGetProperty("access_token_jti", out var accessJtiElement) ? accessJtiElement.GetString() : string.Empty;
-                        refreshJti = tokensElement.TryGetProperty("refresh_token_jti", out var refreshJtiElement) ? refreshJtiElement.GetString() : string.Empty;
-                        expiresIn = tokensElement.TryGetProperty("expires_in", out var expiresInElement) ? expiresInElement.GetDouble() : 3600;
-                    }
-
-                    var roleEnum = Enum.TryParse<RoleType>(roles.FirstOrDefault() ?? "Customer", true, out var parsedRole) ? parsedRole : RoleType.Customer;
-
-                    var accessToken = _jwtService.GenerateAccessToken(userId, email, roleEnum, accessJti);  
-                    var refreshToken = _jwtService.GenerateRefreshToken(userId, refreshJti);
-
-                    return new LoginResponseDto
-                    {
-                        Success = true,
-                        AccessToken = accessToken,
-                        RefreshToken = refreshToken,
-                        ExpiresIn = expiresIn,
-                        ExpiresAt = DateTime.UtcNow.AddSeconds(expiresIn),
-                        User = new UserInfoDto
-                        {
-                            UserId = userId,
-                            Email = email,
-                            IsEmailVerified = emailVerified,
-                            Role = roleEnum
-                        },
-                        Role = roleEnum
-                    };
+                    throw new AuthException(message);
                 }
+
+                // 3. If successful, proceed with token generation
+                var roleEnum = Enum.TryParse<RoleType>(authResult.Role, true, out var parsedRole)
+                    ? parsedRole
+                    : RoleType.Customer; // Default fallback
+
+                var sessionJti = Guid.NewGuid().ToString();
+
+                var accessToken = _jwtService.GenerateAccessToken(authResult.UserId, authResult.Email, roleEnum, sessionJti);
+                var refreshToken = _jwtService.GenerateRefreshToken(authResult.UserId, sessionJti);
+
+                var expiresIn = 3600; // Example: 1 hour. Get this from config.
+
+                // 4. Construct and return the final DTO
+                return new LoginResponseDto
+                {
+                    AccessToken = accessToken,
+                    RefreshToken = refreshToken,
+                    ExpiresIn = expiresIn,
+                    ExpiresAt = DateTime.UtcNow.AddSeconds(expiresIn),
+                    User = new UserInfoDto
+                    {
+                        UserId = authResult.UserId,
+                        Email = authResult.Email,
+                        IsEmailVerified = authResult.EmailVerified,
+                        Role = roleEnum
+                    },
+                    Role = roleEnum.ToString() // As per your DTO structure
+                };
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Login failed for email: {Email}", request.Email);
-             
-                throw;
+                throw; // Re-throw to allow global exception handlers to catch it
             }
         }
 
