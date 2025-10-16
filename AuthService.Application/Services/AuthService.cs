@@ -70,10 +70,11 @@ namespace AuthService.Application.Services
                     ? parsedRole
                     : RoleType.Customer; // Default fallback
 
-                var sessionJti = Guid.NewGuid().ToString();
+                var accessTokenJti = Guid.NewGuid().ToString();
+                var refreshTokenJti = Guid.NewGuid().ToString();
 
-                var accessToken = _jwtService.GenerateAccessToken(authResult.UserId, authResult.Email, roleEnum, sessionJti);
-                var refreshToken = _jwtService.GenerateRefreshToken(authResult.UserId, sessionJti);
+                var accessToken = _jwtService.GenerateAccessToken(authResult.UserId, authResult.Email, roleEnum, accessTokenJti);
+                var refreshToken = _jwtService.GenerateRefreshToken(authResult.UserId, refreshTokenJti);
 
                 var expiresIn = 3600; // Example: 1 hour. Get this from config.
 
