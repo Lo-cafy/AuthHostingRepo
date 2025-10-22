@@ -9,7 +9,7 @@ namespace AuthService.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = "admin,super_admin")]
+    [Authorize(Roles = "Admin,super_admin")]
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _roleService;

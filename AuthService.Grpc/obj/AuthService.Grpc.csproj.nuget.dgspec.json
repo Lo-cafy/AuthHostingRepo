@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AuthHostingRepos\\AuthService.Grpc\\AuthService.Grpc.csproj": {}
+    "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc\\AuthService.Grpc.csproj": {}
   },
   "projects": {
-    "D:\\AuthHostingRepos\\AuthService.Application\\AuthService.Application.csproj": {
+    "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Application\\AuthService.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AuthHostingRepos\\AuthService.Application\\AuthService.Application.csproj",
+        "projectUniqueName": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Application\\AuthService.Application.csproj",
         "projectName": "AuthService.Application",
-        "projectPath": "D:\\AuthHostingRepos\\AuthService.Application\\AuthService.Application.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\AuthHostingRepos\\AuthService.Application\\obj\\",
+        "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Application\\AuthService.Application.csproj",
+        "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
+        "outputPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,14 +32,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\AuthHostingRepos\\AuthService.Domain\\AuthService.Domain.csproj": {
-                "projectPath": "D:\\AuthHostingRepos\\AuthService.Domain\\AuthService.Domain.csproj"
+              "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Domain\\AuthService.Domain.csproj": {
+                "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Domain\\AuthService.Domain.csproj"
               },
-              "D:\\AuthHostingRepos\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj": {
-                "projectPath": "D:\\AuthHostingRepos\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj"
+              "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj": {
+                "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj"
               },
-              "D:\\AuthHostingRepos\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
-                "projectPath": "D:\\AuthHostingRepos\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
+              "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
+                "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
               }
             }
           }
@@ -54,7 +54,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -109,24 +109,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AuthHostingRepos\\AuthService.Domain\\AuthService.Domain.csproj": {
+    "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Domain\\AuthService.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AuthHostingRepos\\AuthService.Domain\\AuthService.Domain.csproj",
+        "projectUniqueName": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Domain\\AuthService.Domain.csproj",
         "projectName": "AuthService.Domain",
-        "projectPath": "D:\\AuthHostingRepos\\AuthService.Domain\\AuthService.Domain.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\AuthHostingRepos\\AuthService.Domain\\obj\\",
+        "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Domain\\AuthService.Domain.csproj",
+        "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
+        "outputPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -153,7 +153,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -174,24 +174,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AuthHostingRepos\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj": {
+    "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AuthHostingRepos\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj",
+        "projectUniqueName": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj",
         "projectName": "AuthService.Grpc.Client",
-        "projectPath": "D:\\AuthHostingRepos\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\AuthHostingRepos\\AuthService.Grpc.Client\\obj\\",
+        "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc.Client\\AuthService.Grpc.Client.csproj",
+        "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
+        "outputPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc.Client\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -218,7 +218,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -259,24 +259,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AuthHostingRepos\\AuthService.Grpc\\AuthService.Grpc.csproj": {
+    "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc\\AuthService.Grpc.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AuthHostingRepos\\AuthService.Grpc\\AuthService.Grpc.csproj",
+        "projectUniqueName": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc\\AuthService.Grpc.csproj",
         "projectName": "AuthService.Grpc",
-        "projectPath": "D:\\AuthHostingRepos\\AuthService.Grpc\\AuthService.Grpc.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\AuthHostingRepos\\AuthService.Grpc\\obj\\",
+        "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc\\AuthService.Grpc.csproj",
+        "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
+        "outputPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Grpc\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -291,11 +291,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\AuthHostingRepos\\AuthService.Application\\AuthService.Application.csproj": {
-                "projectPath": "D:\\AuthHostingRepos\\AuthService.Application\\AuthService.Application.csproj"
+              "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Application\\AuthService.Application.csproj": {
+                "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Application\\AuthService.Application.csproj"
               },
-              "D:\\AuthHostingRepos\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
-                "projectPath": "D:\\AuthHostingRepos\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
+              "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
+                "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj"
               }
             }
           }
@@ -310,7 +310,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -419,24 +419,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\AuthHostingRepos\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
+    "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AuthHostingRepos\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj",
+        "projectUniqueName": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj",
         "projectName": "AuthService.Infrastructure",
-        "projectPath": "D:\\AuthHostingRepos\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\AuthHostingRepos\\AuthService.Infrastructure\\obj\\",
+        "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Infrastructure\\AuthService.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\muham\\.nuget\\packages\\",
+        "outputPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\muham\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -451,8 +451,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\AuthHostingRepos\\AuthService.Domain\\AuthService.Domain.csproj": {
-                "projectPath": "D:\\AuthHostingRepos\\AuthService.Domain\\AuthService.Domain.csproj"
+              "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Domain\\AuthService.Domain.csproj": {
+                "projectPath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService.Domain\\AuthService.Domain.csproj"
               }
             }
           }
@@ -467,7 +467,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -518,7 +518,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
