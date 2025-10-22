@@ -1,4 +1,4 @@
-﻿using AuthService.Api.Extensions;
+using AuthService.Api.Extensions;
 using AuthService.Api.Middleware;
 using AuthService.Application.Interfaces;
 using AuthService.Application.Options;
@@ -42,14 +42,12 @@ Log.Logger = new LoggerConfiguration()
 
 builder.WebHost.ConfigureKestrel(options =>
 {
-    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-    options.ListenAnyIP(int.Parse(port), listenOptions =>
+    // Allow both HTTP/1.1 and HTTP/2 protocols for gRPC-Web support
+    options.ConfigureEndpointDefaults(listenOptions =>
     {
-
         listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
     });
 });
-
 
 builder.Host.UseSerilog();
 

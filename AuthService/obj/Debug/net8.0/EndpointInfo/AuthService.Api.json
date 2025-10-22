@@ -107,17 +107,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
+                "$ref": "#/components/schemas/LoginRequestDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
+                "$ref": "#/components/schemas/LoginRequestDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
+                "$ref": "#/components/schemas/LoginRequestDto"
               }
             }
           }
@@ -138,17 +138,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RefreshRequest"
+                "$ref": "#/components/schemas/RefreshTokenRequestDto"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RefreshRequest"
+                "$ref": "#/components/schemas/RefreshTokenRequestDto"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RefreshRequest"
+                "$ref": "#/components/schemas/RefreshTokenRequestDto"
               }
             }
           }
@@ -160,10 +160,33 @@
         }
       }
     },
-    "/api/Auth/profile": {
+    "/api/Auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/user/{id}": {
       "get": {
         "tags": [
           "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -187,80 +210,6 @@
                 }
               }
             }
-          }
-        }
-      }
-    },
-    "/api/test/login": {
-      "post": {
-        "tags": [
-          "AuthTest"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/test/refresh": {
-      "post": {
-        "tags": [
-          "AuthTest"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RefreshRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RefreshRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RefreshRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/test/profile": {
-      "get": {
-        "tags": [
-          "AuthTest"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }
@@ -494,26 +443,44 @@
         },
         "additionalProperties": false
       },
-      "LoginRequest": {
+      "LoginRequestDto": {
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "email": {
+            "minLength": 1,
             "type": "string",
-            "nullable": true
+            "format": "email"
           },
           "password": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false
       },
-      "RefreshRequest": {
+      "RefreshTokenRequestDto": {
+        "required": [
+          "refreshToken"
+        ],
         "type": "object",
         "properties": {
           "refreshToken": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "ipAddress": {
             "type": "string",
-            "nullable": true
+            "nullable": true,
+            "readOnly": true
+          },
+          "userAgent": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
           }
         },
         "additionalProperties": false

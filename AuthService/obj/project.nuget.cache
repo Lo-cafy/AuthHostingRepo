@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R42EBpl1rPM=",
+  "dgSpecHash": "p1zt4KMKYPI=",
   "success": true,
-  "projectFilePath": "D:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService\\AuthService.Api.csproj",
+  "projectFilePath": "d:\\SingleProject1\\BACKEND\\AuthHostingRepo\\AuthService\\AuthService.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\muham\\.nuget\\packages\\aspnetcore.healthchecks.npgsql\\8.0.0\\aspnetcore.healthchecks.npgsql.8.0.0.nupkg.sha512",
     "C:\\Users\\muham\\.nuget\\packages\\aspnetcore.healthchecks.ui.client\\8.0.0\\aspnetcore.healthchecks.ui.client.8.0.0.nupkg.sha512",

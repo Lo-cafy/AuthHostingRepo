@@ -22,11 +22,11 @@ using AuthService.Grpc.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Kestrel: allow HTTP/1.1 + HTTP/2 for gRPC-Web
+// Configure Kestrel for gRPC-Web support
 builder.WebHost.ConfigureKestrel(options =>
 {
-    var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-    options.ListenAnyIP(int.Parse(port), listenOptions =>
+    // Allow both HTTP/1.1 and HTTP/2 protocols for gRPC-Web support
+    options.ConfigureEndpointDefaults(listenOptions =>
     {
         listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
     });
