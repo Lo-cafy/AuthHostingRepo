@@ -1,4 +1,4 @@
-﻿using AuthService.Application.Interfaces;
+using AuthService.Application.Interfaces;
 using AuthService.Application.Services;
 using AuthService.Infrastructure.Data;
 using AuthService.Infrastructure.Data.Interfaces;
@@ -28,11 +28,13 @@ namespace AuthService.Application.Extensions
             services.AddScoped<IUserCredentialRepository, UserCredentialRepository>();
             services.AddScoped<IJwtSessionRepository, JwtSessionRepository>();
             services.AddScoped<ILoginAttemptRepository, LoginAttemptRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
 
             
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IPasswordService, PasswordService>();
             services.AddScoped<IDigitalFingerprintService, DigitalFingerprintService>();
+            services.AddScoped<IRoleService, RoleService>();
             return services;
         }
     }

@@ -10,6 +10,7 @@ using AuthService.Infrastructure.Services;
 using AuthService.Infrastructure.Repositories;
 using AuthService.Application.Interfaces;
 using AuthService.Application.Services;
+using AuthService.Application.Extensions;
 using System.Text;
 using Serilog;
 using Serilog.Events;
@@ -59,6 +60,9 @@ builder.Services.AddHttpContextAccessor();
 
 // ✅ Register Database (EF Core + Dapper + Neon Connection)
 builder.Services.AddDatabase(builder.Configuration);
+
+// ✅ Register Application Services
+builder.Services.AddApplicationServices(builder.Configuration);
 
 // ✅ Configure JWT Options
 var jwtOptions = builder.Configuration.GetSection("JwtOptions").Get<JwtOptions>();
@@ -114,11 +118,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.Configure<RateLimitOptions>(
     builder.Configuration.GetSection("RateLimitOptions"));
 
-// ✅ Common Services
-builder.Services.AddScoped<IPasswordService, PasswordService>();
-builder.Services.AddScoped<IJwtService, JwtService>();
-builder.Services.AddScoped<IDigitalFingerprintService, DigitalFingerprintService>();
-builder.Services.AddScoped<IAuthService, AuthService.Application.Services.AuthService>();
+// ✅ Additional Services (not in AddApplicationServices)
 builder.Services.AddScoped<IAccountService, AccountService>();
 
 // ✅ CORS Policy
